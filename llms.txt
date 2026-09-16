@@ -1,25 +1,28 @@
 # Found First
 
-> Found First is an AI marketing studio for answer engine optimization (AEO) and managed ChatGPT advertising, founded in 2026 by Nick Radachy (marketing, founder of Modern Apex Strategies) and Jeffrey Davis (technology, co-founder of Frontier App Labs). Based in Michigan, USA. Independent and not affiliated with OpenAI or Google.
+> Founder-led AI marketing: answer engine optimization and ChatGPT advertising.
 
-## What we do
+Contact: nick@modernapexstrategies.com
 
-- Answer engine optimization (AEO): AI visibility audit, answer pages, entity and technical foundation, proof and citations, monthly visibility tracking across ChatGPT, Google AI Overviews and AI Mode, Perplexity, Claude, and Gemini.
-- ChatGPT advertising management: eligibility and account setup in OpenAI's Ads Manager, context hints and targeting, ad copy and landing pages, conversion measurement, monthly reporting.
-- Free AI visibility check: send your website and what you sell to nick@modernapexstrategies.com and receive a personal reply on how AI answers describe your business today.
+## Research library
+- [Answer engine optimization services](https://nradachy-web.github.io/found-first/learn/answer-engine-optimization/): How Found First approaches AEO: buyer questions, technical access, useful answer content, supporting evidence, and measurable visibility.
+- [ChatGPT ads management](https://nradachy-web.github.io/found-first/learn/chatgpt-ads-agency/): Managed ChatGPT advertising from eligibility and campaign strategy to creative, landing pages, conversion measurement, and reporting.
+- [AEO vs. SEO vs. GEO](https://nradachy-web.github.io/found-first/learn/aeo-vs-seo-vs-geo/): A practical comparison of SEO, answer engine optimization, and generative engine optimization, including what to build and how to measure it.
+- [AI visibility audits](https://nradachy-web.github.io/found-first/learn/ai-visibility-audit/): What an AI visibility audit should include: question selection, answer capture, source analysis, technical checks, and a prioritized action plan.
+- [Getting recommended by ChatGPT](https://nradachy-web.github.io/found-first/learn/get-recommended-by-chatgpt/): A practical approach to ChatGPT visibility through accurate business information, useful pages, public evidence, and repeatable observation.
+- [Google AI Overviews and AI Mode](https://nradachy-web.github.io/found-first/learn/google-ai-overviews/): Google AI search visibility starts with indexable pages, helpful content, clear internal links, and measurement that respects Search Console limits.
+- [AEO content strategy](https://nradachy-web.github.io/found-first/learn/aeo-content-strategy/): Build an answer-content strategy around buying questions, original evidence, useful comparisons, and clear conversion paths.
+- [Measuring AI marketing results](https://nradachy-web.github.io/found-first/learn/measure-ai-marketing-roi/): Separate AI visibility, referral visits, qualified inquiries, and revenue when evaluating AEO and ChatGPT advertising.
+- [Choosing an AEO agency](https://nradachy-web.github.io/found-first/learn/choose-aeo-agency/): Questions to ask an AEO agency about evidence, scope, technical execution, reporting, founder involvement, and realistic outcomes.
+- [ChatGPT advertising costs](https://nradachy-web.github.io/found-first/learn/chatgpt-advertising-cost/): Understand media spend, management, landing-page work, and measurement when planning a ChatGPT advertising test.
+- [ChatGPT ads vs. Google Ads](https://nradachy-web.github.io/found-first/learn/chatgpt-ads-vs-google-ads/): Compare the roles of ChatGPT advertising and Google Search ads by buyer context, destination, measurement, and test design.
+- [AEO for B2B and SaaS](https://nradachy-web.github.io/found-first/learn/ai-marketing-for-b2b-saas/): AEO for B2B software: use-case pages, integration details, fair comparisons, implementation answers, and qualified demo measurement.
+- [AEO for ecommerce brands](https://nradachy-web.github.io/found-first/learn/ai-marketing-for-ecommerce/): AI marketing for ecommerce: clear product attributes, buying guides, useful comparisons, customer evidence, and purchase measurement.
+- [AEO for professional services](https://nradachy-web.github.io/found-first/learn/aeo-for-professional-services/): Answer engine optimization for professional services: expertise, service fit, scope, attributable proof, and qualified consultation paths.
+- [AEO for local businesses](https://nradachy-web.github.io/found-first/learn/aeo-for-local-businesses/): Local AEO connects accurate service areas, business profiles, useful service content, reviews, and clear booking or inquiry paths.
+- [AEO for multi-location brands](https://nradachy-web.github.io/found-first/learn/aeo-for-multi-location-brands/): Multi-location AEO connects consistent brand information with accurate location pages, local evidence, centralized governance, and location-level outcomes.
 
-## Key facts on the site (checked against OpenAI Help Center and Google Search Central, September 2026)
+## Resources
+- [AI Visibility Field Kit](https://nradachy-web.github.io/found-first/resources/found-first-field-kit.pdf)
 
-- Ads in ChatGPT appear below a response, labeled as sponsored, only for adults on the Free and Go plans. Ads do not change ChatGPT's answers.
-- Billing is per 1,000 views, per valid click, or conversion-optimized; the minimum daily budget is 25 USD; OpenAI suggests starting CPC bids at 3 to 5 USD.
-- Self-serve Ads Manager is available to legal entities in the United States, Canada, the United Kingdom, Australia, New Zealand, most of the EU, Japan, Korea, India, Brazil, Mexico, and others.
-- Google says no special files, AI text files, markup, or schema are needed to appear in AI Overviews or AI Mode, and inclusion is never guaranteed.
-
-## Pages
-
-- [Found First](https://nradachy-web.github.io/found-first/): the single-page site with services, how ChatGPT ads work, how AEO works, founders, and answers to common questions.
-
-## Contact
-
-- Email: nick@modernapexstrategies.com
-- Founder sites: https://modernapexstrategies.com/ and https://www.frontierapplabs.com/
+This file is a reading aid, not a requirement for AI search visibility.

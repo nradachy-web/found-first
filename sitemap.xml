@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>https://nradachy-web.github.io/found-first/</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://nradachy-web.github.io/found-first/assets/og-card.png</image:loc>
-      <image:title>Found First</image:title>
-    </image:image>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://nradachy-web.github.io/found-first/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/answer-engine-optimization/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/chatgpt-ads-agency/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/aeo-vs-seo-vs-geo/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/ai-visibility-audit/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/get-recommended-by-chatgpt/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/google-ai-overviews/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/aeo-content-strategy/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/measure-ai-marketing-roi/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/choose-aeo-agency/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/chatgpt-advertising-cost/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/chatgpt-ads-vs-google-ads/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/ai-marketing-for-b2b-saas/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/ai-marketing-for-ecommerce/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/aeo-for-professional-services/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/aeo-for-local-businesses/</loc><lastmod>2026-09-16</lastmod></url>
+  <url><loc>https://nradachy-web.github.io/found-first/learn/aeo-for-multi-location-brands/</loc><lastmod>2026-09-16</lastmod></url>
 </urlset>

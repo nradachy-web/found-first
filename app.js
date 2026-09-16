@@ -1,4 +1,6 @@
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
+let manualPause = false;
+const still = () => motion.matches || manualPause;
 const glyphs = '.:+*#@/01';
 const clamp = (v, low = 0, high = 1) => Math.max(low, Math.min(high, v));
 const mix = (a, b, t) => a + (b - a) * t;
@@ -43,7 +45,7 @@ function drawIntro(now) {
   if (t < 1) introFrame = requestAnimationFrame(drawIntro);
 }
 if (intro) {
-  if (skipIntro || motion.matches) finishIntro();
+  if (skipIntro || still()) finishIntro();
   else {
     introFrame = requestAnimationFrame(drawIntro);
     setTimeout(finishIntro, 1900);
@@ -119,12 +121,12 @@ class Monogram extends Scene {
     if (!this.points) return;
     const {ctx: c, width: w, height: h} = this;
     this.clear();
-    const t = motion.matches ? 1 : ease((now - start - this.delay) / (this.isIntro ? 1000 : 1500));
-    const fidelity = motion.matches ? 1 : ease((now - start - this.delay - (this.isIntro ? 600 : 1300)) / 700);
+    const t = still() ? 1 : ease((now - start - this.delay) / (this.isIntro ? 1000 : 1500));
+    const fidelity = still() ? 1 : ease((now - start - this.delay - (this.isIntro ? 600 : 1300)) / 700);
     const size = Math.min(w * 1.06, h * .97);
-    const rotate = motion.matches ? 0 : Math.sin(now / 6500) * .075 + (this.pointer.active ? (this.pointer.x - .5) * .17 : 0);
+    const rotate = still() ? 0 : Math.sin(now / 6500) * .075 + (this.pointer.active ? (this.pointer.x - .5) * .17 : 0);
     this.rotation = mix(this.rotation, rotate, .035);
-    const lift = motion.matches ? 0 : Math.sin(now / 3600) * 4;
+    const lift = still() ? 0 : Math.sin(now / 3600) * 4;
     c.font = `${Math.max(5.5, size / 103)}px "IBM Plex Mono",monospace`;
     c.textAlign = 'center'; c.textBaseline = 'middle';
     c.globalAlpha = 1 - fidelity;
@@ -134,12 +136,12 @@ class Monogram extends Scene {
       let y = p.y * size + lift;
       x += Math.sin(p.r * 70) * spread * w * .8;
       y += Math.cos(p.r * 31) * spread * h * .8;
-      if (this.pointer.active && !motion.matches) {
+      if (this.pointer.active && !still()) {
         const dx = x + w / 2 - this.pointer.x * w, dy = y + h / 2 - this.pointer.y * h;
         const dist = Math.hypot(dx, dy); const force = Math.max(0, 1 - dist / 85) * 5;
         x += dx / (dist || 1) * force; y += dy / (dist || 1) * force;
       }
-      const shimmer = motion.matches ? 0 : Math.sin(now / 1500 + p.y * 8) * .08;
+      const shimmer = still() ? 0 : Math.sin(now / 1500 + p.y * 8) * .08;
       c.fillStyle = `rgba(0,0,0,${clamp(.35 + p.d * 2 + shimmer) * (.25 + .75 * t)})`;
       const char = t < .95 ? glyphs[Math.floor(hash(p.r + Math.floor(now / 90)) * glyphs.length)] : p.ch;
       c.fillText(char, w / 2 + x, h / 2 + y);
@@ -149,6 +151,19 @@ class Monogram extends Scene {
     c.transform(Math.cos(this.rotation), this.rotation * .07, this.rotation * .1, 1, 0, 0);
     c.drawImage(this.image, -size * .893 / 2, -size / 2, size * .893, size);
     c.restore(); c.globalAlpha = 1;
+    // A narrow scan resolves the finished sculpture back into its source glyphs.
+    if (!still() && fidelity > .98 && !this.isIntro) {
+      const scan = ((now / 6500) % 1) * (h + 100) - 50;
+      c.save(); c.beginPath(); c.rect(0, scan - 16, w, 32); c.clip(); c.clearRect(0, 0, w, h);
+      for (const p of this.points) {
+        const y = h / 2 + p.y * size + lift;
+        if (Math.abs(y - scan) > 22) continue;
+        const x = w / 2 + p.x * size * Math.cos(this.rotation) + this.rotation * .1 * p.y * size;
+        c.fillStyle = `rgba(0,0,0,${clamp(.2 + p.d * 1.7)})`;
+        c.fillText(glyphs[Math.floor(hash(p.r + Math.floor(now / 110)) * glyphs.length)], x, y);
+      }
+      c.restore();
+    }
   }
 }
 
@@ -169,7 +184,7 @@ class Signal extends Scene {
     const {ctx: c, width: w, height: h} = this; this.clear();
     const x0 = w * .74, y0 = h * .5;
     c.save();
-    c.translate(x0, y0); c.rotate(motion.matches ? -.23 : now / 180000 - .23);
+    c.translate(x0, y0); c.rotate(still() ? -.23 : now / 180000 - .23);
     const reach = Math.max(w, h) * 1.4;
     c.fillStyle = c.createPattern(this.pattern, 'repeat');
     c.fillRect(-reach, -reach, reach * 2, reach * 2);
@@ -200,17 +215,23 @@ class Negative extends Scene {
     if (!this.pattern) this.onResize();
     const {ctx: c, width: w, height: h} = this; this.clear();
     c.fillStyle = c.createPattern(this.pattern, 'repeat');
-    const drift = motion.matches ? 0 : (now / 160) % 360;
+    const drift = still() ? 0 : (now / 160) % 360;
     c.save(); c.translate(-drift, 0); c.fillRect(0, 0, w + 360, h); c.restore();
-    c.globalCompositeOperation = 'destination-out';
+    c.globalCompositeOperation = positiveSpace ? 'destination-in' : 'destination-out';
     c.textAlign = 'center'; c.textBaseline = 'middle';
     const size = Math.min(w * .128, 150);
     c.font = `800 ${size}px Manrope,Arial,sans-serif`;
     const rect = this.canvas.getBoundingClientRect();
-    const progress = motion.matches ? 1 : clamp((innerHeight - rect.top) / (innerHeight * .65));
+    const progress = still() ? 1 : clamp((innerHeight - rect.top) / (innerHeight * .65));
     c.globalAlpha = ease(progress);
     c.fillText('FOUND FIRST', w / 2, h * .52);
     c.globalAlpha = 1;
+    c.globalCompositeOperation = 'destination-out';
+    if (this.pointer.active && !still() && !positiveSpace) {
+      const hole = c.createRadialGradient(this.pointer.x * w, this.pointer.y * h, 8, this.pointer.x * w, this.pointer.y * h, 90);
+      hole.addColorStop(0, '#000'); hole.addColorStop(1, 'transparent');
+      c.fillStyle = hole; c.fillRect(0, 0, w, h);
+    }
     const fade = c.createLinearGradient(0, 0, 0, h);
     fade.addColorStop(0, '#000'); fade.addColorStop(.23, 'transparent'); fade.addColorStop(.73, 'transparent'); fade.addColorStop(1, '#000');
     c.fillStyle = fade; c.fillRect(0, 0, w, h);
@@ -219,7 +240,45 @@ class Negative extends Scene {
   }
 }
 
-if ($('intro-canvas') && !motion.matches && !skipIntro) new Monogram('intro-canvas');
+// Portraits resolve from a sampled ASCII image into the supplied photograph.
+class Portrait extends Scene {
+  constructor(id, src) {
+    super(id); this.began = null; this.image = new Image();
+    this.image.onload = () => { this.onResize(); requestDraw(); };
+    this.image.src = src;
+  }
+  onResize() {
+    if (!this.image || !this.image.width || !this.width) return;
+    const cols = Math.min(72, Math.ceil(this.width / 7)), rows = Math.ceil(this.height / 10);
+    const sample = document.createElement('canvas'); sample.width = cols; sample.height = rows;
+    const c = sample.getContext('2d', {willReadFrequently: true});
+    const scale = Math.max(this.width / this.image.width, this.height / this.image.height);
+    c.drawImage(this.image, (this.width - this.image.width * scale) / 2 * cols / this.width, (this.height - this.image.height * scale) * .3 * rows / this.height, this.image.width * scale * cols / this.width, this.image.height * scale * rows / this.height);
+    this.sample = {cols, rows, pixels: c.getImageData(0, 0, cols, rows).data};
+  }
+  draw(now) {
+    this.clear();
+    if (still() || !this.sample) return;
+    if (this.began === null) this.began = now;
+    const t = clamp((now - this.began - 300) / 1700);
+    if (t >= 1) return;
+    const {ctx: c, width: w, height: h} = this;
+    const {cols, rows, pixels} = this.sample, chars = ' .:+*#%@';
+    c.save(); c.beginPath(); c.rect(0, h * ease(t), w, h); c.clip();
+    c.fillStyle = '#f4f4f4'; c.fillRect(0, 0, w, h);
+    c.font = `${Math.max(7, w / cols)}px "IBM Plex Mono",monospace`; c.textAlign = 'center';
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const i = (y * cols + x) * 4, shade = 1 - (pixels[i] * .2126 + pixels[i+1] * .7152 + pixels[i+2] * .0722) / 255;
+      c.fillStyle = '#111'; c.fillText(chars[Math.min(7, Math.floor(shade * 8))], (x + .5) * w / cols, (y + .8) * h / rows);
+    }
+    c.restore();
+  }
+}
+if ($('nick-ascii')) new Portrait('nick-ascii', './assets/nick-radachy.png');
+if ($('jeff-ascii')) new Portrait('jeff-ascii', './assets/jeff-davis.png');
+
+let positiveSpace = false;
+if ($('intro-canvas') && !still() && !skipIntro) new Monogram('intro-canvas');
 if ($('hero-canvas')) new Monogram();
 if ($('signal-canvas')) new Signal();
 if ($('negative-canvas')) new Negative('negative-canvas');
@@ -227,21 +286,21 @@ function draw(now) {
   animationFrame = 0;
   if (document.hidden) return;
   for (const scene of scenes) if (visible.has(scene.canvas)) scene.draw(now);
-  if (!motion.matches && visible.size) animationFrame = requestAnimationFrame(draw);
+  if (!still() && visible.size) animationFrame = requestAnimationFrame(draw);
 }
 function requestDraw() { if (!animationFrame && !document.hidden) animationFrame = requestAnimationFrame(draw); }
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { cancelAnimationFrame(animationFrame); animationFrame = 0; cancelAnimationFrame(demoFrame); demoFrame = 0; }
   else { requestDraw(); requestDemo(); }
 });
-motion.addEventListener('change', () => { requestDraw(); if (motion.matches) demoStatic(demoIndex); else requestDemo(); });
-addEventListener('scroll', () => { if (motion.matches) requestDraw(); }, {passive: true});
+motion.addEventListener('change', () => { requestDraw(); if (still()) demoStatic(demoIndex); else requestDemo(); });
+addEventListener('scroll', () => { if (still()) requestDraw(); }, {passive: true});
 document.fonts.ready.then(() => { scenes.forEach(s => s.resize()); requestDraw(); });
 
 // Headline words resolve out of glyph noise once, when they come into view.
 const scrambleObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (!entry.isIntersecting || motion.matches) return;
+    if (!entry.isIntersecting || still()) return;
     const el = entry.target, text = el.dataset.scramble;
     if (!text) return;
     let began = performance.now();
@@ -254,9 +313,9 @@ document.querySelectorAll('[data-scramble]').forEach(el => { el.setAttribute('ar
 
 // The illustrated AI answer: a question is typed, the answer resolves, your business is found first, and a sponsored unit follows.
 const scenarios = [
-  {q: 'who does ceramic coating near Grand Rapids?', a: 'A few detail shops in Grand Rapids do ceramic coating. The one recommended most consistently:', why: 'clear service pages, consistent reviews', ad: '[ your business ]  Ceramic coating, booked this week'},
-  {q: 'I need a plumber in Austin tonight. Who is open?', a: 'Several Austin plumbers list 24 hour service. The one cited most often for emergency calls:', why: 'hours and service area stated plainly', ad: '[ your business ]  24 hour service, call now'},
-  {q: 'best window tint shop in Ann Arbor?', a: 'Based on reviews and detail pages, these shops come up for tint in Ann Arbor:', why: 'answer pages for the questions people ask', ad: '[ your business ]  Lifetime warranty tint, book online'}
+  {q: 'which project management tool fits a growing team?', a: 'For a growing team, compare the workflow, integrations, and onboarding support:', why: 'documented features, credible customer evidence', ad: '[ your business ]  See the product. Book a demo.'},
+  {q: 'what should I look for in a durable carry-on bag?', a: 'Compare materials, repair support, and warranty coverage. Consider these brands:', why: 'product specifications, independent reviews', ad: '[ your business ]  Explore the collection.'},
+  {q: 'how do I choose an operations consulting partner?', a: 'Start with relevant experience, scope, and how the work will be measured:', why: 'clear methodology, attributable case studies', ad: '[ your business ]  Meet the team. Discuss your project.'}
 ];
 const demo = $('demo');
 const demoEl = {q: $('demo-q'), a: $('demo-a1'), you: $('demo-you'), why: $('demo-why'), ad: $('demo-ad-text'), step: $('demo-step')};
@@ -273,7 +332,7 @@ function demoStatic(i) {
 }
 function demoTick(now) {
   demoFrame = 0;
-  if (!demoVisible || document.hidden || motion.matches) return;
+  if (!demoVisible || document.hidden || still()) return;
   const s = scenarios[demoIndex], phases = demoPhases(s), [name, dur] = phases[phaseIndex];
   if (!phaseStart) phaseStart = now;
   const p = clamp((now - phaseStart) / dur);
@@ -297,9 +356,9 @@ function demoTick(now) {
   }
   demoFrame = requestAnimationFrame(demoTick);
 }
-function requestDemo() { if (demo && demoVisible && !demoFrame && !document.hidden && !motion.matches) { phaseStart = 0; demoFrame = requestAnimationFrame(demoTick); } }
+function requestDemo() { if (demo && demoVisible && !demoFrame && !document.hidden && !still()) { phaseStart = 0; demoFrame = requestAnimationFrame(demoTick); } }
 if (demo) {
-  if (motion.matches) demoStatic(0);
+  if (still()) demoStatic(0);
   new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.target === demo) demoVisible = entry.isIntersecting; });
     if (demoVisible) requestDemo(); else { cancelAnimationFrame(demoFrame); demoFrame = 0; }
@@ -354,5 +413,55 @@ if (copyButton) {
     const text = `To: ${EMAIL}\nSubject: ${briefSubject(d)}\n\n${briefBody(d)}`;
     try { await navigator.clipboard.writeText(text); setStatus(`Copied. Paste it into any email to ${EMAIL}.`); }
     catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
+  });
+}
+
+// Accessible sample tabs: all three documents remain readable without JavaScript.
+const tablist = $('workbench-tabs');
+if (tablist) {
+  const tabs = [...tablist.querySelectorAll('[role="tab"]')];
+  const selectTab = tab => {
+    tabs.forEach(item => {
+      const selected = item === tab;
+      item.setAttribute('aria-selected', String(selected)); item.tabIndex = selected ? 0 : -1;
+      $(item.dataset.panel).hidden = !selected;
+    });
+  };
+  if (tabs.length) {
+    tablist.hidden = false; selectTab(tabs[0]);
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => selectTab(tab));
+      tab.addEventListener('keydown', e => {
+        let next;
+        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+        if (e.key === 'ArrowLeft') next = (i + tabs.length - 1) % tabs.length;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End') next = tabs.length - 1;
+        if (next !== undefined) { e.preventDefault(); selectTab(tabs[next]); tabs[next].focus(); }
+      });
+    });
+  }
+}
+const pauseControl = $('motion-toggle');
+if (pauseControl) {
+  pauseControl.hidden = false;
+  pauseControl.addEventListener('click', () => {
+    manualPause = !manualPause;
+    root.classList.toggle('motion-paused', manualPause);
+    pauseControl.setAttribute('aria-pressed', String(manualPause));
+    pauseControl.textContent = manualPause ? 'Resume motion [ > ]' : 'Pause motion [ II ]';
+    cancelAnimationFrame(demoFrame); demoFrame = 0;
+    if (still()) { finishIntro(); demoStatic(demoIndex); } else requestDemo();
+    requestDraw();
+  });
+}
+const spaceControl = $('space-toggle');
+if (spaceControl) {
+  spaceControl.hidden = false;
+  spaceControl.addEventListener('click', () => {
+    positiveSpace = !positiveSpace;
+    spaceControl.setAttribute('aria-pressed', String(positiveSpace));
+    spaceControl.textContent = positiveSpace ? 'Switch to negative space [ - ]' : 'Switch to positive space [ + ]';
+    requestDraw();
   });
 }

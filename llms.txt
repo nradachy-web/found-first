@@ -1,0 +1,25 @@
+# Found First
+
+> Found First is an AI marketing studio for answer engine optimization (AEO) and managed ChatGPT advertising, founded in 2026 by Nick Radachy (marketing, founder of Modern Apex Strategies) and Jeffrey Davis (technology, co-founder of Frontier App Labs). Based in Michigan, USA. Independent and not affiliated with OpenAI or Google.
+
+## What we do
+
+- Answer engine optimization (AEO): AI visibility audit, answer pages, entity and technical foundation, proof and citations, monthly visibility tracking across ChatGPT, Google AI Overviews and AI Mode, Perplexity, Claude, and Gemini.
+- ChatGPT advertising management: eligibility and account setup in OpenAI's Ads Manager, context hints and targeting, ad copy and landing pages, conversion measurement, monthly reporting.
+- Free AI visibility check: send your website and what you sell to nick@modernapexstrategies.com and receive a personal reply on how AI answers describe your business today.
+
+## Key facts on the site (checked against OpenAI Help Center and Google Search Central, September 2026)
+
+- Ads in ChatGPT appear below a response, labeled as sponsored, only for adults on the Free and Go plans. Ads do not change ChatGPT's answers.
+- Billing is per 1,000 views, per valid click, or conversion-optimized; the minimum daily budget is 25 USD; OpenAI suggests starting CPC bids at 3 to 5 USD.
+- Self-serve Ads Manager is available to legal entities in the United States, Canada, the United Kingdom, Australia, New Zealand, most of the EU, Japan, Korea, India, Brazil, Mexico, and others.
+- Google says no special files, AI text files, markup, or schema are needed to appear in AI Overviews or AI Mode, and inclusion is never guaranteed.
+
+## Pages
+
+- [Found First](https://nradachy-web.github.io/found-first/): the single-page site with services, how ChatGPT ads work, how AEO works, founders, and answers to common questions.
+
+## Contact
+
+- Email: nick@modernapexstrategies.com
+- Founder sites: https://modernapexstrategies.com/ and https://www.frontierapplabs.com/

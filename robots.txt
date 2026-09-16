@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nradachy-web.github.io/found-first/sitemap.xml

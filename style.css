@@ -214,7 +214,7 @@ caption{text-align:left;font:12px var(--mono);color:var(--muted);padding-bottom:
 .optional{color:#666}
 .field input[type=text],.field textarea{width:100%;background:transparent;border:0;border-bottom:1px solid #4a4a4a;color:#fff;font:16px/1.5 var(--mono);padding:10px 0;border-radius:0;outline:0;-webkit-appearance:none;appearance:none;resize:vertical;transition:border-color .2s}
 .field input[type=text]:focus,.field textarea:focus{border-bottom-color:#fff;outline:0}
-.field ::placeholder{color:#555;opacity:1}
+.field ::placeholder{color:#888;opacity:1}
 .choices{display:flex;flex-wrap:wrap;gap:10px}
 .choices label{position:relative;cursor:pointer}
 .choices input{position:absolute;opacity:0;width:1px;height:1px}

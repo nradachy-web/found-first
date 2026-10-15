@@ -351,7 +351,7 @@
     <p>Tell us your website and what you sell. Nick will check how ChatGPT and other AI answers describe your business today, and reply personally with what we found and what we would do first.</p>
     <a class="contact-email" href="mailto:nick@modernapexstrategies.com?subject=Found%20First%20%7C%20AI%20visibility%20check">nick@modernapexstrategies.com</a>
   </div>
-  <form class="brief" id="brief-form">
+  <form class="brief" id="brief-form" method="post" action="#contact">
     <div class="field">
       <label for="brief-site">Your website</label>
       <input id="brief-site" name="Website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
@@ -374,10 +374,10 @@
       <textarea id="brief-notes" name="Notes" rows="3" placeholder="What you want to improve, what you run today, timing"></textarea>
     </div>
     <div class="brief-actions">
-      <button class="button button-white" type="submit">Send to Nick</button>
-      <button class="text-link text-link-white" type="button" id="copy-brief">Copy the message instead</button>
+      <a class="button button-white" href="mailto:nick@modernapexstrategies.com">Open your email app</a>
+      <button class="text-link text-link-white" type="button" id="copy-brief" disabled>Copy your message</button>
     </div>
-    <p class="brief-fine" id="brief-status">Opens your email app with the message written for you. Nothing is stored on this site.</p>
+    <p class="brief-fine" id="brief-status" role="status" aria-live="polite" aria-atomic="true">Copy your message, then paste it into an email to Nick. Opening your email app does not send anything. Nothing is stored on this site.</p>
     <noscript><p class="brief-fine is-ok">JavaScript is off in your browser, so this form cannot open your email app. Email nick@modernapexstrategies.com with your website and what you sell.</p></noscript>
   </form>
 </section>

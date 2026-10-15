@@ -1,0 +1,16 @@
+[
+  ".nojekyll", "index.html", "app.js", "style.css", "studio.css", "llms.txt", "robots.txt", "sitemap.xml",
+  "assets/apple-touch-icon.png", "assets/favicon.svg", "assets/FONT-LICENSE.txt",
+  "assets/frontier-app-labs.png", "assets/jeff-davis.png", "assets/logo-horizontal.png",
+  "assets/manrope-latin.woff2", "assets/mark.svg", "assets/micro.svg", "assets/modern-apex.png",
+  "assets/nick-radachy.png", "assets/og-card.png", "assets/plex-mono.woff2",
+  "resources/ai-visibility-tracker.csv", "resources/campaign-planning-brief.txt", "resources/found-first-field-kit.pdf",
+  "learn/index.html", "learn/aeo-content-strategy/index.html", "learn/aeo-for-local-businesses/index.html",
+  "learn/aeo-for-multi-location-brands/index.html", "learn/aeo-for-professional-services/index.html",
+  "learn/aeo-vs-seo-vs-geo/index.html", "learn/ai-marketing-for-b2b-saas/index.html",
+  "learn/ai-marketing-for-ecommerce/index.html", "learn/ai-visibility-audit/index.html",
+  "learn/answer-engine-optimization/index.html", "learn/chatgpt-ads-agency/index.html",
+  "learn/chatgpt-ads-vs-google-ads/index.html", "learn/chatgpt-advertising-cost/index.html",
+  "learn/choose-aeo-agency/index.html", "learn/get-recommended-by-chatgpt/index.html",
+  "learn/google-ai-overviews/index.html", "learn/measure-ai-marketing-roi/index.html"
+]

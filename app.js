@@ -384,7 +384,7 @@ if (sticky && hero && contact) {
   stickyObserver.observe(contact);
 }
 
-// The brief builder writes the email for the visitor. Nothing is stored; the visitor's own mail app sends it.
+// Copy is explicit. Never put inquiry fields into a URL, including a mailto query.
 const EMAIL = 'nick@modernapexstrategies.com';
 const form = $('brief-form'), status = $('brief-status'), copyButton = $('copy-brief');
 function briefData() {
@@ -399,13 +399,7 @@ function briefBody(d) {
 }
 function setStatus(text) { if (status) { status.textContent = text; status.classList.add('is-ok'); } }
 if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (form.reportValidity && !form.reportValidity()) return;
-    const d = briefData();
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(briefSubject(d))}&body=${encodeURIComponent(briefBody(d))}`;
-    setStatus(`Your email app should open with the message ready. If it did not, use "Copy the message instead" and send it to ${EMAIL}.`);
-  });
+  form.addEventListener('submit', e => e.preventDefault());
 }
 if (copyButton) {
   copyButton.addEventListener('click', async () => {
@@ -414,6 +408,7 @@ if (copyButton) {
     try { await navigator.clipboard.writeText(text); setStatus(`Copied. Paste it into any email to ${EMAIL}.`); }
     catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
   });
+  copyButton.disabled = false;
 }
 
 // Accessible sample tabs: all three documents remain readable without JavaScript.

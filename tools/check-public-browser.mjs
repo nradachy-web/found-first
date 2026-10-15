@@ -4,6 +4,7 @@ import path from 'node:path';
 import http from 'node:http';
 import {createRequire} from 'node:module';
 import {createHash} from 'node:crypto';
+import {attemptRecorder, browserArgs, denyTransport} from './browser-transport.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 const option = name => process.argv[process.argv.indexOf(name) + 1];
@@ -16,7 +17,9 @@ fs.mkdirSync(output, {recursive: true});
 const files = JSON.parse(fs.readFileSync(path.join(root, 'config/public-files.json')));
 const allowed = new Set(files);
 const manifest = {at: new Date().toISOString(), checks: [], screenshots: [], blocked: [], errors: [], histories: [], files: {}};
-for (const file of [...files, 'tools/check-public-browser.mjs']) manifest.files[file] = createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
+manifest.networkAttempts = [];
+const transport = denyTransport(attemptRecorder(manifest.networkAttempts));
+for (const file of [...files, 'tools/check-public-browser.mjs', 'tools/browser-transport.mjs']) manifest.files[file] = createHash('sha256').update(fs.readFileSync(path.join(root, file))).digest('hex');
 const server = http.createServer((request, response) => {
   const parsed = new URL(request.url, 'http://localhost');
   const file = parsed.pathname === '/' ? 'index.html' : decodeURIComponent(parsed.pathname.slice(1));
@@ -30,7 +33,7 @@ const check = (name, pass, detail = null) => { manifest.checks.push({name, pass,
 const contains = (url, values) => { let decoded = url; for (let n = 0; n < 3; n++) { try { decoded = decodeURIComponent(decoded.replaceAll('+', ' ')); } catch {} } return values.some(value => decoded.includes(value)); };
 try {
   for (const [engineName, engine] of [['chromium', chromium], ['webkit', webkit]]) {
-    const browser = await engine.launch();
+    const browser = await engine.launch({proxy: await transport.proxy(), args: browserArgs([])});
     try {
       for (const mode of ['normal', 'no-js', 'blocked-module', 'initialization-failure', 'clipboard-rejected', 'clipboard-unavailable']) {
         const enhanced = !['no-js', 'blocked-module', 'initialization-failure'].includes(mode);
@@ -102,6 +105,7 @@ try {
   }
   check('unexpected external requests', manifest.blocked.length === 0);
   check('unexpected application errors', manifest.errors.length === 0);
+  check('unexpected transport attempts', manifest.networkAttempts.length === 0);
 } catch (error) { manifest.errors.push(error.message); process.exitCode = 1; }
-finally { await new Promise(resolve => server.close(resolve)); fs.writeFileSync(path.join(output, 'manifest.json'), JSON.stringify(manifest, null, 2)); }
+finally { await transport.close(); await new Promise(resolve => server.close(resolve)); fs.writeFileSync(path.join(output, 'manifest.json'), JSON.stringify(manifest, null, 2)); }
 console.log(JSON.stringify({output, checks: manifest.checks.length, failures: manifest.checks.filter(item => !item.pass), errors: manifest.errors}));

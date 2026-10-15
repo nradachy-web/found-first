@@ -20,7 +20,7 @@ test('published artifact contains exactly approved files, never unrelated reposi
   assert.throws(()=>buildPublic(ROOT,output),/overwrite/);
 });
 
-test('build fails closed for traversal and symlink allowlist entries', t => {
+test('build fails closed for traversal allowlist entries', t => {
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'ff-public-invalid-'));
   t.after(()=>fs.rmSync(temp,{recursive:true,force:true}));
   fs.mkdirSync(path.join(temp,'config'));
@@ -28,6 +28,22 @@ test('build fails closed for traversal and symlink allowlist entries', t => {
     fs.writeFileSync(path.join(temp,'config/public-files.json'),JSON.stringify([bad]));
     assert.throws(()=>buildPublic(temp,path.join(temp,'site')));
     assert.equal(fs.existsSync(path.join(temp,'site')),false);
+  }
+});
+
+test('real file symlinks and parent-directory junctions cannot enter the artifact', t => {
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'ff-public-symlinks-'));
+  t.after(()=>fs.rmSync(temp,{recursive:true,force:true}));
+  const source=path.join(temp,'source'), privateDir=path.join(temp,'private');
+  fs.mkdirSync(path.join(source,'config'),{recursive:true});fs.mkdirSync(privateDir);
+  fs.writeFileSync(path.join(privateDir,'account.json'),'SYNTHETIC-PRIVATE');
+  fs.symlinkSync(privateDir,path.join(source,'assets'),process.platform==='win32'?'junction':'dir');
+  fs.symlinkSync(path.join(privateDir,'account.json'),path.join(source,'account.json'),'file');
+  for(const file of ['assets/account.json','account.json']) {
+    fs.writeFileSync(path.join(source,'config/public-files.json'),JSON.stringify([file]));
+    const output=path.join(temp,'site');
+    assert.throws(()=>buildPublic(source,output));
+    assert.equal(fs.existsSync(output),false);
   }
 });
 

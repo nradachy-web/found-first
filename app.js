@@ -409,6 +409,7 @@ if (copyButton) {
     catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
   });
   copyButton.disabled = false;
+  setStatus('Copy your message, then paste it into an email to Nick. Opening your email app does not send anything. Nothing is stored on this site.');
 }
 
 // Accessible sample tabs: all three documents remain readable without JavaScript.

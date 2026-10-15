@@ -1,5 +1,6 @@
 [
   ".nojekyll", "index.html", "app.js", "style.css", "studio.css", "llms.txt", "robots.txt", "sitemap.xml",
+  "config/offer-manifest.json",
   "assets/apple-touch-icon.png", "assets/favicon.svg", "assets/FONT-LICENSE.txt",
   "assets/frontier-app-labs.png", "assets/jeff-davis.png", "assets/logo-horizontal.png",
   "assets/manrope-latin.woff2", "assets/mark.svg", "assets/micro.svg", "assets/modern-apex.png",

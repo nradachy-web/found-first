@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {readOfferManifest} from './validate-offer-manifest.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export function buildPublic(root = ROOT, output = path.join(root, '_site')) {
@@ -14,6 +15,8 @@ export function buildPublic(root = ROOT, output = path.join(root, '_site')) {
     if (!fs.lstatSync(source).isFile() || fs.realpathSync(source) !== source) throw Error('Public file must be a regular file without symlinks');
     return {name, source};
   });
+  const offer = inputs.find(input => input.name === 'config/offer-manifest.json');
+  if (offer) readOfferManifest(offer.source);
   if (fs.existsSync(output)) throw Error('Refusing to overwrite an existing build; choose a fresh output directory');
   fs.mkdirSync(output, {recursive:true});
   for (const {name, source} of inputs) {

@@ -1,2 +1,4 @@
 config/offer-manifest.json text eol=lf
+*.pdf binary
+*.csv text eol=lf
 tests/fixtures/public-inquiry-v1.json text eol=lf

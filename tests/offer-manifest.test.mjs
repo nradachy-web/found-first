@@ -10,9 +10,9 @@ import {MANIFEST_PATH, parseOfferManifest, readOfferManifest, serializeOfferMani
 function approvedFixture() {
   return {
     schema_version: 1,
-    offer_version: 'found-first-offer-2026-10-15',
+    offer_version: 'found-first-offer-2026-10-21',
     tracks: ['existing_eligible', 'new_build', 'rebuild'],
-    period_semantics: 'Three consecutive 30-day service periods when agreed; renewal requires a new written agreement.',
+    period_semantics: 'Service term, billing periods and renewal are agreed in each written scope; no automatic renewal is implied.',
     existing_site: 'Eligible existing sites can receive ordinary onboarding and in-scope AEO within recurring service. Separate builds or remediation require explicit scope and approval.',
     measurement_labels: ['observed', 'unavailable', 'not configured', 'not applicable']
   };
@@ -100,7 +100,7 @@ test('CLI validates the shipped manifest and rejects private content without pri
   const command = path.join(ROOT, 'tools/validate-offer-manifest.mjs');
   const passed = spawnSync(process.execPath, [command], {encoding: 'utf8'});
   assert.equal(passed.status, 0, passed.stderr);
-  assert.match(passed.stdout, /Validated found-first-offer-2026-10-15/);
+  assert.match(passed.stdout, /Validated found-first-offer-2026-10-21/);
   const file = path.join(temporaryDirectory(t), 'invalid.json');
   fs.writeFileSync(file, '{"PRIVATE-SENTINEL":"fixture@example.test"}');
   const rejected = spawnSync(process.execPath, [command, file], {encoding: 'utf8'});

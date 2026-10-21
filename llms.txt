@@ -25,4 +25,9 @@ Contact: nick@modernapexstrategies.com
 ## Resources
 - [AI Visibility Field Kit](https://nradachy-web.github.io/found-first/resources/found-first-field-kit.pdf)
 
-This file is a reading aid, not a requirement for AI search visibility.
+## Scope and evidence
+We agree deliverables, allowances, service term, billing periods and renewal in your written scope. Eligible existing sites can receive ordinary onboarding and in-scope AEO within recurring service. A new website, major rebuild or additional remediation needs a separate approved scope. Media spend is separate from service fees. Domain control, hosting, ownership and support are recorded before work starts.
+
+API source studies record the selected model, search configuration, exact questions, repeated answers, retrieved sources and citations. They do not measure all consumer-app behavior or prove causation. Google generative-AI impressions, referrals, paid activity and inquiries are separate measures. No AI recommendation or ranking is guaranteed.
+
+This file is a reading aid, not a requirement for AI search visibility. Content reviewed October 21, 2026.

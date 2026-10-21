@@ -1,4 +1,4 @@
-FOUND FIRST / CAMPAIGN PLANNING BRIEF
+FOUND FIRST / CAMPAIGN PLANNING BRIEF / REVIEWED 2026-10-21
 
 Business and website:
 Primary buyer:
@@ -9,12 +9,19 @@ Supported claims and evidence sources:
 Eligibility or policy questions to resolve:
 Qualified outcome definition:
 Where the outcome is verified:
-Media budget and currency:
+Account eligibility, access and billing readiness:
+Approved creative, destination and launch authority:
+Media budget and billing currency:
+Budget type (average daily or campaign-total):
 Management and other fees (separate):
 Agreed spend limit:
 Review date:
 What would justify expanding the test:
 What would require changing or stopping it:
+Written scope and version:
+Service term, billing periods and renewal decision:
+Included existing-site work and separately approved build/remediation:
+Domain control, hosting, ownership and support:
 Owner and next action:
 
 Organic AI mentions and paid placements are separate systems.
@@ -22,3 +29,5 @@ Agree scope and budget before launch. Do not assume a click is a qualified lead.
 
 Found First / nick@modernapexstrategies.com
 https://nradachy-web.github.io/found-first/
+
+A daily budget is an average delivery target, not a fixed daily ceiling. Confirm current currency-specific minimums in the account. No automatic renewal or unapproved charges are implied.

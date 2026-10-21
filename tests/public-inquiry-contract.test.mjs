@@ -97,7 +97,7 @@ test('static form starts disabled with independent module, safe native semantics
   assert.match(html, /<script type="module" src="\.\/inquiry\.js"><\/script>/);
   assert.doesNotMatch(fs.readFileSync(new URL('../app.js', import.meta.url), 'utf8'), /briefData|copy-brief|brief-form/);
   const shipped = JSON.parse(fs.readFileSync(new URL('../config/public-files.json', import.meta.url)));
-  assert.equal(shipped.length, 45);
+  assert.equal(shipped.length, 46);
   for (const name of ['inquiry.js', 'config/public-inquiry.json', 'privacy/index.html']) assert.ok(shipped.includes(name));
   assert.ok(!shipped.some(name => /^(tests|tools)\//.test(name)));
 });

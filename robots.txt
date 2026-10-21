@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nradachy-web.github.io/found-first/sitemap.xml
+Sitemap: https://befoundfirst.ai/sitemap.xml

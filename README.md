@@ -2,7 +2,7 @@
 
 AEO and ChatGPT advertising, with an ASCII brand identity.
 
-Live website: https://nradachy-web.github.io/found-first/
+Live website: https://befoundfirst.ai/
 
 Pushes to main publish automatically through GitHub Actions.
 

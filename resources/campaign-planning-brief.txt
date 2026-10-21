@@ -20,7 +20,7 @@ What would justify expanding the test:
 What would require changing or stopping it:
 Written scope and version:
 Service term, billing periods and renewal decision:
-Included existing-site work and separately approved build/remediation:
+Initial existing-site improvement round, recurring work and separate build/remediation scope:
 Domain control, hosting, ownership and support:
 Owner and next action:
 
@@ -28,6 +28,9 @@ Organic AI mentions and paid placements are separate systems.
 Agree scope and budget before launch. Do not assume a click is a qualified lead.
 
 Found First / nick@modernapexstrategies.com
-https://nradachy-web.github.io/found-first/
+https://befoundfirst.ai/
 
 A daily budget is an average delivery target, not a fixed daily ceiling. Confirm current currency-specific minimums in the account. No automatic renewal or unapproved charges are implied.
+
+Public program reference: proposed monthly fees are Foundation $2,000, Growth $3,500 and Expansion $5,000, for one brand and one existing website. Foundation includes eligible ChatGPT campaign management and one initial improvement round; ongoing optimization, research and answer pages are not included. Growth adds optimization at least once monthly, ongoing research and answer pages. Expansion shares Growth's page allowance and adds approved relevant-channel distribution, with no fixed post quota.
+Final delivery allowances, billing periods, term, renewal, ownership, hosting and support are confirmed in the written scope. Advertising spend is separate; new sites, major rebuilds and additional remediation require separate approval and scope. No automatic renewal or ownership-transfer date is implied.

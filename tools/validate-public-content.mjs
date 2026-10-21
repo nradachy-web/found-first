@@ -4,7 +4,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BASE = 'https://nradachy-web.github.io/found-first/';
+const BASE = 'https://befoundfirst.ai/';
 const decode = text => text.replace(/&#x([0-9a-f]+);/gi, (_, value) => String.fromCodePoint(parseInt(value, 16)))
   .replace(/&#([0-9]+);/g, (_, value) => String.fromCodePoint(Number(value)))
   .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'");
@@ -28,15 +28,15 @@ export function validatePublicContent(root = ROOT) {
   for (const [file, source] of markup) {
     const pageUrl = new URL(file === 'index.html' ? '' : file.replace(/index.html$/, ''), BASE);
     const canonical = source.match(/<link rel="canonical" href="([^"]+)"/);
-    check(canonical?.[1] === pageUrl.href, `${file}: canonical must preserve project path`);
+    check(canonical?.[1] === pageUrl.href, `${file}: canonical must use the public domain`);
+    check(!/nradachy-web\.github\.io\/found-first/.test(source), `${file}: stale project-domain reference`);
     check(!/\uFFFD|shown only to adults|as of September 2026|Three consecutive 30-day/.test(source), `${file}: stale or malformed content`);
     for (const match of source.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
       const reference = decode(match[1]);
       if (/^(?:mailto:|tel:|data:)/.test(reference)) continue;
       const url = new URL(reference, pageUrl);
       if (url.origin !== new URL(BASE).origin) continue;
-      check(url.pathname.startsWith('/found-first/'), `${file}: local link leaves project path`);
-      let target = decodeURIComponent(url.pathname.slice('/found-first/'.length));
+      let target = decodeURIComponent(url.pathname.slice(1));
       if (!target || target.endsWith('/')) target += 'index.html';
       check(allowed.has(target), `${file}: missing published target ${target}`);
       if (url.hash && ids.has(target)) check(ids.get(target).has(decodeURIComponent(url.hash.slice(1))), `${file}: missing anchor ${target}${url.hash}`);

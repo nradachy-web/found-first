@@ -43,7 +43,7 @@ def frame(number, label, title, subtitle):
     c.setFont("Courier", 7)
     c.line(48, 60, 564, 60)
     c.drawString(48, 43, "AI VISIBILITY / AEO / CHATGPT ADS")
-    c.drawRightString(564, 43, f"0{number} / 03")
+    c.drawRightString(564, 43, f"0{number} / 04")
 
 
 frame(1, "THE READINESS CHECK", ["Be part of", "the answer."],
@@ -55,7 +55,7 @@ for heading, text in [
     ("Answer a real customer decision.", "Explain fit, scope, price drivers, process and limitations. Use first-hand knowledge and current sources; a city-name swap is not a useful new page."),
     ("Keep evidence and approval together.", "Retain the source, version, approved facts and media permissions. Review final copy and destination, then verify publication."),
     ("Separate visibility from outcomes.", "Track impressions, sampled citations, identifiable referrals, received inquiries and confirmed revenue separately. Missing evidence stays unknown."),
-    ("Agree the work before it starts.", "Written scope controls allowances, term, billing periods and renewal. Eligible existing-site work, separate builds, media spend, domain control, hosting and ownership need clear boundaries."),
+    ("Agree the work before it starts.", "Choose the level of ongoing work and agree deliverables. Final allowances, term, billing, ownership, hosting and support belong in the written scope. New builds and media spend are separate."),
 ]:
     c.rect(48, top - 11, 9, 9, stroke=1, fill=0)
     bottom = para(heading, 70, top + 1, 494, TITLE)
@@ -99,6 +99,19 @@ for heading, text in [
     top = bottom - 19
 para("Current references / reviewed October 21, 2026", 48, 156, style=TITLE)
 para('<link href="https://support.google.com/webmasters/answer/16984139">Google Generative AI performance report</link> | <link href="https://support.google.com/webmasters/answer/16908024">Google inclusion control</link><br/><link href="https://help.openai.com/en/articles/20001210-create-campaigns-for-chatgpt-ads">OpenAI campaign budgets</link> | <link href="https://help.openai.com/en/articles/20001245-ads-manager-availability">Ads Manager availability</link>', 48, 136, style=NOTE)
-para("Free initial visibility check: nick@modernapexstrategies.com<br/>nradachy-web.github.io/found-first/", 48, 99, style=NOTE)
+para("Free initial visibility check: nick@modernapexstrategies.com<br/>befoundfirst.ai/", 48, 99, style=NOTE)
+c.showPage()
+frame(4, "THE SERVICE PROPOSAL", ["Choose the work.", "Agree the scope."],
+      "Proposed monthly service fees for one brand and one existing website. Advertising spend is separate. Final allowances and commercial terms are confirmed in writing before work starts.")
+para("Foundation / $2,000 per month", 48, 514, style=TITLE)
+para("Eligible ChatGPT campaign management and one initial improvement round on agreed existing pages. Includes campaign and inquiry reporting. Ongoing website optimization, customer-question research and recurring answer pages are not included.", 48, 492)
+para("Growth / $3,500 per month", 48, 423, style=TITLE)
+para("Everything in Foundation, plus website optimization at least once per month, an ongoing monthly research cycle and new or substantially improved answer pages. Final page and campaign allowances are agreed in your scope.", 48, 401)
+para("Expansion / $5,000 per month", 48, 332, style=TITLE)
+para("Everything in Growth, with the same website-page allowance. Adds adaptation, approval, scheduling and distribution of content through relevant channels, plus channel reporting. The publishing plan follows audience fit; there is no fixed post quota.", 48, 310)
+para("Scope, readiness and costs", 48, 241, style=TITLE)
+para("New websites, major repairs, rebuilds, migrations and custom integrations need separate scope. Hosting, support and third-party costs are identified in the quote. Confirm delivery allowances, billing periods, term, renewal and ownership in writing. Ads launch only after eligibility, access, billing, creative, destination and media budget approval are confirmed.", 48, 220, style=NOTE)
+para("Distribution excludes community management, inbox handling, automated outreach, filming and on-site photography. No automatic renewal or guaranteed AI recommendations, rankings, leads or sales. Platform availability and policies apply.", 48, 151, style=NOTE)
+para('<link href="https://befoundfirst.ai/#programs">befoundfirst.ai / programs</link> | nick@modernapexstrategies.com', 48, 87, style=NOTE)
 c.save()
 print(OUTPUT)

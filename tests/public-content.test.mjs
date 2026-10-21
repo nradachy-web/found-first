@@ -36,3 +36,10 @@ test('an unpublished internal target and a missing page anchor are rejected', t 
   fs.appendFileSync(file, '<a href="./private/account.json">Internal</a><a href="./learn/google-ai-overviews/#missing-target">Missing</a>');
   assert.throws(() => validatePublicContent(directory), error => /missing published target/.test(error.message) && /missing anchor/.test(error.message));
 });
+
+test('a stale project-domain metadata reference is rejected on the custom-domain site', t => {
+  const directory = fixture(t), file = path.join(directory, 'index.html');
+  const source = fs.readFileSync(file, 'utf8').replace('content="https://befoundfirst.ai/"', 'content="https://nradachy-web.github.io/found-first/"');
+  fs.writeFileSync(file, source);
+  assert.throws(() => validatePublicContent(directory), /stale project-domain reference/);
+});

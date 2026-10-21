@@ -10,10 +10,10 @@ import {MANIFEST_PATH, parseOfferManifest, readOfferManifest, serializeOfferMani
 function approvedFixture() {
   return {
     schema_version: 1,
-    offer_version: 'found-first-offer-2026-10-21',
+    offer_version: 'found-first-offer-2026-10-21-space',
     tracks: ['existing_eligible', 'new_build', 'rebuild'],
-    period_semantics: 'Service term, billing periods and renewal are agreed in each written scope; no automatic renewal is implied.',
-    existing_site: 'Eligible existing sites can receive ordinary onboarding and in-scope AEO within recurring service. Separate builds or remediation require explicit scope and approval.',
+    period_semantics: 'Proposed fees are monthly; billing periods, service term, renewal and ownership are confirmed in each written scope. No automatic renewal is implied.',
+    existing_site: 'Eligible existing sites receive a scoped initial improvement round; Growth and Expansion add recurring optimization and answer-page work. New websites, major rebuilds and additional remediation require separate explicit scope and approval.',
     measurement_labels: ['observed', 'unavailable', 'not configured', 'not applicable']
   };
 }
@@ -100,7 +100,7 @@ test('CLI validates the shipped manifest and rejects private content without pri
   const command = path.join(ROOT, 'tools/validate-offer-manifest.mjs');
   const passed = spawnSync(process.execPath, [command], {encoding: 'utf8'});
   assert.equal(passed.status, 0, passed.stderr);
-  assert.match(passed.stdout, /Validated found-first-offer-2026-10-21/);
+  assert.match(passed.stdout, /Validated found-first-offer-2026-10-21-space/);
   const file = path.join(temporaryDirectory(t), 'invalid.json');
   fs.writeFileSync(file, '{"PRIVATE-SENTINEL":"fixture@example.test"}');
   const rejected = spawnSync(process.execPath, [command, file], {encoding: 'utf8'});
@@ -130,12 +130,12 @@ test('actual publication builder rejects private manifest bytes before creating 
   }
 });
 
-test('45-file artifact preserves exact manifest bytes and every private-data exclusion', t => {
+test('46-file artifact preserves exact manifest bytes and every private-data exclusion', t => {
   const temp = temporaryDirectory(t);
   const source = path.join(temp, 'source');
   const output = path.join(temp, 'site');
   const files = JSON.parse(fs.readFileSync(path.join(ROOT, 'config/public-files.json'), 'utf8'));
-  assert.equal(files.length, 45);
+  assert.equal(files.length, 46);
   assert.equal(files.filter(file => file === 'config/offer-manifest.json').length, 1);
   fs.mkdirSync(path.join(source, 'config'), {recursive: true});
   fs.writeFileSync(path.join(source, 'config/public-files.json'), JSON.stringify(files));

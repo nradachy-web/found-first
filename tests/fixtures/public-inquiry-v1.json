@@ -1,0 +1,2380 @@
+{
+  "design_version": 1,
+  "status": "design_only_not_implementation_or_acceptance",
+  "authority": {
+    "path": "evidence/phase3-wire-contract.md",
+    "sha256": "2ef23e521a2d52ab0a4abbb5977cf2eafdd9f515aff9a821866d0e3ccc777ee9",
+    "owner_freeze": "2026-10-16 including website input-length/local-suffix clarification"
+  },
+  "notes": [
+    "All contact values are synthetic; no application imports or canonicalizer implementations are used to choose expected objects.",
+    "Accepted means semantic canonicalization is valid, not that an API receipt or production policy has been verified.",
+    "Exact expected objects are manually specified. Only standard JSON serialization, UTF-8 encoding and SHA256 are derived.",
+    "Error stage and field labels classify design vectors; they do not introduce API error codes or override the owner's response mapping.",
+    "raw_json values are literal wire text after decoding this fixture. Lone-surrogate sequences remain escaped in those strings.",
+    "Website-local suffix exclusions apply only to websites, not mailbox DNS grammar.",
+    "No vector count is an acceptance quota; later tests may combine these cases within existing contract checks."
+  ],
+  "fixture_context": {
+    "now_utc": "2026-10-16T12:00:10Z",
+    "configured_form_id": "phase3_design",
+    "idempotency_key": "00000000-0000-4000-8000-000000000001",
+    "new_intake_policy": "synthetic enabled unless case context says accepted-key replay",
+    "maximum_body_utf8_bytes": 32768
+  },
+  "accepted_semantic_vectors": [
+    {
+      "id": "defaults_none",
+      "purpose": "Omitted optionals supply null/unsure/empty defaults.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 212,
+        "sha256": "90ca2c0894c6b336dcf6379b0bb626ded98859a76fa0d1d110c2b009d3688e82"
+      }
+    },
+    {
+      "id": "explicit_defaults",
+      "purpose": "Explicit optional defaults equal omission.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": null,
+        "interest": "unsure",
+        "notes": ""
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 212,
+        "sha256": "90ca2c0894c6b336dcf6379b0bb626ded98859a76fa0d1d110c2b009d3688e82"
+      },
+      "same_semantics_as": "defaults_none"
+    },
+    {
+      "id": "none_empty_website",
+      "purpose": "Trim only SPACE/TAB/LF before treating empty website as null.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": " \t\r\n "
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 212,
+        "sha256": "90ca2c0894c6b336dcf6379b0bb626ded98859a76fa0d1d110c2b009d3688e82"
+      },
+      "same_semantics_as": "defaults_none"
+    },
+    {
+      "id": "unsure_no_website",
+      "purpose": "Unsure is distinct from none and does not require a website.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "unsure",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": ""
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "unsure"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"unsure\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a22756e73757265227d",
+        "utf8_byte_length": 214,
+        "sha256": "a8a451982f2086182ee99abe0056f79ebd808627f0701c7c6cdf7a7c2c1431ab"
+      }
+    },
+    {
+      "id": "nfc_crlf_name_collapse",
+      "purpose": "NFC, CRLF/CR conversion, exact trim set and name-only collapse.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": " \tJosé \r\n  Example\t ",
+        "email": " \tADA+Trial@EXAMPLE.COM\r\n",
+        "website_status": "none",
+        "brief": " \tCafé\r\n  second\tline\rthird  \n",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "notes": "\t Keep  two\r\nlines \r "
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Café\n  second\tline\nthird",
+          "email": "ada+trial@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "José Example",
+          "notes": "Keep  two\nlines",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Café\\n  second\\tline\\nthird\",\"email\":\"ada+trial@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"José Example\",\"notes\":\"Keep  two\\nlines\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a22436166c3a95c6e20207365636f6e645c746c696e655c6e7468697264222c22656d61696c223a226164612b747269616c406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a224a6f73c3a9204578616d706c65222c226e6f746573223a224b656570202074776f5c6e6c696e6573222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 226,
+        "sha256": "d78700eb17bdaf9c1dc097215367529f156990f7c4397efee0bc38a51e9a7163"
+      }
+    },
+    {
+      "id": "literal_other_whitespace",
+      "purpose": "NBSP, EM SPACE and line-separator are literal, not language-dependent trim/collapse.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": " Ada Example ",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": " A ",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "notes": "　note　"
+      },
+      "expected": {
+        "semantic": {
+          "brief": " A ",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": " Ada Example ",
+          "notes": "　note　",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\" A \",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\" Ada Example \",\"notes\":\"　note　\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a22e280a841e280a8222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22c2a0416461e280834578616d706c65c2a0222c226e6f746573223a22e380806e6f7465e38080222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 197,
+        "sha256": "a72c470ca01572b0c5a62da4a56f99f7bf97c930d97193f8f39b48cadb599ebb"
+      }
+    },
+    {
+      "id": "astral_name_100_codepoints",
+      "purpose": "100 astral characters are 100 code points, not 200 UTF-16 code units.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880f09f9880222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 601,
+        "sha256": "6f53e69ca72ac820b69a78681a332bf4cd151cbd3efa1b5f9fdce8144265bcb7"
+      }
+    },
+    {
+      "id": "root_implicit_https",
+      "purpose": "Missing scheme and path become https and root slash.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "EXAMPLE.COM"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 234,
+        "sha256": "22a23436f009bca28b6b886b5da3530cbc4bc434da2e1702d0f0be6e4e150f63"
+      }
+    },
+    {
+      "id": "root_explicit_https_default_port",
+      "purpose": "Case-insensitive scheme/host and exact default port equal implicit root.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": " \tHTTPS://Example.COM:443/\n"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 234,
+        "sha256": "22a23436f009bca28b6b886b5da3530cbc4bc434da2e1702d0f0be6e4e150f63"
+      },
+      "same_semantics_as": "root_implicit_https"
+    },
+    {
+      "id": "root_http_default_port",
+      "purpose": "HTTP keeps HTTP and removes exact port 80.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "HTTP://Example.COM:80"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "http://example.com/",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"http://example.com/\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a22687474703a2f2f6578616d706c652e636f6d2f222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 233,
+        "sha256": "3d88a55c44860d6ce004c9ac490f83731e27c78abdccddd61b8df0d7492c04da"
+      }
+    },
+    {
+      "id": "path_case_and_lower_escape",
+      "purpose": "Path case and percent-escape spelling are preserved.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/Offer/%7euser"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/Offer/%7euser",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/Offer/%7euser\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f4f666665722f25376575736572222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 247,
+        "sha256": "4914666646ce67e989a981dc7395a629147db56d3a29bdd55ec1d39558f95eaa"
+      }
+    },
+    {
+      "id": "path_upper_escape_distinct",
+      "purpose": "Equivalent URL escape spelling remains a different semantic string by frozen policy.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/Offer/%7Euser"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/Offer/%7Euser",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/Offer/%7Euser\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f4f666665722f25374575736572222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 247,
+        "sha256": "790bd7af932edf645d21bb855a2c85d4d2b8b9b5ef4b7c8ee8655fb5ea58071f"
+      },
+      "different_semantics_from": "path_case_and_lower_escape"
+    },
+    {
+      "id": "encoded_unicode_path",
+      "purpose": "Already percent-encoded path accepted without percent-decoding or URL fetch.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/caf%C3%A9"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/caf%C3%A9",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/caf%C3%A9\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f636166254333254139222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 243,
+        "sha256": "ffc20d3aee8fa77b2c066b84039a871ed0566f2f2d56804283dc5f7c6cf0dfc1"
+      }
+    },
+    {
+      "id": "nonroot_path",
+      "purpose": "Non-root path without trailing slash.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/Offer"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/Offer",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/Offer\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f4f66666572222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 239,
+        "sha256": "888da0badb50fa11504084f2945130f8a4362bd9edf3c4543556237d499290d2"
+      }
+    },
+    {
+      "id": "nonroot_trailing_slash_distinct",
+      "purpose": "Non-root trailing slash remains significant.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/Offer/"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/Offer/",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/Offer/\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f4f666665722f222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 240,
+        "sha256": "b6ec3574600219bea8f1d87493fd63332424996a2afb892ed1a3a332e5a9fef5"
+      },
+      "different_semantics_from": "nonroot_path"
+    },
+    {
+      "id": "mailbox_all_allowed_atom_punctuation",
+      "purpose": "ASCII dot-atom punctuation survives; ASCII letter case lowers; plus/dot are not rewritten.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "A!#$%&'*+-/=?^_`{|}~.Z@Sub.Example.COM",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "a!#$%&'*+-/=?^_`{|}~.z@sub.example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"a!#$%&'*+-/=?^_`{|}~.z@sub.example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22612123242526272a2b2d2f3d3f5e5f607b7c7d7e2e7a407375622e6578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 235,
+        "sha256": "2696d7c0fb8be600c14088ed8ba7c436d97e0fc4d738718fdfbc1adf11607c74"
+      }
+    },
+    {
+      "id": "path_allowed_punctuation",
+      "purpose": "Frozen ASCII URI path punctuation is preserved.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/A-._~!$&'()*+,;=:@/x"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/A-._~!$&'()*+,;=:@/x",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/A-._~!$&'()*+,;=:@/x\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f412d2e5f7e2124262728292a2b2c3b3d3a402f78222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 254,
+        "sha256": "e04bb8c0eefa0b353cd243c303d70d4fb50b2449dda974b8449b427db7f2f4cc"
+      }
+    },
+    {
+      "id": "website_input_2000_canonical_2008",
+      "purpose": "Owner clarification: input length bound applies before adding scheme; canonical output may exceed 2000.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f6578616d706c652e636f6d2f6161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 2222,
+        "sha256": "26284001ad5a3f1ad6e181eb8ab52708037243355c2e3b9d1e34bcea60876724"
+      }
+    },
+    {
+      "id": "website_reserved_example_suffix_allowed",
+      "purpose": "No broader local-suffix heuristic beyond localhost/.localhost/.local.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "shop.example"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://shop.example/",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://shop.example/\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f73686f702e6578616d706c652f222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 235,
+        "sha256": "d9bdd2f2b2d6ecda5b495b53055032a5aba16f3390af6a3822a80a30eac3eba8"
+      }
+    },
+    {
+      "id": "website_internal_suffix_allowed",
+      "purpose": "Owner explicitly excludes .internal from local-name rejection heuristics.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "shop.internal"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": "https://shop.internal/",
+          "website_status": "provided"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":\"https://shop.internal/\",\"website_status\":\"provided\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a2268747470733a2f2f73686f702e696e7465726e616c2f222c22776562736974655f737461747573223a2270726f7669646564227d",
+        "utf8_byte_length": 236,
+        "sha256": "aec9f86a900bb6e3ab9db45aa7666de7b1a775354c30095ca20d39af855c2936"
+      }
+    },
+    {
+      "id": "mailbox_local_suffix_unchanged",
+      "purpose": "Website-only local suffix exclusions do not change mailbox DNS grammar.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "Ada@Shop.LOCAL",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@shop.local",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@shop.local\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a226164614073686f702e6c6f63616c222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 211,
+        "sha256": "345df2a8fb874478c9e9bf580c734dc7c6f47281b5b6023ed6ad04db715b370d"
+      }
+    },
+    {
+      "id": "mailbox_local_64_boundary",
+      "purpose": "Exact 64-character local-part boundary.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a2261616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 273,
+        "sha256": "7085a695be9eca579c1c086d21c21e7536e19dbf31ed2b2e6092fcb767ffb919"
+      }
+    },
+    {
+      "id": "form_exact_token",
+      "purpose": "Form ID is an exact configured public token and part of semantic identity.",
+      "input": {
+        "form_id": "Phase3_Design-2",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "interest": "both",
+        "notes": "Synthetic second configuration."
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "Phase3_Design-2",
+          "interest": "both",
+          "name": "Ada Example",
+          "notes": "Synthetic second configuration.",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"Phase3_Design-2\",\"interest\":\"both\",\"name\":\"Ada Example\",\"notes\":\"Synthetic second configuration.\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a225068617365335f44657369676e2d32222c22696e746572657374223a22626f7468222c226e616d65223a22416461204578616d706c65222c226e6f746573223a2253796e746865746963207365636f6e6420636f6e66696775726174696f6e2e222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 243,
+        "sha256": "b4956a3e97b66a989002bb09492ed5aa202110c7dfdaa2a7220ff70ea98df782"
+      },
+      "requires_configured_form_id": "Phase3_Design-2"
+    }
+  ],
+  "replay_semantic_vectors": [
+    {
+      "id": "replay_old_timestamp",
+      "purpose": "An existing same-semantic key ignores original elapsed-time eligibility after safe field validation; original evidence is not rewritten.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2020-01-01T00:00:00Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "same_semantics_as": "defaults_none",
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 212,
+        "sha256": "90ca2c0894c6b336dcf6379b0bb626ded98859a76fa0d1d110c2b009d3688e82"
+      },
+      "eligibility_context": "Only accepted-key replay is eligible; an absent key fails maximum age at fixture time."
+    },
+    {
+      "id": "replay_nonempty_honeypot",
+      "purpose": "Existing-key replay does not re-run first-acceptance honeypot eligibility.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "synthetic-honeypot-marker",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "same_semantics_as": "defaults_none",
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 212,
+        "sha256": "90ca2c0894c6b336dcf6379b0bb626ded98859a76fa0d1d110c2b009d3688e82"
+      },
+      "eligibility_context": "Only accepted-key replay is eligible; an absent key is rejected."
+    },
+    {
+      "id": "reentry_fresh_timestamp",
+      "purpose": "Matching post-reload re-entry can use fresh valid abuse metadata without changing semantic identity.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:07.123456Z"
+      },
+      "expected": {
+        "semantic": {
+          "brief": "Synthetic inquiry about a new website.",
+          "email": "ada@example.com",
+          "form_id": "phase3_design",
+          "interest": "unsure",
+          "name": "Ada Example",
+          "notes": "",
+          "schema_version": 1,
+          "website": null,
+          "website_status": "none"
+        },
+        "same_semantics_as": "defaults_none",
+        "canonical_json": "{\"brief\":\"Synthetic inquiry about a new website.\",\"email\":\"ada@example.com\",\"form_id\":\"phase3_design\",\"interest\":\"unsure\",\"name\":\"Ada Example\",\"notes\":\"\",\"schema_version\":1,\"website\":null,\"website_status\":\"none\"}",
+        "utf8_hex": "7b226272696566223a2253796e74686574696320696e71756972792061626f75742061206e657720776562736974652e222c22656d61696c223a22616461406578616d706c652e636f6d222c22666f726d5f6964223a227068617365335f64657369676e222c22696e746572657374223a22756e73757265222c226e616d65223a22416461204578616d706c65222c226e6f746573223a22222c22736368656d615f76657273696f6e223a312c2277656273697465223a6e756c6c2c22776562736974655f737461747573223a226e6f6e65227d",
+        "utf8_byte_length": 212,
+        "sha256": "90ca2c0894c6b336dcf6379b0bb626ded98859a76fa0d1d110c2b009d3688e82"
+      },
+      "eligibility_context": "Fingerprint equality only; original accepted abuse evidence remains immutable."
+    }
+  ],
+  "rejected_vectors": [
+    {
+      "id": "missing_name",
+      "purpose": "Required field omission does not coerce/default.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      }
+    },
+    {
+      "id": "name_number",
+      "purpose": "Required string cannot be coerced.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": 7,
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      }
+    },
+    {
+      "id": "schema_bool",
+      "purpose": "Boolean is not integer schema 1.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": true,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "schema_version"
+      }
+    },
+    {
+      "id": "schema_string",
+      "purpose": "String is not integer schema 1.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": "1",
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "schema_version"
+      }
+    },
+    {
+      "id": "schema_unsupported_integer",
+      "purpose": "Different numeric schema is incompatible.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 2,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "schema_validation",
+        "field": "schema_version"
+      }
+    },
+    {
+      "id": "notes_null",
+      "purpose": "Only website accepts null.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "notes": null
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "notes"
+      }
+    },
+    {
+      "id": "interest_null",
+      "purpose": "Omission defaults interest; null does not.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "interest": null
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "interest"
+      }
+    },
+    {
+      "id": "website_array",
+      "purpose": "Nullable website still rejects arrays.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": []
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "website_status_case",
+      "purpose": "Enum is an exact token.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "NONE",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website_status"
+      }
+    },
+    {
+      "id": "interest_outer_space",
+      "purpose": "Enum does not inherit free-text trim.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "interest": " aeo"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "interest"
+      }
+    },
+    {
+      "id": "form_outer_space",
+      "purpose": "Form ID does not inherit free-text trim.",
+      "input": {
+        "form_id": " phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "form_id"
+      }
+    },
+    {
+      "id": "form_nonascii",
+      "purpose": "Form ID is bounded ASCII token.",
+      "input": {
+        "form_id": "phase3_désign",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "form_id"
+      }
+    },
+    {
+      "id": "website_none_with_value",
+      "purpose": "Non-provided status rejects a nonempty website.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "website_provided_null",
+      "purpose": "Provided status requires nonempty website.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": null
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "name_blank",
+      "purpose": "Whitespace normalization can produce empty required name.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": " \t\r\n ",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      }
+    },
+    {
+      "id": "name_101_astral",
+      "purpose": "Code-point bound is 100 after normalization.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      }
+    },
+    {
+      "id": "brief_2001",
+      "purpose": "Brief upper bound is 2000 normalized code points.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "brief"
+      }
+    },
+    {
+      "id": "notes_4001",
+      "purpose": "Notes upper bound is 4000 normalized code points.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "notes": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "notes"
+      }
+    },
+    {
+      "id": "outer_bom_not_trimmed",
+      "purpose": "FEFF must reject before outer trim.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "﻿Ada",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      }
+    },
+    {
+      "id": "outer_nel_not_trimmed",
+      "purpose": "0085 is forbidden, not Python whitespace to strip.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "brief"
+      }
+    },
+    {
+      "id": "name_vertical_tab",
+      "purpose": "000B is forbidden rather than collapsed.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada\u000bExample",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      }
+    },
+    {
+      "id": "notes_del",
+      "purpose": "007F is forbidden.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "notes": "Syntheticmarker"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "notes"
+      }
+    },
+    {
+      "id": "brief_nul",
+      "purpose": "0000 is forbidden.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic\u0000marker",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "brief"
+      }
+    },
+    {
+      "id": "email_nonascii",
+      "purpose": "No Unicode mailbox/casefold expansion.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "straße@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_display_name",
+      "purpose": "Display name is not bare dot-atom address.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "Ada <ada@example.com>",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_quoted_local",
+      "purpose": "Quoted local-part rejected by shared grammar.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "\"ada\"@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_adjacent_dots",
+      "purpose": "Dot atoms must be nonempty.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "a..b@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_leading_dot",
+      "purpose": "Leading local dot is invalid.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": ".ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_trailing_dot",
+      "purpose": "Trailing local dot is invalid.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada.@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_domain_literal",
+      "purpose": "Domain literal rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@[127.0.0.1]",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_local_65",
+      "purpose": "Local-part maximum is 64.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_single_label",
+      "purpose": "DNS grammar requires at least two labels.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@localhost",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_numeric_final_label",
+      "purpose": "DNS final label requires an ASCII letter.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.12",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_one_char_final_label",
+      "purpose": "DNS final label has minimum length 2.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.c",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_label_edge_hyphen",
+      "purpose": "DNS label edges must be alphanumeric.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@-example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_label_64",
+      "purpose": "Individual DNS labels have maximum length 63.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "email_interior_tab",
+      "purpose": "Text rules do not permit whitespace in mailbox grammar.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ad\ta@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "email"
+      }
+    },
+    {
+      "id": "url_literal_unicode_path",
+      "purpose": "ASCII path policy does not invoke browser percent-encoding.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/café"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_unicode_hostname",
+      "purpose": "ASCII DNS hostname required.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "café.example"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_encoded_hostname",
+      "purpose": "Encoded hostname rejected before native URL repair.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "%65xample.com"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_trailing_host_dot",
+      "purpose": "Trailing host dot rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com."
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_nondefault_port",
+      "purpose": "Nondefault port rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "https://example.com:8443/"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_default_port_leading_zero",
+      "purpose": "Only exact default-port spelling accepted.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "https://example.com:0443/"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_wrong_default_for_scheme",
+      "purpose": "HTTPS does not accept HTTP default port.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "https://example.com:80/"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_default_scheme_port80",
+      "purpose": "Missing scheme defaults to HTTPS, not inferred HTTP.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com:80/"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_userinfo",
+      "purpose": "Userinfo rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "https://user@example.com/"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_query",
+      "purpose": "Query rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/?source=synthetic"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_fragment",
+      "purpose": "Fragment rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/#synthetic"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_backslash",
+      "purpose": "Backslash rejected before native parser repair.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com\\path"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_interior_space",
+      "purpose": "Path whitespace rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/a b"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_malformed_escape",
+      "purpose": "Percent escapes require two hexadecimal digits.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/%2"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_encoded_slash",
+      "purpose": "Encoded slash rejected case-insensitively.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/a%2Fb"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_encoded_backslash",
+      "purpose": "Encoded backslash rejected case-insensitively.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/a%5cb"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_dot_segment",
+      "purpose": "Raw dot segment rejected before normalization.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/a/./b"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_double_dot_segment",
+      "purpose": "Raw double-dot segment rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/a/../b"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_encoded_double_dot_segment",
+      "purpose": "Encoded dot segments rejected before parser repair.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/%2e%2E/x"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_mixed_dot_segment",
+      "purpose": "Replace only encoded dots before dot-segment comparison.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/.%2e/x"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_numeric_ipv4",
+      "purpose": "Numeric final label/IP literal rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "127.0.0.1"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_short_numeric_ipv4",
+      "purpose": "Legacy numeric address spelling rejected before browser repair.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "127.1"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_ipv6",
+      "purpose": "IP literal is not DNS grammar.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "https://[::1]/"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_single_label",
+      "purpose": "Single-label name rejected.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "localhost"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_localhost_suffix",
+      "purpose": "Owner-frozen website-only suffix exclusion.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "shop.localhost"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_local_suffix_case",
+      "purpose": "Owner-frozen suffix exclusion is case-insensitive.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "SHOP.LoCaL"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "url_input_2001",
+      "purpose": "Input bound is checked before canonical scheme insertion.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "provided",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.000Z",
+        "website": "example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website"
+      }
+    },
+    {
+      "id": "honeypot_null",
+      "purpose": "Honeypot must remain a string even for replay.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": null,
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "website_confirm"
+      }
+    },
+    {
+      "id": "timestamp_null",
+      "purpose": "Timestamp must remain a string even for replay.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": null
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "started_at"
+      }
+    },
+    {
+      "id": "timestamp_offset",
+      "purpose": "Exact UTC Z syntax excludes numeric offset.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00+00:00"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "started_at"
+      }
+    },
+    {
+      "id": "timestamp_fraction_7",
+      "purpose": "At most six decimal fractional digits.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:00.1234567Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "started_at"
+      }
+    },
+    {
+      "id": "timestamp_invalid_calendar",
+      "purpose": "Timestamp must denote a real UTC time.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-02-30T12:00:00Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "started_at"
+      }
+    },
+    {
+      "id": "honeypot_nonempty_new",
+      "purpose": "Any nonempty honeypot rejects new acceptance without normalization.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": " ",
+        "started_at": "2026-10-16T12:00:00.000Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "new_acceptance",
+        "field": "website_confirm"
+      }
+    },
+    {
+      "id": "too_fast_new",
+      "purpose": "Initial age below two seconds rejects; not a fake receipt.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-16T12:00:09Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "new_acceptance",
+        "field": "started_at"
+      }
+    },
+    {
+      "id": "too_old_new",
+      "purpose": "Initial age above 24 hours rejects.",
+      "input": {
+        "form_id": "phase3_design",
+        "schema_version": 1,
+        "name": "Ada Example",
+        "email": "ada@example.com",
+        "website_status": "none",
+        "brief": "Synthetic inquiry about a new website.",
+        "website_confirm": "",
+        "started_at": "2026-10-15T12:00:09Z"
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "new_acceptance",
+        "field": "started_at"
+      }
+    }
+  ],
+  "rejected_wire_vectors": [
+    {
+      "id": "raw_nonobject",
+      "raw_json": "[]",
+      "expected": {
+        "result": "reject",
+        "stage": "wire_parse"
+      },
+      "purpose": "Top-level body must be object."
+    },
+    {
+      "id": "raw_duplicate_key",
+      "raw_json": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"Ada Example\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\",\"name\":\"Other Synthetic\"}",
+      "expected": {
+        "result": "reject",
+        "stage": "wire_parse"
+      },
+      "purpose": "Reject duplicate JSON keys rather than choosing first or last."
+    },
+    {
+      "id": "raw_nonfinite",
+      "raw_json": "{\"form_id\":\"phase3_design\",\"schema_version\":NaN,\"name\":\"Ada Example\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\"}",
+      "expected": {
+        "result": "reject",
+        "stage": "wire_parse"
+      },
+      "purpose": "Reject nonfinite JSON numeric extension."
+    },
+    {
+      "id": "raw_unknown_destination",
+      "raw_json": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"Ada Example\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\",\"destination_email\":\"synthetic@example.com\"}",
+      "expected": {
+        "result": "reject",
+        "stage": "field_allowlist"
+      },
+      "purpose": "Unknown routing field must not be ignored or acted upon."
+    },
+    {
+      "id": "raw_unknown_tenant",
+      "raw_json": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"Ada Example\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\",\"tenant_id\":\"synthetic-tenant\"}",
+      "expected": {
+        "result": "reject",
+        "stage": "field_allowlist"
+      },
+      "purpose": "Public DTO cannot select tenant ownership."
+    },
+    {
+      "id": "raw_lone_high_surrogate",
+      "raw_json": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"\\ud800\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\"}",
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      },
+      "purpose": "Escaped lone surrogate rejected without replacement-character repair."
+    },
+    {
+      "id": "raw_lone_low_surrogate",
+      "raw_json": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"\\udfff\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\"}",
+      "expected": {
+        "result": "reject",
+        "stage": "field_validation",
+        "field": "name"
+      },
+      "purpose": "Escaped lone low surrogate rejected."
+    },
+    {
+      "id": "raw_invalid_utf8",
+      "raw_utf8_hex": "7b226e616d65223a22ff227d",
+      "expected": {
+        "result": "reject",
+        "stage": "wire_parse"
+      },
+      "purpose": "Strict UTF-8 decoding rejects FF rather than replacement."
+    }
+  ],
+  "unresolved_normative_ambiguities": [],
+  "wire_size_vectors": [
+    {
+      "id": "raw_size_32768",
+      "purpose": "Valid JSON with trailing ASCII spaces isolates the frozen raw-byte limit from semantic field validation.",
+      "raw_body_recipe": {
+        "literal_utf8_prefix": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"Ada Example\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\"}",
+        "append_ascii_space_count": 32541
+      },
+      "expected": {
+        "result": "semantic_accept",
+        "stage": "wire_size",
+        "utf8_byte_length": 32768,
+        "raw_body_sha256": "dc7e029346e64640d4a949a019458acca2aa3ae755abe278f2cccff3a1fb3988",
+        "same_canonical_as": "defaults_none"
+      }
+    },
+    {
+      "id": "raw_size_32769",
+      "purpose": "Valid JSON with trailing ASCII spaces isolates the frozen raw-byte limit from semantic field validation.",
+      "raw_body_recipe": {
+        "literal_utf8_prefix": "{\"form_id\":\"phase3_design\",\"schema_version\":1,\"name\":\"Ada Example\",\"email\":\"ada@example.com\",\"website_status\":\"none\",\"brief\":\"Synthetic inquiry about a new website.\",\"website_confirm\":\"\",\"started_at\":\"2026-10-16T12:00:00.000Z\"}",
+        "append_ascii_space_count": 32542
+      },
+      "expected": {
+        "result": "reject",
+        "stage": "wire_size",
+        "utf8_byte_length": 32769,
+        "raw_body_sha256": "c30eff7c8b2db219e896a1d3a0f5e7e0799f8fa8a082c83f3377a910af7b674f"
+      }
+    }
+  ]
+}

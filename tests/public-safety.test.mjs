@@ -62,12 +62,23 @@ test('decoy private files are excluded even when present beside public files', t
 
 test('form has a safe default and does not encode contact values into URLs',()=>{
   const html=fs.readFileSync(path.join(ROOT,'index.html'),'utf8');
-  const js=fs.readFileSync(path.join(ROOT,'app.js'),'utf8');
+  const js=fs.readFileSync(path.join(ROOT,'inquiry.js'),'utf8');
   const form=html.match(/<form\b[^>]*id="brief-form"[^>]*>[\s\S]*?<\/form>/)[0];
   assert.match(form,/method="post"/);
   assert.doesNotMatch(form,/type="submit"/);
   assert.match(form,/id="copy-brief" disabled/);
   assert.match(form,/role="status"/);
   assert.doesNotMatch(js,/mailto:.*\?(?:subject|body)/);
-  assert.match(js,/addEventListener\('submit', e => e.preventDefault\(\)\)/);
+  assert.match(js,/addEventListener\('submit', event => event.preventDefault\(\)\)/);
+});
+
+test('publication rejects an unsafe runtime endpoint before writing any output',t=>{
+  const temp=fs.mkdtempSync(path.join(os.tmpdir(),'ff-public-config-'));
+  t.after(()=>fs.rmSync(temp,{recursive:true,force:true}));
+  fs.mkdirSync(path.join(temp,'config'));
+  fs.writeFileSync(path.join(temp,'config/public-files.json'),JSON.stringify(['config/public-inquiry.json']));
+  fs.writeFileSync(path.join(temp,'config/public-inquiry.json'),JSON.stringify({schema_version:1,mode:'api',endpoint:'http://127.0.0.1:8010/public/v1/inquiries',form_id:'synthetic'}));
+  const output=path.join(temp,'site');
+  assert.throws(()=>buildPublic(temp,output),/Invalid public inquiry configuration/);
+  assert.equal(fs.existsSync(output),false);
 });

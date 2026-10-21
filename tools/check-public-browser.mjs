@@ -41,8 +41,8 @@ try {
         await context.route('**/*', route => {
           const url = new URL(route.request().url());
           if (url.origin !== origin) { manifest.blocked.push({host: url.hostname}); return route.abort(); }
-          if (url.pathname === '/app.js' && mode === 'blocked-module') return route.abort();
-          if (url.pathname === '/app.js' && mode === 'initialization-failure') return route.fulfill({contentType: 'text/javascript', body: 'throw new Error("Synthetic initialization failure")'});
+          if (url.pathname === '/inquiry.js' && mode === 'blocked-module') return route.abort();
+          if (url.pathname === '/inquiry.js' && mode === 'initialization-failure') return route.fulfill({contentType: 'text/javascript', body: 'throw new Error("Synthetic initialization failure")'});
           return route.continue();
         });
         await context.addInitScript(mode => {
@@ -57,26 +57,34 @@ try {
         await page.goto(origin + '/?fixture_history=before', {waitUntil: 'networkidle'});
         await page.goto(origin + '/', {waitUntil: 'networkidle'});
         const before = await page.evaluate(() => history.length);
-        const values = [`site-${engineName}-${mode}.example`, `sell-${engineName}-${mode}-synthetic`, `notes-${engineName}-${mode}-synthetic`, 'ChatGPT ads'];
-        await page.locator('#brief-site').fill(values[0]);
-        await page.locator('#brief-sell').fill(values[1]);
-        await page.locator('#brief-notes').fill(values[2]);
-        await page.locator('input[name="Interested in"][value="ChatGPT ads"]').check();
-        for (const selector of ['#brief-site', '#brief-sell', '#brief-notes', 'input[name="Interested in"][value="ChatGPT ads"]']) {
-          await page.locator(selector).press('Enter');
-          check(`${engineName}/${mode}/Enter ${selector} retains safe URL`, !contains(page.url(), values));
+        const values = [`site-${engineName}-${mode}.example.com`, `sell-${engineName}-${mode}-synthetic`, `notes-${engineName}-${mode}-synthetic`, `name-${engineName}-${mode}`, `email-${engineName}-${mode}@example.com`];
+        const fieldValues = {'#brief-site':values[0], '#brief-sell':values[1], '#brief-notes':values[2], '#brief-name':values[3], '#brief-email':values[4]};
+        if (enhanced) {
+          await page.locator('input[name="website_status"][value="provided"]').check();
+          for (const [selector,value] of Object.entries(fieldValues)) await page.locator(selector).fill(value);
+          await page.locator('input[name="interest"][value="chatgpt_ads"]').check();
+          for (const selector of Object.keys(fieldValues)) {
+            await page.locator(selector).press('Enter');
+            check(`${engineName}/${mode}/Enter ${selector} retains safe URL`, !contains(page.url(), values));
+          }
+        } else {
+          check(`${engineName}/${mode}/unenhanced fields disabled`, await page.locator('#brief-fields').evaluate(element=>element.disabled));
+          // Simulate browser-restored values without enabling a disabled input or inventing a submit action.
+          await page.evaluate(entries=>{for(const [selector,value] of entries)document.querySelector(selector).value=value;},Object.entries(fieldValues));
+          await page.locator('body').press('Enter');
+          check(`${engineName}/${mode}/restored values retain safe URL`, !contains(page.url(),values));
         }
         const after = await page.evaluate(() => history.length);
         check(`${engineName}/${mode}/no extra history entries`, before === after, {before, after});
         const status = await page.locator('#brief-status').innerText();
-        check(`${engineName}/${mode}/honest fallback status`, enhanced ? status.includes('Copy your message') && status.includes('does not send') : status.includes('Open your email app using the link') && status.includes('does not include these form fields') && !status.includes('Copy your message'));
+        check(`${engineName}/${mode}/honest fallback status`, enhanced ? status.includes('Copy your message') && status.includes('does not send') : status.includes('cannot submit online') && status.includes('email link does not include form details or send anything') && !status.includes('Copy your message'));
         check(`${engineName}/${mode}/plain email link`, await page.locator('#brief-form a[href="mailto:nick@modernapexstrategies.com"]').count() === 1);
         check(`${engineName}/${mode}/no native submit`, await page.locator('#brief-form button[type=submit]').count() === 0);
-        if (mode === 'no-js') check(`${engineName}/${mode}/accurate noscript`, (await page.locator('noscript').innerText()).includes('email link still works'));
+        if (mode === 'no-js') check(`${engineName}/${mode}/accurate noscript`, (await page.locator('noscript p').innerText()).includes('form and copy action are unavailable') && (await page.locator('noscript p').innerText()).includes('using the email link'));
         if (enhanced) {
           await page.locator('#copy-brief').click();
-          if (mode === 'normal') check(`${engineName}/explicit copy includes every field`, await page.evaluate(values => values.every(value => window.__copied?.includes(value)), values));
-          else check(`${engineName}/${mode}/manual recovery`, (await page.locator('#brief-status').innerText()).includes('Copy is not available here. Email'));
+          if (mode === 'normal') check(`${engineName}/explicit copy includes every field`, await page.evaluate(values => values.every(value => window.__copied?.includes(value)) && window.__copied.includes('ChatGPT ads'), values));
+          else check(`${engineName}/${mode}/manual recovery`, (await page.locator('#brief-status').innerText()).includes('Copy is unavailable here. Open your email app and write to'));
         } else check(`${engineName}/${mode}/copy disabled`, await page.locator('#copy-brief').isDisabled());
         if (engineName === 'chromium') {
           const cdp = await context.newCDPSession(page);

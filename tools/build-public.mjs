@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {readOfferManifest} from './validate-offer-manifest.mjs';
+import {readInquiryConfig} from './validate-inquiry-config.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export function buildPublic(root = ROOT, output = path.join(root, '_site')) {
@@ -17,6 +18,8 @@ export function buildPublic(root = ROOT, output = path.join(root, '_site')) {
   });
   const offer = inputs.find(input => input.name === 'config/offer-manifest.json');
   if (offer) readOfferManifest(offer.source);
+  const inquiry = inputs.find(input => input.name === 'config/public-inquiry.json');
+  if (inquiry) readInquiryConfig(inquiry.source);
   if (fs.existsSync(output)) throw Error('Refusing to overwrite an existing build; choose a fresh output directory');
   fs.mkdirSync(output, {recursive:true});
   for (const {name, source} of inputs) {

@@ -348,37 +348,75 @@
   <div class="contact-copy">
     <p class="section-note">Free AI visibility check.</p>
     <h2>Let’s get<br><span data-scramble="you found.">you found.</span></h2>
-    <p>Tell us your website and what you sell. Nick will check how ChatGPT and other AI answers describe your business today, and reply personally with what we found and what we would do first.</p>
+    <p>Tell us what you sell, who you serve, and your website if you have one. Start with a free AI visibility check and a clear next step.</p>
     <a class="contact-email" href="mailto:nick@modernapexstrategies.com?subject=Found%20First%20%7C%20AI%20visibility%20check">nick@modernapexstrategies.com</a>
   </div>
-  <form class="brief" id="brief-form" method="post" action="#contact">
-    <div class="field">
-      <label for="brief-site">Your website</label>
-      <input id="brief-site" name="Website" type="text" inputmode="url" autocomplete="url" placeholder="yourbusiness.com" required>
-    </div>
-    <div class="field">
-      <label for="brief-sell">What you sell, and where</label>
-      <input id="brief-sell" name="What we sell" type="text" placeholder="Products, software, or services. Who is your ideal buyer?" required>
-    </div>
-    <fieldset class="field field-choice">
-      <legend>Interested in</legend>
-      <div class="choices">
-        <label><input type="radio" name="Interested in" value="AEO (organic AI visibility)"><span>AEO</span></label>
-        <label><input type="radio" name="Interested in" value="ChatGPT ads"><span>ChatGPT ads</span></label>
-        <label><input type="radio" name="Interested in" value="Both" checked><span>Both</span></label>
-        <label><input type="radio" name="Interested in" value="Not sure yet"><span>Not sure yet</span></label>
+  <form class="brief" id="brief-form" method="post" action="#contact" novalidate autocomplete="off">
+    <div id="brief-errors" class="brief-errors" role="alert" aria-label="Please check these fields" hidden></div>
+    <fieldset id="brief-fields" class="brief-fields" disabled>
+      <legend class="sr-only">Your inquiry</legend>
+      <div class="field">
+        <label for="brief-name">Your name</label>
+        <input id="brief-name" data-label="Your name" name="name" type="text" autocomplete="off" aria-describedby="brief-name-error" required>
+        <p id="brief-name-error" class="field-error" hidden></p>
       </div>
+      <div class="field">
+        <label for="brief-email">Email for our reply</label>
+        <input id="brief-email" data-label="Email" name="email" type="email" inputmode="email" autocomplete="off" aria-describedby="brief-email-help brief-email-error" required>
+        <p id="brief-email-help" class="field-help">Include this in your message so we can reply.</p>
+        <p id="brief-email-error" class="field-error" hidden></p>
+      </div>
+      <fieldset class="field field-choice" id="brief-website-status" data-label="Website choice" aria-describedby="brief-website-status-error">
+        <legend>Do you have a website?</legend>
+        <div class="choices">
+          <label><input type="radio" name="website_status" value="provided" required><span>Yes</span></label>
+          <label><input type="radio" name="website_status" value="none"><span>Not yet</span></label>
+          <label><input type="radio" name="website_status" value="unsure"><span>Not sure</span></label>
+        </div>
+        <p id="brief-website-status-error" class="field-error" hidden></p>
+      </fieldset>
+      <div class="field" id="brief-site-field" hidden>
+        <label for="brief-site">Your website</label>
+        <input id="brief-site" data-label="Website" name="website" type="text" inputmode="url" autocomplete="off" placeholder="yourbusiness.com" aria-describedby="brief-site-help brief-site-error" disabled>
+        <p id="brief-site-help" class="field-help">A website address without a query or fragment.</p>
+        <p id="brief-site-error" class="field-error" hidden></p>
+      </div>
+      <div class="field">
+        <label for="brief-sell">What do you sell, and who do you serve?</label>
+        <textarea id="brief-sell" data-label="Business brief" name="brief" rows="3" placeholder="Products, software, or services. Who is your ideal buyer?" aria-describedby="brief-sell-error" required></textarea>
+        <p id="brief-sell-error" class="field-error" hidden></p>
+      </div>
+      <fieldset class="field field-choice" id="brief-interest" data-label="Interest" aria-describedby="brief-interest-error">
+        <legend>What would you like to explore?</legend>
+        <div class="choices">
+          <label><input type="radio" name="interest" value="aeo"><span>AEO</span></label>
+          <label><input type="radio" name="interest" value="chatgpt_ads"><span>ChatGPT ads</span></label>
+          <label><input type="radio" name="interest" value="both"><span>Both</span></label>
+          <label><input type="radio" name="interest" value="unsure" id="interest-unsure" checked><span>Not sure yet</span></label>
+        </div>
+        <p id="brief-interest-error" class="field-error" hidden></p>
+      </fieldset>
+      <div class="field">
+        <label for="brief-notes">Anything else <span class="optional">(optional)</span></label>
+        <textarea id="brief-notes" data-label="Notes" name="notes" rows="3" placeholder="What you want to improve, what you run today, timing" aria-describedby="brief-notes-help brief-notes-error"></textarea>
+        <p id="brief-notes-help" class="field-help">Please leave out passwords, payment details and confidential client information.</p>
+        <p id="brief-notes-error" class="field-error" hidden></p>
+      </div>
+      <div class="inquiry-trap" aria-hidden="true"><label for="website-confirm">Leave this empty</label><input id="website-confirm" name="website_confirm" type="text" tabindex="-1" autocomplete="off"></div>
     </fieldset>
-    <div class="field">
-      <label for="brief-notes">Anything else <span class="optional">(optional)</span></label>
-      <textarea id="brief-notes" name="Notes" rows="3" placeholder="What you want to improve, what you run today, timing"></textarea>
-    </div>
+    <p id="brief-api-disclosure" class="brief-fine" hidden>Choosing Send inquiry sends these details to Found First's inquiry system for review and a reply. A receipt confirms the inquiry was saved; it does not confirm an email was delivered or read.</p>
     <div class="brief-actions">
+      <button class="button button-white" type="button" id="send-inquiry" disabled hidden>Send inquiry</button>
       <a class="button button-white" href="mailto:nick@modernapexstrategies.com">Open your email app</a>
       <button class="text-link text-link-white" type="button" id="copy-brief" disabled>Copy your message</button>
+      <button class="text-link text-link-white" type="button" id="retry-inquiry" disabled hidden>Retry same inquiry</button>
+      <button class="text-link text-link-white" type="button" id="new-inquiry" disabled hidden>Start a new inquiry</button>
     </div>
-    <p class="brief-fine" id="brief-status" role="status" aria-live="polite" aria-atomic="true">Open your email app using the link, then write to Nick with your website and what you sell. The link does not include these form fields or send anything. Nothing is stored on this site.</p>
-    <noscript><p class="brief-fine is-ok">JavaScript is off, so the copy button is unavailable. The email link still works. You can also write directly to nick@modernapexstrategies.com.</p></noscript>
+    <div id="brief-new-warning" class="brief-new-warning" hidden><p>Your earlier inquiry may already have been received. Starting another can create a separate inquiry. It does not withdraw an earlier one.</p><button type="button" class="button button-white" id="confirm-new-inquiry">Start new inquiry</button><button type="button" class="text-link text-link-white" id="cancel-new-inquiry">Keep previous attempt</button></div>
+    <p class="brief-fine" id="brief-status" role="status" aria-live="polite" aria-atomic="true">This form cannot submit online until it is ready. Open your email app and write to Nick. The email link does not include form details or send anything.</p>
+    <p class="brief-receipt" id="brief-receipt" hidden></p>
+    <p class="brief-fine">Preparing an inquiry does not subscribe you to marketing. <a href="./privacy/">How this form handles your information</a>.</p>
+    <noscript><p class="brief-fine is-ok">JavaScript is off, so the form and copy action are unavailable. Write directly to nick@modernapexstrategies.com using the email link.</p></noscript>
   </form>
 </section>
 
@@ -418,6 +456,7 @@
 
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true"><a class="button" href="#contact" tabindex="-1">Free AI visibility check</a></div>
 
+<script type="module" src="./inquiry.js"></script>
 <script type="module" src="./app.js"></script>
 </body>
 </html>

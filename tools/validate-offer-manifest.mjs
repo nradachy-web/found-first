@@ -9,7 +9,7 @@ export const MANIFEST_PATH = path.join(ROOT, 'config', 'offer-manifest.json');
 // A new approved narrative or vocabulary requires an explicit versioned change.
 const APPROVED = Object.freeze({
   schema_version: 1,
-  offer_version: 'found-first-offer-2026-10-21-space',
+  offer_version: 'found-first-offer-2026-10-22-research',
   tracks: Object.freeze(['existing_eligible', 'new_build', 'rebuild']),
   period_semantics: 'Proposed fees are monthly; billing periods, service term, renewal and ownership are confirmed in each written scope. No automatic renewal is implied.',
   existing_site: 'Eligible existing sites receive a scoped initial improvement round; Growth and Expansion add recurring optimization and answer-page work. New websites, major rebuilds and additional remediation require separate explicit scope and approval.',

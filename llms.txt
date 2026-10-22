@@ -26,3 +26,8 @@ Contact: nick@modernapexstrategies.com
 - [AI Visibility Field Kit](https://befoundfirst.ai/resources/found-first-field-kit.pdf)
 
 This file is a reading aid, not a requirement for AI search visibility.
+
+## Original research
+- [Research and insights](https://befoundfirst.ai/research/): Selected findings and interpretation.
+- [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): A dated 240-answer baseline, with search cohorts and limitations.
+- [Mentions, sources and recommendations](https://befoundfirst.ai/research/mentions-sources-recommendations/): How to interpret different evidence channels.

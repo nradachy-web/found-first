@@ -20,13 +20,13 @@ function fixture(t) {
 test('public links and structured answers cover the complete shipped library', () => {
   const result = validatePublicContent();
   assert.equal(result.field_notes, 16);
-  assert.equal(result.html_pages, 19);
-  assert.equal(result.visible_faq_answers, 57);
+  assert.equal(result.html_pages, 22);
+  assert.equal(result.visible_faq_answers, 60);
 });
 
 test('structured answers that disagree with the visible page are rejected', t => {
   const directory = fixture(t), file = path.join(directory, 'index.html');
-  const source = fs.readFileSync(file, 'utf8').replace('"text":"Answer engine optimization', '"text":"Incorrect hidden promise. Answer engine optimization');
+  const source = fs.readFileSync(file, 'utf8').replace('We connect AI search research', 'Incorrect hidden promise. We connect AI search research');
   fs.writeFileSync(file, source);
   assert.throws(() => validatePublicContent(directory), /FAQ answer differs/);
 });

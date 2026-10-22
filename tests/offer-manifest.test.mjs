@@ -130,12 +130,12 @@ test('actual publication builder rejects private manifest bytes before creating 
   }
 });
 
-test('46-file artifact preserves exact manifest bytes and every private-data exclusion', t => {
+test('51-file artifact preserves exact manifest bytes and every private-data exclusion', t => {
   const temp = temporaryDirectory(t);
   const source = path.join(temp, 'source');
   const output = path.join(temp, 'site');
   const files = JSON.parse(fs.readFileSync(path.join(ROOT, 'config/public-files.json'), 'utf8'));
-  assert.equal(files.length, 46);
+  assert.equal(files.length, 51);
   assert.equal(files.filter(file => file === 'config/offer-manifest.json').length, 1);
   fs.mkdirSync(path.join(source, 'config'), {recursive: true});
   fs.writeFileSync(path.join(source, 'config/public-files.json'), JSON.stringify(files));

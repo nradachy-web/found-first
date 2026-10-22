@@ -26,8 +26,13 @@ Contact: nick@modernapexstrategies.com
 - [AI Visibility Field Kit](https://befoundfirst.ai/resources/found-first-field-kit.pdf)
 
 ## Scope and evidence
-Proposed monthly fees are $2,000 for Foundation, $3,500 for Growth and $5,000 for Expansion, for one brand and one existing website. Foundation includes eligible ChatGPT campaign management and one scoped initial website improvement round, with no ongoing optimization, research or answer-page production. Growth adds website optimization at least once monthly, a monthly research cycle and recurring answer pages. Expansion shares Growth’s page allowance and adds adaptation, approval, scheduling and distribution through relevant channels; there is no fixed post quota. Advertising spend is separate. New websites, major rebuilds, repairs, migrations and custom integrations require separate scope. Hosting, support and third-party costs are quoted. Final delivery allowances, billing periods, term, renewal and ownership are confirmed in the written scope.
+Proposed monthly fees are $2,000 for Foundation, $3,500 for Growth and $5,000 for Expansion, for one brand and one existing website. Foundation includes eligible ChatGPT campaign management and one scoped initial website improvement round, with no ongoing optimization, research or answer-page production. Growth adds website optimization at least once monthly, a monthly research cycle, recurring answer pages and publishing across 3 agreed channels. Expansion shares Growth’s page allowance and broadens adaptation, approval, scheduling and distribution beyond Growth’s 3 channels through an agreed relevant-channel plan; there is no fixed post quota. Advertising spend is separate. New websites, major rebuilds, repairs, migrations and custom integrations require separate scope. Hosting, support and third-party costs are quoted. Final delivery allowances, billing periods, term, renewal and ownership are confirmed in the written scope.
 
 API source studies record the selected model, search configuration, exact questions, repeated answers, retrieved sources and citations. They do not measure all consumer-app behavior or prove causation. Google generative-AI impressions, referrals, paid activity and inquiries are separate measures. No AI recommendation or ranking is guaranteed.
 
 This file is a reading aid, not a requirement for AI search visibility. Content reviewed October 21, 2026.
+
+## Original research
+- [Research and insights](https://befoundfirst.ai/research/): Selected findings and interpretation.
+- [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): A dated 240-answer baseline, with search cohorts and limitations.
+- [Mentions, sources and recommendations](https://befoundfirst.ai/research/mentions-sources-recommendations/): How to interpret different evidence channels.

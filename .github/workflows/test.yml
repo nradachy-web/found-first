@@ -14,6 +14,8 @@ jobs:
         with:
           node-version: '22'
       - run: node --check app.js
+      - run: node --check research.js
+      - run: node --check inquiry.js
       - run: node tools/validate-public-content.mjs
       - run: node --test tests/*.test.mjs
       - run: node tools/build-public.mjs

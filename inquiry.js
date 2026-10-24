@@ -218,7 +218,7 @@ const ERROR_MESSAGES = Object.freeze({
   intake_unavailable: 'Online submission is temporarily unavailable. Retry the same inquiry later, or use the email fallback.'
 });
 
-export async function createInquiryController({config, allowLoopback = false, storage, cryptoImpl = globalThis.crypto, fetchImpl = globalThis.fetch, now = () => Date.now(), notify = () => {}, timeoutMs = 15000, setTimer = setTimeout, clearTimer = clearTimeout} = {}) {
+export async function createInquiryController({config, allowLoopback = false, storage, cryptoImpl = globalThis.crypto, fetchImpl = globalThis.fetch, now = () => Date.now(), notify = () => {}, measurement = null, timeoutMs = 15000, setTimer = setTimeout, clearTimer = clearTimeout} = {}) {
   config = validateInquiryConfig(config, {allowLoopback});
   let pending = null, invalidStored = false, readableStorage = true, apiReady = false, busy = false, generation = 0, cancel = null, startedAt = new Date(now()).toISOString();
   let current = {type: 'fallback', message: FALLBACK, fields: {}, receipt: null};
@@ -277,9 +277,12 @@ export async function createInquiryController({config, allowLoopback = false, st
       timer = setTimer(cancel, Math.max(1, Math.min(timeoutMs, 30000)));
     });
     emit('sending', 'Sending your inquiry.');
+    let measurementContext;
+    try { measurementContext = measurement?.requestContext(attempt.key, config.endpoint, attempt.measurementEligible === true); }
+    catch { /* Optional measurement must never block or change inquiry delivery. */ }
     try {
       const operation = (async () => {
-        const response = await fetchImpl(config.endpoint, {method: 'POST', credentials: 'omit', redirect: 'error', cache: 'no-store', headers: {'Content-Type': 'application/json', 'Idempotency-Key': attempt.key}, body: attempt.body, signal: abort.signal});
+        const response = await fetchImpl(config.endpoint, {method: 'POST', credentials: 'omit', redirect: 'error', cache: 'no-store', headers: {'Content-Type': 'application/json', 'Idempotency-Key': attempt.key, ...measurementContext?.headers}, body: attempt.body, signal: abort.signal});
         return validatePublicResponse(response.status, await readResponseJSON(response, 8192));
       })();
       const result = await Promise.race([operation, deadline]);
@@ -289,6 +292,8 @@ export async function createInquiryController({config, allowLoopback = false, st
         const cleared = clearOwn(attempt);
         attempt.body = null; pending = null;
         const receipt = result.receipt;
+        try { measurement?.confirmedReceipt(receipt, attempt.key, measurementContext); }
+        catch { /* A confirmed inquiry remains confirmed even if measurement fails. */ }
         const message = receipt.notification_status === 'simulated' ? 'Test inquiry saved. Its notification is simulated; this is not a live lead.' : receipt.notification_status === 'attention_required' ? "Your inquiry is saved. The staff notification needs attention; you don't need to submit it again." : 'Found First received your inquiry. This receipt confirms it was saved, not that an email was delivered or read.';
         return emit('received', message + (cleared ? '' : ' The saved retry reference could not be cleared; keep this receipt.'), {}, receipt);
       }
@@ -325,7 +330,7 @@ export async function createInquiryController({config, allowLoopback = false, st
         if (!pending) {
           const key = cryptoImpl.randomUUID();
           if (!UUID.test(key)) throw new Error('unavailable');
-          pending = {key, hash, body: null};
+          pending = {key, hash, body: null, measurementEligible: true};
         }
         // Retain submitted input, not the canonical URL: the v1 website bound is input-only.
         if (!pending.body) pending.body = JSON.stringify(input);
@@ -360,7 +365,12 @@ export async function createInquiryController({config, allowLoopback = false, st
 
 const FIELD_IDS = Object.freeze({name: 'brief-name', email: 'brief-email', website_status: 'brief-website-status', website: 'brief-site', brief: 'brief-sell', interest: 'brief-interest', notes: 'brief-notes'});
 const FIELD_MESSAGES = Object.freeze({required: 'Please complete this field.', invalid: 'Please check this value.', too_long: 'Please shorten this field.', inconsistent: 'Check your website choice and address.'});
-export async function mountInquiryForm(doc = document, win = window) {
+async function loadMeasurement() {
+  const [{mountMeasurement}, {default: config}] = await Promise.all([import('./measurement.js'), import('./measurement-config.js')]);
+  return {mountMeasurement, config};
+}
+
+export async function mountInquiryForm(doc = document, win = window, {measurementLoader = loadMeasurement} = {}) {
   const form = doc.getElementById('brief-form');
   if (!form) return null;
   // First listener is installed before any editable control is enabled.
@@ -456,10 +466,20 @@ export async function mountInquiryForm(doc = document, win = window) {
     let storage;
     try { storage = win.sessionStorage; } catch { storage = null; }
     const allowLoopback = win.location.protocol === 'http:' && ['127.0.0.1', '[::1]'].includes(win.location.hostname);
-    const created = await createInquiryController({config, allowLoopback, storage, cryptoImpl: win.crypto, fetchImpl: win.fetch.bind(win), notify: state => { if (ticket === mountedGeneration || controller) render(state); }});
+    let optionalMeasurement = null;
+    const measurement = {
+      requestContext: (...args) => optionalMeasurement?.requestContext(...args),
+      confirmedReceipt: (...args) => optionalMeasurement?.confirmedReceipt(...args)
+    };
+    const created = await createInquiryController({config, allowLoopback, storage, cryptoImpl: win.crypto, fetchImpl: win.fetch.bind(win), measurement, notify: state => { if (ticket === mountedGeneration || controller) render(state); }});
     // Notification closure follows future page lifecycles; no original form values are captured.
     if (ticket !== mountedGeneration) { created.suspend(); return null; }
     controller = created;
+    // Even an indefinitely pending optional module must not delay submission.
+    // Only newly consented attempts can acquire measurement context later.
+    void Promise.resolve().then(measurementLoader).then(optional => {
+      if (ticket === mountedGeneration) optionalMeasurement = optional.mountMeasurement(optional.config, doc, win);
+    }).catch(() => { /* Submission remains available without measurement. */ });
     return controller;
   } catch {
     send.hidden = true; send.disabled = true;

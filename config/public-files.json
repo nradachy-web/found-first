@@ -9,6 +9,8 @@
   "sitemap.xml",
   "config/offer-manifest.json",
   "inquiry.js",
+  "measurement.js",
+  "measurement-config.js",
   "config/public-inquiry.json",
   "privacy/index.html",
   "assets/apple-touch-icon.png",

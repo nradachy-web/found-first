@@ -57,6 +57,17 @@ test('committed receipt alone succeeds and repeated Send cannot create a new inq
   await s.controller.submit(fields);
   assert.equal(s.calls.length, 1);
 });
+
+test('optional measurement failures cannot block a lead or erase its committed receipt', async () => {
+  for (const hook of ['requestContext', 'confirmedReceipt']) {
+    const s = await setup({measurement: {requestContext: () => ({}), confirmedReceipt: () => {}, [hook]: () => { throw Error('optional measurement failure'); }}});
+    await s.controller.submit(fields);
+    assert.equal(s.calls.length, 1);
+    assert.equal(s.controller.getState().type, 'received');
+    assert.equal(s.controller.getState().busy, false);
+    assert.equal(s.controller.getState().receipt.receipt_id, receipt.receipt_id);
+  }
+});
 test('double click while hashing or sending keeps one in-flight request and one identity', async () => {
   const wait = deferred(), entered = deferred();
   const s = await setup({transport: () => { entered.resolve(); return wait.promise; }});
@@ -268,4 +279,49 @@ test('returning with no pending inquiry retains truthful API-ready guidance', as
   assert.match(view.nodes.get('brief-status').textContent, /Enter your inquiry when you are ready/);
   assert.doesNotMatch(view.nodes.get('brief-status').textContent, /paste it into an email/);
   assert.equal(view.calls.length, 1);
+});
+
+for (const failure of ['import', 'mount']) {
+  test(`optional measurement ${failure} failure does not prevent a confirmed inquiry`, async context => {
+    let now = Date.now();
+    context.mock.method(Date, 'now', () => now);
+    const view = viewHarness({runtimeConfig: config});
+    const original = view.win.fetch;
+    view.win.fetch = async (url, options) => options?.method === 'POST' ? response() : original(url, options);
+    const controller = await mountInquiryForm(view.doc, view.win, {measurementLoader: async () => {
+      if (failure === 'import') throw Error('blocked optional module');
+      return {config: {}, mountMeasurement() { throw Error('optional mount failed'); }};
+    }});
+    assert.equal(controller.getState().apiReady, true);
+    assert.equal(view.nodes.get('send-inquiry').disabled, false);
+    now += 3000;
+    await controller.submit(fields);
+    assert.equal(controller.getState().type, 'received');
+    assert.match(view.nodes.get('brief-receipt').textContent, /00000000-0000-4000-8000-000000000001/);
+    assert.equal(view.nodes.get('brief-form').attributes['aria-busy'], 'false');
+  });
+}
+
+test('navigation during optional module loading cannot late-mount measurement', async () => {
+  const view = viewHarness({runtimeConfig: config}), loading = deferred(), entered = deferred();
+  const mounting = mountInquiryForm(view.doc, view.win, {measurementLoader: () => { entered.resolve(); return loading.promise; }});
+  await entered.promise;
+  await view.win.emit('pagehide');
+  loading.resolve({config: {}, mountMeasurement() { assert.fail('late measurement mount'); }});
+  assert.equal((await mounting).getState().apiReady, true);
+  await Promise.resolve();
+  assert.equal(view.calls.length, 1);
+});
+
+test('a permanently pending optional module never delays inquiry readiness or receipt', async context => {
+  let now = Date.now();
+  context.mock.method(Date, 'now', () => now);
+  const view = viewHarness({runtimeConfig: config}), original = view.win.fetch;
+  view.win.fetch = async (url, options) => options?.method === 'POST' ? response() : original(url, options);
+  const controller = await mountInquiryForm(view.doc, view.win, {measurementLoader: () => new Promise(() => {})});
+  assert.equal(controller.getState().apiReady, true);
+  assert.equal(view.nodes.get('send-inquiry').disabled, false);
+  now += 3000;
+  await controller.submit(fields);
+  assert.equal(controller.getState().type, 'received');
 });

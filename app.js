@@ -384,38 +384,6 @@ if (sticky && hero && contact) {
   stickyObserver.observe(contact);
 }
 
-// The brief builder writes the email for the visitor. Nothing is stored; the visitor's own mail app sends it.
-const EMAIL = 'nick@modernapexstrategies.com';
-const form = $('brief-form'), status = $('brief-status'), copyButton = $('copy-brief');
-function briefData() {
-  const f = form.elements || {};
-  const get = name => ((f[name] && f[name].value) || '').trim();
-  const checked = form.querySelector ? form.querySelector('input[name="Interested in"]:checked') : null;
-  return {site: get('Website'), sell: get('What we sell'), interest: checked ? checked.value : 'Both', notes: get('Notes')};
-}
-function briefSubject(d) { return `Found First | AI visibility check | ${d.site || 'my business'}`; }
-function briefBody(d) {
-  return `Hi Nick,\n\nI'd like a free AI visibility check.\n\nWebsite: ${d.site}\nWhat we sell, and where: ${d.sell}\nInterested in: ${d.interest}\n${d.notes ? `Notes: ${d.notes}\n` : ''}\nThanks`;
-}
-function setStatus(text) { if (status) { status.textContent = text; status.classList.add('is-ok'); } }
-if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (form.reportValidity && !form.reportValidity()) return;
-    const d = briefData();
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(briefSubject(d))}&body=${encodeURIComponent(briefBody(d))}`;
-    setStatus(`Your email app should open with the message ready. If it did not, use "Copy the message instead" and send it to ${EMAIL}.`);
-  });
-}
-if (copyButton) {
-  copyButton.addEventListener('click', async () => {
-    const d = briefData();
-    const text = `To: ${EMAIL}\nSubject: ${briefSubject(d)}\n\n${briefBody(d)}`;
-    try { await navigator.clipboard.writeText(text); setStatus(`Copied. Paste it into any email to ${EMAIL}.`); }
-    catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
-  });
-}
-
 // Accessible sample tabs: all three documents remain readable without JavaScript.
 const tablist = $('workbench-tabs');
 if (tablist) {

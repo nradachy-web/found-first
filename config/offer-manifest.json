@@ -1,0 +1,17 @@
+{
+  "existing_site": "Eligible existing sites receive a scoped initial improvement round; Growth and Expansion add recurring optimization and answer-page work. New websites, major rebuilds and additional remediation require separate explicit scope and approval.",
+  "measurement_labels": [
+    "observed",
+    "unavailable",
+    "not configured",
+    "not applicable"
+  ],
+  "offer_version": "found-first-offer-2026-10-22-research",
+  "period_semantics": "Proposed fees are monthly; billing periods, service term, renewal and ownership are confirmed in each written scope. No automatic renewal is implied.",
+  "schema_version": 1,
+  "tracks": [
+    "existing_eligible",
+    "new_build",
+    "rebuild"
+  ]
+}

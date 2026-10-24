@@ -61,33 +61,4 @@ const filter=$('model-filter');
 if(filter)filter.addEventListener('change',e=>{const mode=e.target.value;document.querySelectorAll('[data-method]').forEach(row=>{row.hidden=mode!=='all'&&row.dataset.method!==mode;});$('coverage-summary').textContent=mode==='native'?'12 planned routes / 10 completed':mode==='external'?'6 planned routes / 6 completed':'18 planned routes / 16 completed';});
 const industry=$('industry-select');
 if(industry)industry.addEventListener('change',()=>{const tree=industry.value==='tree';const panel=$('industry-example');panel.querySelector('h3').textContent=tree?'From a tree concern to a useful local presence.':'From a leak question to a useful local presence.';panel.querySelector('p').textContent=tree?'An approved tree-risk explanation can become a service-page improvement, seasonal social content and an email for property owners. Industry opportunities can include eligible arborist directories, municipal resources and local property-manager audiences.':'An approved leak-detection answer can become a service-page improvement, a short explanation, a Google Business update and a customer email. Relevant profile checks can include eligible manufacturer finders and local property-manager resources.';});
-const EMAIL = 'nick@modernapexstrategies.com';
-const form = $('brief-form'), status = $('brief-status'), copyButton = $('copy-brief');
-function briefData() {
-  const f = form.elements || {};
-  const get = name => ((f[name] && f[name].value) || '').trim();
-  const checked = form.querySelector ? form.querySelector('input[name="Interested in"]:checked') : null;
-  return {site: get('Website'), sell: get('What we sell'), interest: checked ? checked.value : 'Both', notes: get('Notes')};
-}
-function briefSubject(d) { return `Found First | AI visibility check | ${d.site || 'my business'}`; }
-function briefBody(d) {
-  return `Hi Nick,\n\nI'd like a free AI visibility check.\n\nWebsite: ${d.site}\nWhat we sell, and where: ${d.sell}\nInterested in: ${d.interest}\n${d.notes ? `Notes: ${d.notes}\n` : ''}\nThanks`;
-}
-function setStatus(text) { if (status) { status.textContent = text; status.classList.add('is-ok'); } }
-if (form) {
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (form.reportValidity && !form.reportValidity()) return;
-    const d = briefData();
-    location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(briefSubject(d))}&body=${encodeURIComponent(briefBody(d))}`;
-    setStatus(`Your email app should open with the message ready. If it did not, use "Copy the message instead" and send it to ${EMAIL}.`);
-  });
-}
-if (copyButton) {
-  copyButton.addEventListener('click', async () => {
-    const d = briefData();
-    const text = `To: ${EMAIL}\nSubject: ${briefSubject(d)}\n\n${briefBody(d)}`;
-    try { await navigator.clipboard.writeText(text); setStatus(`Copied. Paste it into any email to ${EMAIL}.`); }
-    catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
-  });
-}
+// Inquiry behavior is owned by inquiry.js so fallback and receipt safeguards stay shared.

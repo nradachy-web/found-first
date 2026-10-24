@@ -1,4 +1,4 @@
-FOUND FIRST / CAMPAIGN PLANNING BRIEF
+FOUND FIRST / CAMPAIGN PLANNING BRIEF / REVIEWED 2026-10-21
 
 Business and website:
 Primary buyer:
@@ -9,12 +9,19 @@ Supported claims and evidence sources:
 Eligibility or policy questions to resolve:
 Qualified outcome definition:
 Where the outcome is verified:
-Media budget and currency:
+Account eligibility, access and billing readiness:
+Approved creative, destination and launch authority:
+Media budget and billing currency:
+Budget type (average daily or campaign-total):
 Management and other fees (separate):
 Agreed spend limit:
 Review date:
 What would justify expanding the test:
 What would require changing or stopping it:
+Written scope and version:
+Service term, billing periods and renewal decision:
+Initial existing-site improvement round, recurring work and separate build/remediation scope:
+Domain control, hosting, ownership and support:
 Owner and next action:
 
 Organic AI mentions and paid placements are separate systems.
@@ -22,3 +29,8 @@ Agree scope and budget before launch. Do not assume a click is a qualified lead.
 
 Found First / nick@modernapexstrategies.com
 https://befoundfirst.ai/
+
+A daily budget is an average delivery target, not a fixed daily ceiling. Confirm current currency-specific minimums in the account. No automatic renewal or unapproved charges are implied.
+
+Public program reference: proposed monthly fees are Foundation $2,000, Growth $3,500 and Expansion $5,000, for one brand and one existing website. Foundation includes eligible ChatGPT campaign management and one initial improvement round; ongoing optimization, research and answer pages are not included. Growth adds optimization at least once monthly, ongoing research, answer pages and publishing across 3 agreed channels. Expansion shares Growth's page allowance and broadens approved distribution beyond those 3 channels through an agreed relevant-channel plan, with no fixed post quota.
+Final delivery allowances, billing periods, term, renewal, ownership, hosting and support are confirmed in the written scope. Advertising spend is separate; new sites, major rebuilds and additional remediation require separate approval and scope. No automatic renewal or ownership-transfer date is implied.

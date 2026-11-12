@@ -1,0 +1,312 @@
+/* Found First field notes: answer pages and the library hub.
+   Loaded after style.css (tokens, header, footer, buttons) and research.css (homepage header, program cards).
+   One rule of thumb runs through this file: content is set in ink, #666 is for support text only. */
+
+.learn{--pad:clamp(22px,5vw,88px);--page:1380px;--gutter:max(var(--pad),calc((100vw - var(--page))/2));--measure:33em}
+.learn .header{margin:0 var(--gutter);max-width:none}
+.learn footer{padding-left:var(--gutter);padding-right:var(--gutter);max-width:none;margin:0}
+.learn main a:focus-visible,.learn summary:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+/* Page head: the plain topic, the quotable answer, who wrote it and when. */
+.note-head{padding:38px var(--gutter) 60px;border-bottom:1px solid var(--rule)}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:14px;color:var(--muted);margin-bottom:52px}
+.crumbs a{color:var(--ink);padding:10px 0;text-decoration:underline;text-decoration-color:#bbb;text-decoration-thickness:1px;text-underline-offset:5px}
+.crumbs a:hover{text-decoration-color:var(--ink)}
+.note-head h1{font-size:clamp(40px,5.6vw,84px);line-height:1.04;letter-spacing:-.062em;font-weight:650;max-width:15em;text-wrap:balance;margin-left:-.04em}
+.note-deck{font-size:clamp(19px,1.75vw,25px);line-height:1.4;letter-spacing:-.02em;color:var(--muted);margin-top:18px;max-width:30em}
+.note-open{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:40px 8%;align-items:start;margin-top:44px}
+.note-answer{font-size:clamp(20px,1.72vw,25px);line-height:1.52;letter-spacing:-.018em;max-width:29em}
+.note-answer a,.block-text a,.cmp a,.block-note a,.facts a,.checklist a,.steps-grid a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.note-answer a:hover,.block-text a:hover,.cmp a:hover,.block-note a:hover{text-decoration-thickness:2px}
+.note-meta{font-size:14px;line-height:1.7;color:var(--muted);margin-top:26px}
+.note-meta i{font-style:normal;color:#b5b5b5;margin:0 10px}
+
+/* On this page. Open beside the answer on wide screens, one closed row on small ones. */
+.toc{border-top:2px solid var(--ink);padding-top:14px}
+.toc summary,.toc>p{font:12px/1.6 var(--mono);color:var(--muted);list-style:none;margin-bottom:6px}
+.toc summary::-webkit-details-marker{display:none}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li+li{border-top:1px solid var(--rule)}
+.toc a{display:flex;justify-content:space-between;gap:16px;padding:9px 0;font-size:15px;line-height:1.45;min-height:40px;align-items:center}
+.toc a:hover{text-decoration:underline;text-underline-offset:4px}
+.toc a span{font:12px var(--mono);color:var(--muted)}
+
+/* Blocks. Heading left, running text right, anything wide underneath. */
+.note-body{padding:0 var(--gutter)}
+.block{padding:62px 0;border-bottom:1px solid var(--rule)}
+.block:last-child{border-bottom:0}
+.block-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px 6%;align-items:start}
+.block h2{font-size:clamp(28px,3vw,44px);line-height:1.1;letter-spacing:-.052em;text-wrap:balance;max-width:13em}
+.block-text{max-width:var(--measure);font-size:18px}
+.block-text p,.block-text li{font-size:inherit;line-height:1.7}
+.block-text p+p,.block-text p+ul{margin-top:1em}
+.block-text ul{margin:0;padding:0;list-style:none}
+.block-text li{position:relative;padding:11px 0 11px 26px;border-top:1px solid var(--rule)}
+.block-text li:last-child{border-bottom:1px solid var(--rule)}
+.block-text li::before{content:'+';position:absolute;left:0;top:11px;font-family:var(--mono);font-size:15px}
+.block-head+.block-wide{margin-top:44px}
+.block-head-solo{grid-template-columns:minmax(0,1fr)}
+.block-head-solo h2{max-width:22em}
+.block-head-solo+.block-wide{margin-top:36px}
+.block-note{font-size:14px;line-height:1.7;color:var(--muted);margin-top:22px;max-width:62em}
+.block-note a{color:var(--ink)}
+
+/* Key facts strip. Each cell shares three rows (label, value, note) so they line up across the strip. */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:auto;margin:0;border-top:2px solid var(--ink)}
+.facts[data-cols="3"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.facts[data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.facts>div{display:grid;grid-template-rows:subgrid;grid-row:span 3;row-gap:0;padding:20px 28px 6px 0;border-right:1px solid var(--rule)}
+.facts>div+div{padding-left:28px}
+.facts>div:last-child{border-right:0;padding-right:0}
+.facts dt{font-size:14px;line-height:1.5;color:var(--muted);padding-bottom:22px}
+.facts dd{display:contents}
+.facts strong{display:block;font-size:clamp(26px,2.6vw,38px);font-weight:600;letter-spacing:-.05em;line-height:1.12;padding-bottom:12px}
+.facts dd span{display:block;font-size:15px;line-height:1.6;max-width:22em}
+.block-facts:first-child{padding-top:56px}
+
+/* Quote-ready definition. */
+.definition{background:var(--surface);padding:clamp(26px,3.6vw,52px);display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:16px 4%;align-items:start}
+.definition-label{font:12px/1.6 var(--mono);color:var(--muted);padding-top:.9em}
+.definition-text{font-size:clamp(22px,2.3vw,33px);line-height:1.34;letter-spacing:-.035em;max-width:26em}
+.definition-text dfn{font-style:normal;font-weight:650}
+.definition-note{font-size:16px;line-height:1.7;margin-top:18px;max-width:38em}
+.definition-note a{text-decoration:underline;text-underline-offset:3px}
+
+/* Comparison and cost tables. Real tables on wide screens, stacked rows on small ones. Nothing scrolls sideways. */
+.cmp{width:100%;border-collapse:collapse}
+.cmp caption{font:14px/1.6 var(--sans);color:var(--muted);padding-bottom:18px;text-align:left}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:20px 32px 20px 0;border-bottom:1px solid var(--rule);overflow-wrap:anywhere}
+.cmp th:last-child,.cmp td:last-child{padding-right:0}
+.cmp thead th{font-size:19px;font-weight:650;letter-spacing:-.03em;line-height:1.3;vertical-align:bottom;padding-top:0;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.cmp tbody th{font-size:15px;font-weight:650;line-height:1.5;width:21%}
+.cmp td{font-size:16.5px;line-height:1.62}
+.block-comparison .cmp[data-cols="3"] td{width:39.5%}
+.block-cost .cmp td:last-child{width:46%}
+.cmp tbody tr:last-child th,.cmp tbody tr:last-child td{border-bottom-color:var(--ink)}
+
+/* Steps (numbered only when the order matters) and titled points. */
+.steps-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 4%;list-style:none;margin:0;padding:0;counter-reset:step}
+.steps-grid[data-cols="4"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.steps-grid[data-cols="2"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.steps-grid li{border-top:1px solid var(--ink);padding-top:20px}
+ol.steps-grid li{border-top-width:2px;counter-increment:step}
+ol.steps-grid li::before{content:counter(step,decimal-leading-zero);display:block;font:12px var(--mono);color:var(--muted);margin-bottom:26px}
+.steps-grid h3{font-size:22px;line-height:1.25;letter-spacing:-.035em;margin-bottom:12px;max-width:14em}
+.steps-grid p{font-size:16.5px;line-height:1.65;max-width:30em}
+
+/* Checklist. The bracket is the box. */
+.checklist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 6%;border-top:2px solid var(--ink)}
+.checklist li{position:relative;padding:20px 0 20px 52px;border-bottom:1px solid var(--rule);font-size:16.5px;line-height:1.62}
+.checklist li::before{content:'[ ]';position:absolute;left:0;top:21px;font:15px/1.5 var(--mono);white-space:pre}
+.checklist strong{display:block;font-weight:650;letter-spacing:-.01em}
+
+/* Evidence callout. The one inverted block inside the article. */
+.evidence{background:#000;color:#fff;padding:clamp(28px,4.2vw,60px);display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:40px 8%;align-items:center}
+.evidence-plain{grid-template-columns:minmax(0,1fr)}
+.evidence-plain .evidence-copy{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:0 8%;align-items:start}
+.evidence-plain .evidence-label{grid-column:1/-1}
+.evidence-plain h3{grid-column:1;grid-row:2/span 4}
+.evidence-plain .evidence-copy>p:not(.evidence-label),.evidence-plain a{grid-column:2;justify-self:start}
+.evidence-plain .evidence-copy>p:nth-of-type(2){margin-top:6px}
+.evidence-label{font:12px/1.6 var(--mono);color:#bcbcbc;margin-bottom:22px}
+.evidence h3{font-size:clamp(25px,2.6vw,38px);line-height:1.14;letter-spacing:-.045em;max-width:14em}
+.evidence-copy>p:not(.evidence-label){font-size:17px;line-height:1.65;margin-top:20px;max-width:33em}
+.evidence-copy>p.evidence-caveat{font-size:14px;color:#bcbcbc;margin-top:14px}
+.evidence a{display:inline-block;margin-top:24px;padding:10px 0;font-size:15px;border-bottom:1px solid #fff}
+.evidence a:hover{border-bottom-color:#777}
+.evidence-figures{display:grid;grid-template-columns:1fr 1fr;gap:30px 36px}
+.evidence figure{margin:0;min-width:0}
+.evidence figcaption span{display:block;font-size:16px;margin-bottom:14px}
+.evidence figcaption strong,.stat strong{font-size:clamp(44px,4.6vw,64px);font-weight:600;letter-spacing:-.06em;line-height:1}
+.evidence figcaption small{font:14px var(--sans);letter-spacing:0;color:#bcbcbc;margin-left:10px}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-top:20px;max-width:330px}
+.dots i{display:block;aspect-ratio:1;background:#333}
+.dots i.on{background:#fff}
+.evidence-figure-note{grid-column:1/-1;font-size:13px;color:#bcbcbc}
+.stat{border-top:1px solid #555;padding-top:16px}
+.stat span{display:block;font-size:14px;color:#bcbcbc;margin-top:10px}
+
+/* Program cards reuse the homepage's .program-grid from research.css, without the buttons. */
+.learn .program-grid ul{margin-bottom:6px}
+.learn .program-grid li{font-size:15.5px}
+.learn .program-purpose{min-height:54px;font-size:16px;color:var(--ink)}
+.learn .program-fit{font-size:12px}
+
+/* Questions. Same disclosure as the homepage FAQ. */
+.faq-list details{border-top:1px solid var(--rule)}
+.faq-list details:first-child{border-top:2px solid var(--ink)}
+.faq-list details:last-child{border-bottom:1px solid var(--rule)}
+.faq-list summary{list-style:none;display:flex;justify-content:space-between;gap:24px;cursor:pointer;padding:22px 0;font-size:19px;line-height:1.4;font-weight:600;letter-spacing:-.02em}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary span{font:23px/1.15 var(--mono);font-weight:400;flex:none;transition:transform .2s}
+.faq-list details[open] summary span{transform:rotate(45deg)}
+.faq-list details p{font-size:18px;line-height:1.7;max-width:var(--measure);padding:0 40px 26px 0}
+
+/* Sources. Support material, so it is allowed to be quiet. */
+.block-sources h2,.block-related h2{font-size:clamp(24px,2.1vw,30px);letter-spacing:-.04em}
+.block-sources .block-text{font-size:15px;color:var(--muted);max-width:35em}
+.block-sources .block-text a{color:var(--ink)}
+.source-list{margin-top:1em}
+.source-list summary{list-style:none;font:12px/1.6 var(--mono);color:var(--muted);padding-bottom:10px}
+.source-list summary::-webkit-details-marker{display:none}
+.block-sources li::before{content:none}
+.block-sources li{padding-left:0;font-size:15px}
+
+/* Rows: related notes on a page, every entry on the hub. The whole row is the link. */
+.rows{border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr) 7.5em;gap:6px 28px;align-items:baseline;padding:19px 0;border-bottom:1px solid var(--rule);transition:background .15s,color .15s,box-shadow .15s}
+.row-title{font-size:20px;font-weight:600;letter-spacing:-.03em;line-height:1.3}
+.row-line{font-size:16px;line-height:1.55}
+.row-kind{font:12px/1.6 var(--mono);color:var(--muted);text-align:right;transition:color .15s}
+.row:hover,.row:focus-visible{background:#000;color:#fff;box-shadow:-18px 0 0 #000,18px 0 0 #000;border-bottom-color:#000;outline:0}
+.row:hover .row-kind,.row:focus-visible .row-kind{color:#bcbcbc}
+.row-lead{grid-template-columns:minmax(0,1fr) 7.5em;padding:28px 0 30px}
+.row-lead .row-title{font-size:clamp(27px,2.7vw,40px);letter-spacing:-.05em;line-height:1.12;grid-column:1}
+.row-lead .row-line{grid-column:1;font-size:18px;max-width:34em;margin-top:6px}
+.row-lead .row-kind{grid-column:2;grid-row:1}
+
+/* Hub. */
+.learn-hub .note-head h1{max-width:12em}
+.hub-group .block-head>div:first-child p{font-size:17px;line-height:1.6;color:var(--muted);margin-top:16px;max-width:21em}
+.hub-group .block-head{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+.hub-group .rows{margin-top:6px}
+
+/* The one next step. Same words on every page. */
+.next-step{background:#000;color:#fff;padding:84px var(--gutter);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:30px 6%;align-items:start}
+.next-step h2{font-size:clamp(34px,4vw,58px);line-height:1.06;letter-spacing:-.06em;max-width:11em;text-wrap:balance}
+.next-step p{font-size:18px;line-height:1.65;color:#d6d6d6;max-width:33em;margin-bottom:28px}
+
+@media(max-width:1000px){
+.note-open{grid-template-columns:minmax(0,1fr);gap:34px}
+.toc{max-width:560px}
+.toc[open]{padding-bottom:4px}
+.toc summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:44px;margin:-14px 0 0;font-size:13px;color:var(--ink)}
+.toc summary::after{content:'+';font:20px var(--mono)}
+.toc[open] summary::after{content:'-'}
+.block-head,.hub-group .block-head,.next-step{grid-template-columns:minmax(0,1fr)}
+.block h2{max-width:20em}
+.facts,.facts[data-cols="3"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.facts>div:nth-child(2n){border-right:0;padding-right:0}
+.facts>div:nth-child(2n+1){padding-left:0}
+.facts>div:nth-child(n+3){border-top:1px solid var(--rule)}
+.facts>div{padding-bottom:22px}
+.steps-grid,.steps-grid[data-cols="4"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.evidence{grid-template-columns:minmax(0,1fr)}
+.evidence-plain .evidence-copy{display:block}
+.evidence-plain .evidence-copy>p:nth-of-type(2){margin-top:20px}
+.hub-group .block-head>div:first-child p{max-width:34em}
+.hub-group .rows{margin-top:10px}
+}
+
+@media(min-width:1001px){
+.toc summary{pointer-events:none}
+}
+@media(min-width:761px){
+.source-list summary{pointer-events:none}
+}
+
+@media(max-width:760px){
+.note-head{padding-top:14px;padding-bottom:40px}
+.crumbs{margin-bottom:24px;font-size:13px}
+.crumbs a{padding:12px 0}
+.note-head h1{font-size:clamp(38px,10.6vw,56px);margin-left:-.03em}
+.note-deck{font-size:18px;margin-top:14px}
+.note-open{margin-top:26px;gap:28px}
+.note-answer{font-size:19px;line-height:1.55}
+.note-meta{font-size:13px;margin-top:20px}
+.note-meta i{margin:0 7px}
+.block{padding:40px 0}
+.block h2{font-size:29px}
+.block-head{gap:18px}
+.block-head+.block-wide,.block-head-solo+.block-wide{margin-top:26px}
+.block-text,.faq-list details p{font-size:17px}
+.block-facts:first-child{padding-top:34px}
+.facts,.facts[data-cols="3"],.facts[data-cols="2"]{grid-template-columns:minmax(0,1fr)}
+.facts>div,.facts>div+div,.facts>div:nth-child(2n){display:block;padding:14px 0 16px;border-right:0;border-top:0;border-bottom:1px solid var(--rule)}
+.facts>div:last-child{border-bottom:0;padding-bottom:4px}
+.facts dt{font-size:13px;padding-bottom:3px}
+.facts strong{font-size:24px;line-height:1.2;letter-spacing:-.04em;padding-bottom:5px}
+.facts dd span{font-size:15.5px;line-height:1.55;max-width:none}
+.definition{grid-template-columns:minmax(0,1fr);margin:0 calc(-1 * var(--pad));padding:30px var(--pad)}
+.definition-label{padding-top:0}
+.definition-text{font-size:22px}
+.steps-grid,.steps-grid[data-cols="4"],.steps-grid[data-cols="2"],.checklist{grid-template-columns:minmax(0,1fr)}
+.steps-grid{gap:26px}
+.steps-grid li{padding-top:16px}
+ol.steps-grid li::before{margin-bottom:10px}
+.steps-grid h3{margin-bottom:8px}
+.steps-grid h3{font-size:21px}
+.checklist li{padding:16px 0 16px 42px;font-size:16px}
+.checklist li::before{top:17px}
+.evidence{margin:0 calc(-1 * var(--pad));padding:32px var(--pad) 34px;gap:28px}
+.evidence-figures{gap:20px 20px}
+.evidence figcaption span{margin-bottom:8px}
+.evidence figcaption strong,.stat strong{font-size:40px}
+.dots{gap:3px;margin-top:14px;max-width:none}
+.evidence a{margin-top:16px}
+.faq-list summary{font-size:17.5px;padding:19px 0}
+.faq-list details p{padding-right:0}
+.row,.row-lead{grid-template-columns:minmax(0,1fr);padding:18px 0;gap:6px}
+.row-lead{padding:22px 0 24px}
+.row-lead .row-title{font-size:27px}
+.row-lead .row-line{font-size:16.5px;margin-top:2px}
+.row-kind,.row-lead .row-kind{text-align:left;grid-column:1;grid-row:auto;margin-top:2px}
+.row:hover,.row:focus-visible{box-shadow:-22px 0 0 #000,22px 0 0 #000}
+.source-list summary{display:flex;justify-content:space-between;align-items:center;min-height:44px;padding:0;cursor:pointer;font-size:13px;color:var(--ink);border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+.source-list[open] summary{border-bottom-color:transparent}
+.source-list summary::after{content:'+';font:20px var(--mono)}
+.source-list[open] summary::after{content:'-'}
+.learn .program-grid article,.learn .program-grid article:first-child,.learn .program-grid article:last-child{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;align-items:baseline;padding:22px 0 12px}
+.learn .program-grid .program-growth{margin:0 calc(-1 * var(--pad));padding:40px var(--pad) 12px}
+.learn .program-fit{top:16px;left:var(--pad)}
+.learn .program-grid h3{grid-row:1;grid-column:1;font-size:26px}
+.learn .program-price{grid-row:1;grid-column:2;margin:0;font-size:28px}
+.learn .program-price span{font-size:12px;margin-left:5px}
+.learn .program-purpose{grid-row:2;grid-column:1/-1;min-height:0;margin-top:8px;font-size:15.5px}
+.learn .program-grid ul{grid-row:3;grid-column:1/-1;margin:14px 0 0}
+.learn .program-grid li{padding:10px 0;font-size:15px}
+.next-step{padding:52px var(--pad) 56px}
+.next-step p{font-size:17px}
+.next-step .button{width:100%}
+.learn footer{padding-bottom:56px}
+}
+
+/* The shared header and footer keep the homepage's look. These only enlarge what a thumb can hit. */
+@media(max-width:760px){
+.learn .ff-header nav a{padding:14px 0;margin:-14px 0}
+.learn .header-cta,.learn .brand{position:relative}
+.learn .header-cta::after,.learn .brand::after{content:'';position:absolute;inset:-5px 0}
+.learn .footer-grid a{margin-top:0;padding:11px 0}
+.learn .footer-label{margin-bottom:2px}
+.learn .footer-bottom a{display:inline-block;padding:13px 0}
+.learn .footer-bottom span a{padding:13px 4px 13px 0}
+}
+
+/* Stacked tables. Each row becomes a small heading followed by one labelled value per column. */
+@media(max-width:640px){
+.cmp,.cmp tbody,.cmp tr,.cmp tbody th,.cmp td,.cmp caption{display:block;width:auto}
+.cmp thead{display:none}
+.cmp caption{padding-bottom:14px}
+.cmp tbody{border-top:2px solid var(--ink)}
+.cmp tr{padding:20px 0 8px;border-bottom:1px solid var(--rule)}
+.cmp tbody tr:last-child{border-bottom-color:var(--ink)}
+.cmp tbody th{font-size:18px;letter-spacing:-.02em;line-height:1.35;padding:0 0 12px;border:0}
+.cmp td,.block-comparison .cmp[data-cols="3"] td,.block-cost .cmp td:last-child{width:auto;padding:0 0 14px;border:0;font-size:16px;line-height:1.6;max-width:34em}
+.cmp td::before{content:attr(data-label);display:block;font:12px/1.5 var(--mono);color:var(--muted);margin-bottom:3px}
+}
+/* Four-column tables run out of room sooner, so they stack sooner. */
+@media(min-width:641px) and (max-width:860px){
+.cmp[data-cols="4"],.cmp[data-cols="4"] tbody,.cmp[data-cols="4"] tr,.cmp[data-cols="4"] tbody th,.cmp[data-cols="4"] td,.cmp[data-cols="4"] caption{display:block;width:auto}
+.cmp[data-cols="4"] thead{display:none}
+.cmp[data-cols="4"] caption{padding-bottom:14px}
+.cmp[data-cols="4"] tbody{border-top:2px solid var(--ink)}
+.cmp[data-cols="4"] tr{padding:20px 0 8px;border-bottom:1px solid var(--rule)}
+.cmp[data-cols="4"] tbody tr:last-child{border-bottom-color:var(--ink)}
+.cmp[data-cols="4"] tbody th{font-size:18px;letter-spacing:-.02em;line-height:1.35;padding:0 0 12px;border:0}
+.cmp[data-cols="4"] td{width:auto;padding:0 0 14px;border:0;font-size:16px;line-height:1.6;max-width:34em}
+.cmp[data-cols="4"] td::before{content:attr(data-label);display:block;font:12px/1.5 var(--mono);color:var(--muted);margin-bottom:3px}
+}
+
+@media(prefers-reduced-motion:reduce){
+.row,.row-kind,.faq-list summary span{transition:none}
+}

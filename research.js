@@ -61,7 +61,7 @@ const filter=$('model-filter');
 if(filter)filter.addEventListener('change',e=>{const mode=e.target.value;document.querySelectorAll('[data-method]').forEach(row=>{row.hidden=mode!=='all'&&row.dataset.method!==mode;});$('coverage-summary').textContent=mode==='native'?'12 planned routes / 10 completed':mode==='external'?'6 planned routes / 6 completed':'18 planned routes / 16 completed';});
 const industry=$('industry-select');
 if(industry)industry.addEventListener('change',()=>{const tree=industry.value==='tree';const panel=$('industry-example');panel.querySelector('h3').textContent=tree?'From a tree concern to a useful local presence.':'From a leak question to a useful local presence.';panel.querySelector('p').textContent=tree?'An approved tree-risk explanation can become a service-page improvement, seasonal social content and an email for property owners. Industry opportunities can include eligible arborist directories, municipal resources and local property-manager audiences.':'An approved leak-detection answer can become a service-page improvement, a short explanation, a Google Business update and a customer email. Relevant profile checks can include eligible manufacturer finders and local property-manager resources.';});
-const EMAIL = 'nick@modernapexstrategies.com';
+const EMAIL = 'nick@befoundfirst.ai';
 const form = $('brief-form'), status = $('brief-status'), copyButton = $('copy-brief');
 function briefData() {
   const f = form.elements || {};

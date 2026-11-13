@@ -57,10 +57,6 @@ if (canvas) {
   control.addEventListener('click',()=>{paused=!paused;control.setAttribute('aria-pressed',String(paused));control.textContent=paused?'Resume animation':'Pause animation';if(frame)cancelAnimationFrame(frame);frame=0;last=0;wake();});
   document.fonts.ready.then(resize);
 }
-const filter=$('model-filter');
-if(filter)filter.addEventListener('change',e=>{const mode=e.target.value;document.querySelectorAll('[data-method]').forEach(row=>{row.hidden=mode!=='all'&&row.dataset.method!==mode;});$('coverage-summary').textContent=mode==='native'?'12 planned routes / 10 completed':mode==='external'?'6 planned routes / 6 completed':'18 planned routes / 16 completed';});
-const industry=$('industry-select');
-if(industry)industry.addEventListener('change',()=>{const tree=industry.value==='tree';const panel=$('industry-example');panel.querySelector('h3').textContent=tree?'From a tree concern to a useful local presence.':'From a leak question to a useful local presence.';panel.querySelector('p').textContent=tree?'An approved tree-risk explanation can become a service-page improvement, seasonal social content and an email for property owners. Industry opportunities can include eligible arborist directories, municipal resources and local property-manager audiences.':'An approved leak-detection answer can become a service-page improvement, a short explanation, a Google Business update and a customer email. Relevant profile checks can include eligible manufacturer finders and local property-manager resources.';});
 const EMAIL = 'nick@befoundfirst.ai';
 const form = $('brief-form'), status = $('brief-status'), copyButton = $('copy-brief');
 function briefData() {
@@ -69,9 +65,9 @@ function briefData() {
   const checked = form.querySelector ? form.querySelector('input[name="Interested in"]:checked') : null;
   return {site: get('Website'), sell: get('What we sell'), interest: checked ? checked.value : 'Both', notes: get('Notes')};
 }
-function briefSubject(d) { return `Found First | AI visibility check | ${d.site || 'my business'}`; }
+function briefSubject(d) { return `Found First | Private conversation | ${d.site || 'my business'}`; }
 function briefBody(d) {
-  return `Hi Nick,\n\nI'd like a free AI visibility check.\n\nWebsite: ${d.site}\nWhat we sell, and where: ${d.sell}\nInterested in: ${d.interest}\n${d.notes ? `Notes: ${d.notes}\n` : ''}\nThanks`;
+  return `Hi Nick,\n\nI'd like to talk about working with Found First.\n\nWebsite: ${d.site}\nWhat we sell, and where: ${d.sell}\nInterested in: ${d.interest}\n${d.notes ? `Notes: ${d.notes}\n` : ''}\nThanks`;
 }
 function setStatus(text) { if (status) { status.textContent = text; status.classList.add('is-ok'); } }
 if (form) {

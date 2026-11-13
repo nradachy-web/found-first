@@ -4,30 +4,26 @@
 
 Contact: nick@befoundfirst.ai
 
-## Research library
-- [Answer engine optimization services](https://befoundfirst.ai/learn/answer-engine-optimization/): What an answer engine optimization (AEO) service does, what Google and OpenAI say a site needs, how results are measured and what it costs.
-- [Getting recommended by ChatGPT](https://befoundfirst.ai/learn/get-recommended-by-chatgpt/): What gives ChatGPT a reason to name a business: crawler access, pages that answer real questions, consistent facts and public evidence. Plus how to check.
-- [Google AI Overviews and AI Mode](https://befoundfirst.ai/learn/google-ai-overviews/): What Google says a page needs to appear in AI Overviews and AI Mode: indexed, snippet-eligible, no special markup. And how Search Console counts it.
-- [AEO content strategy](https://befoundfirst.ai/learn/aeo-content-strategy/): How to plan content for AI answers: find buyers' real questions by buying stage, give each one a single page, back it with evidence and keep it current.
-- [AEO vs. SEO vs. GEO](https://befoundfirst.ai/learn/aeo-vs-seo-vs-geo/): SEO, AEO and GEO compared: what each term means, the work they share, what you measure differently, and why the label matters less than the work.
-- [ChatGPT ads vs. Google Ads](https://befoundfirst.ai/learn/chatgpt-ads-vs-google-ads/): ChatGPT ads and Google Search ads compared side by side: what triggers each ad, where it shows, how you pay, budgets, targeting and measurement.
-- [ChatGPT advertising costs](https://befoundfirst.ai/learn/chatgpt-advertising-cost/): What a ChatGPT ads budget pays for: media billed by OpenAI from $25 a day, management, the landing page, measurement and the test period.
-- [ChatGPT ads management](https://befoundfirst.ai/learn/chatgpt-ads-agency/): What managing ChatGPT ads involves, from eligibility and account setup to ad review, landing pages and reporting, and what stays with the advertiser.
-- [AI visibility audits](https://befoundfirst.ai/learn/ai-visibility-audit/): What an AI visibility audit should check and hand over: the question set, saved answers with dates and models, sources, business facts and a ranked list.
-- [Measuring AI marketing results](https://befoundfirst.ai/learn/measure-ai-marketing-roi/): How to measure AI marketing: mentions, citations, visits, inquiries and revenue as separate measures, where each one is visible and what it cannot prove.
-- [Choosing an AEO agency](https://befoundfirst.ai/learn/choose-aeo-agency/): Questions to ask an AEO agency before you sign, what a good answer sounds like, and the red flags: guarantees, secret methods and no saved evidence.
-- [AEO for local businesses](https://befoundfirst.ai/learn/aeo-for-local-businesses/): What is different about AEO for a local business: the questions customers ask, the listing facts to confirm, and what our plumbing study does and does not show.
-- [AEO for multi-location brands](https://befoundfirst.ai/learn/aeo-for-multi-location-brands/): AEO for brands with many locations: which facts the brand sets and which each location owns, what a location page needs, and how to measure by location.
-- [AEO for professional services](https://befoundfirst.ai/learn/aeo-for-professional-services/): AEO for law, accounting, medical and consulting firms: evidence a client can check, named credentials, scope fit, and the conduct rules to check first.
-- [AEO for B2B and SaaS](https://befoundfirst.ai/learn/ai-marketing-for-b2b-saas/): AEO for B2B software: the pages each buyer role needs, public pricing and docs, fair comparisons, and what a demo request can and cannot be attributed to.
-- [AEO for ecommerce brands](https://befoundfirst.ai/learn/ai-marketing-for-ecommerce/): AEO for ecommerce: the product facts shoppers ask AI about, a product page audit, how pages, feeds and ads differ on Google and ChatGPT, and what to measure.
-
-## Resources
-- [AI Visibility Field Kit](https://befoundfirst.ai/resources/found-first-field-kit.pdf)
-
+## Perspectives
+- [Answer engine optimization services](https://befoundfirst.ai/learn/answer-engine-optimization/): Found First helps ambitious brands compete for attention in AI answers. AEO with a point of view. Start a private conversation.
+- [Getting recommended by ChatGPT](https://befoundfirst.ai/learn/get-recommended-by-chatgpt/): Your business deserves to be part of the AI conversation. Found First works with brands that want to be harder to overlook.
+- [Google AI Overviews and AI Mode](https://befoundfirst.ai/learn/google-ai-overviews/): Google AI Overviews and AI Mode put a new lens on search. Found First helps ambitious businesses compete for a presence worth noticing.
+- [AEO content strategy](https://befoundfirst.ai/learn/aeo-content-strategy/): AEO content strategy for brands with a point of view. Found First helps you compete for attention without sounding like everyone else.
+- [AEO vs. SEO vs. GEO](https://befoundfirst.ai/learn/aeo-vs-seo-vs-geo/): SEO, AEO and GEO all point to a bigger ambition: getting your business seen. Found First brings a clear commercial point of view to AI visibility.
+- [ChatGPT ads vs. Google Ads](https://befoundfirst.ai/learn/chatgpt-ads-vs-google-ads/): ChatGPT ads or Google Ads? Found First brings a commercial point of view to the conversation. Your business deserves more than a platform preference.
+- [ChatGPT advertising costs](https://befoundfirst.ai/learn/chatgpt-advertising-cost/): Discuss ChatGPT advertising costs with Found First. Private pricing and a direct conversation about your business and its ambition.
+- [ChatGPT ads management](https://befoundfirst.ai/learn/chatgpt-ads-agency/): Found First manages ChatGPT advertising for ambitious brands. Make your next move with a team that takes your business seriously.
+- [AI visibility audits](https://befoundfirst.ai/learn/ai-visibility-audit/): Find out where your brand stands in AI answers. Found First offers a private conversation about the visibility your business deserves.
+- [Measuring AI marketing results](https://befoundfirst.ai/learn/measure-ai-marketing-roi/): Found First takes AI marketing results seriously. A clear conversation about visibility, business value and what the evidence actually supports.
+- [Choosing an AEO agency](https://befoundfirst.ai/learn/choose-aeo-agency/): Choose an AEO agency with conviction, clear answers and a real point of view. Meet Found First and decide whether the ambition matches yours.
+- [AEO for local businesses](https://befoundfirst.ai/learn/aeo-for-local-businesses/): Your reputation deserves to travel further. Found First helps local businesses compete for attention in AI search. Make your name count.
+- [AEO for multi-location brands](https://befoundfirst.ai/learn/aeo-for-multi-location-brands/): A bigger footprint should come with a presence to match. Found First helps multi-location brands compete for attention in AI search.
+- [AEO for professional services](https://befoundfirst.ai/learn/aeo-for-professional-services/): Expertise deserves to be found. Found First helps professional firms pursue a stronger presence in AI search without compromising their reputation.
+- [AEO for B2B and SaaS](https://befoundfirst.ai/learn/ai-marketing-for-b2b-saas/): Your best demo needs an audience. Found First helps B2B and SaaS brands compete for attention before a buyer chooses who gets the meeting.
+- [AEO for ecommerce brands](https://befoundfirst.ai/learn/ai-marketing-for-ecommerce/): Your next customer has options. Make your brand worth the closer look. Found First helps ecommerce brands compete for attention in AI search.
 This file is a reading aid, not a requirement for AI search visibility.
 
 ## Original research
-- [Research and insights](https://befoundfirst.ai/research/): Selected findings and interpretation.
-- [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): A dated 240-answer baseline, with search cohorts and limitations.
-- [Mentions, sources and recommendations](https://befoundfirst.ai/research/mentions-sources-recommendations/): How to interpret different evidence channels.
+- [Research and insights](https://befoundfirst.ai/research/): Original research and selected public proof.
+- [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): Selected dated baseline findings.
+- [Being named is not enough](https://befoundfirst.ai/research/mentions-sources-recommendations/): The meaning behind a mention.

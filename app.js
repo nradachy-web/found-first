@@ -385,7 +385,7 @@ if (sticky && hero && contact) {
 }
 
 // The brief builder writes the email for the visitor. Nothing is stored; the visitor's own mail app sends it.
-const EMAIL = 'nick@modernapexstrategies.com';
+const EMAIL = 'nick@befoundfirst.ai';
 const form = $('brief-form'), status = $('brief-status'), copyButton = $('copy-brief');
 function briefData() {
   const f = form.elements || {};

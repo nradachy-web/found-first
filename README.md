@@ -8,6 +8,6 @@ Pushes to main publish automatically through GitHub Actions.
 
 Static website. Open index.html through a local HTTP server for development.
 
-Contact: nick@modernapexstrategies.com
+Contact: nick@befoundfirst.ai
 
 Font license: assets/FONT-LICENSE.txt

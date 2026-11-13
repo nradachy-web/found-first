@@ -78,7 +78,7 @@ try {
         check(`${engineName}/${mode}/no extra history entries`, before === after, {before, after});
         const status = await page.locator('#brief-status').innerText();
         check(`${engineName}/${mode}/honest fallback status`, enhanced ? status.includes('Copy your message') && status.includes('does not send') : status.includes('cannot submit online') && status.includes('email link does not include form details or send anything') && !status.includes('Copy your message'));
-        check(`${engineName}/${mode}/plain email link`, await page.locator('#brief-form a[href="mailto:nick@modernapexstrategies.com"]').count() === 1);
+        check(`${engineName}/${mode}/plain email link`, await page.locator('#brief-form a[href="mailto:nick@befoundfirst.ai"]').count() === 1);
         check(`${engineName}/${mode}/no native submit`, await page.locator('#brief-form button[type=submit]').count() === 0);
         if (mode === 'no-js') check(`${engineName}/${mode}/accurate noscript`, (await page.locator('noscript p').innerText()).includes('form and copy action are unavailable') && (await page.locator('noscript p').innerText()).includes('using the email link'));
         if (enhanced) {

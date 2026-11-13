@@ -5,7 +5,7 @@ export const REQUEST_FIELDS = Object.freeze(['form_id', 'schema_version', 'name'
 const REQUIRED = ['form_id', 'schema_version', 'name', 'email', 'website_status', 'brief', 'website_confirm', 'started_at'];
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const HASH = /^[0-9a-f]{64}$/;
-const EMAIL = 'nick@modernapexstrategies.com';
+const EMAIL = 'nick@befoundfirst.ai';
 const encoder = new TextEncoder();
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const exactKeys = (value, keys) => object(value) && Object.keys(value).length === keys.length && keys.every(key => Object.hasOwn(value, key));

@@ -30,7 +30,7 @@ Proposed monthly fees are $2,000 for Foundation, $3,500 for Growth and $5,000 fo
 
 API source studies record the selected model, search configuration, exact questions, repeated answers, retrieved sources and citations. They do not measure all consumer-app behavior or prove causation. Google generative-AI impressions, referrals, paid activity and inquiries are separate measures. No AI recommendation or ranking is guaranteed.
 
-This file is a reading aid, not a requirement for AI search visibility. Content reviewed October 21, 2026.
+This file is a reading aid, not a requirement for AI search visibility.
 
 ## Original research
 - [Research and insights](https://befoundfirst.ai/research/): Selected findings and interpretation.

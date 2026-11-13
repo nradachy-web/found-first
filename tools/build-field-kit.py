@@ -99,7 +99,7 @@ for heading, text in [
     top = bottom - 19
 para("Current references / reviewed October 21, 2026", 48, 156, style=TITLE)
 para('<link href="https://support.google.com/webmasters/answer/16984139">Google Generative AI performance report</link> | <link href="https://support.google.com/webmasters/answer/16908024">Google inclusion control</link><br/><link href="https://help.openai.com/en/articles/20001210-create-campaigns-for-chatgpt-ads">OpenAI campaign budgets</link> | <link href="https://help.openai.com/en/articles/20001245-ads-manager-availability">Ads Manager availability</link>', 48, 136, style=NOTE)
-para("Free initial visibility check: nick@modernapexstrategies.com<br/>befoundfirst.ai/", 48, 99, style=NOTE)
+para("Free initial visibility check: nick@befoundfirst.ai<br/>befoundfirst.ai/", 48, 99, style=NOTE)
 c.showPage()
 frame(4, "THE SERVICE PROPOSAL", ["Choose the work.", "Agree the scope."],
       "Proposed monthly service fees for one brand and one existing website. Advertising spend is separate. Final allowances and commercial terms are confirmed in writing before work starts.")
@@ -112,6 +112,6 @@ para("Everything in Growth, with the same website-page allowance. Broadens adapt
 para("Scope, readiness and costs", 48, 241, style=TITLE)
 para("New websites, major repairs, rebuilds, migrations and custom integrations need separate scope. Hosting, support and third-party costs are identified in the quote. Confirm delivery allowances, billing periods, term, renewal and ownership in writing. Ads launch only after eligibility, access, billing, creative, destination and media budget approval are confirmed.", 48, 220, style=NOTE)
 para("Distribution excludes community management, inbox handling, automated outreach, filming and on-site photography. No automatic renewal or guaranteed AI recommendations, rankings, leads or sales. Platform availability and policies apply.", 48, 151, style=NOTE)
-para('<link href="https://befoundfirst.ai/#programs">befoundfirst.ai / programs</link> | nick@modernapexstrategies.com', 48, 87, style=NOTE)
+para('<link href="https://befoundfirst.ai/#programs">befoundfirst.ai / programs</link> | nick@befoundfirst.ai', 48, 87, style=NOTE)
 c.save()
 print(OUTPUT)

@@ -20,8 +20,8 @@ function fixture(t) {
 test('public links and structured answers cover the complete shipped library', () => {
   const result = validatePublicContent();
   assert.equal(result.field_notes, 16);
-  assert.equal(result.html_pages, 22);
-  assert.equal(result.visible_faq_answers, 60);
+  assert.equal(result.html_pages, 23);
+  assert.equal(result.visible_faq_answers, 109);
 });
 
 test('structured answers that disagree with the visible page are rejected', t => {

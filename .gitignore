@@ -1,0 +1,7 @@
+_site/
+node_modules/
+artifacts/
+.env
+.env.*
+!.env.example
+test-results/

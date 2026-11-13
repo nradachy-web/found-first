@@ -2,25 +2,25 @@
 
 > Founder-led AI marketing: answer engine optimization and ChatGPT advertising.
 
-Contact: nick@modernapexstrategies.com
+Contact: nick@befoundfirst.ai
 
 ## Research library
-- [Answer engine optimization services](https://befoundfirst.ai/learn/answer-engine-optimization/): How Found First approaches AEO: buyer questions, technical access, useful answer content, supporting evidence, and measurable visibility.
-- [ChatGPT ads management](https://befoundfirst.ai/learn/chatgpt-ads-agency/): Managed ChatGPT advertising from eligibility and campaign strategy to creative, landing pages, conversion measurement, and reporting.
-- [AEO vs. SEO vs. GEO](https://befoundfirst.ai/learn/aeo-vs-seo-vs-geo/): A practical comparison of SEO, answer engine optimization, and generative engine optimization, including what to build and how to measure it.
-- [AI visibility audits](https://befoundfirst.ai/learn/ai-visibility-audit/): What an AI visibility audit should include: question selection, answer capture, source analysis, technical checks, and a prioritized action plan.
-- [Getting recommended by ChatGPT](https://befoundfirst.ai/learn/get-recommended-by-chatgpt/): A practical approach to ChatGPT visibility through accurate business information, useful pages, public evidence, and repeatable observation.
-- [Google AI Overviews and AI Mode](https://befoundfirst.ai/learn/google-ai-overviews/): Google AI search visibility starts with indexable pages, helpful content, clear internal links, and measurement that respects Search Console limits.
-- [AEO content strategy](https://befoundfirst.ai/learn/aeo-content-strategy/): Build an answer-content strategy around buying questions, original evidence, useful comparisons, and clear conversion paths.
-- [Measuring AI marketing results](https://befoundfirst.ai/learn/measure-ai-marketing-roi/): Separate AI visibility, referral visits, qualified inquiries, and revenue when evaluating AEO and ChatGPT advertising.
-- [Choosing an AEO agency](https://befoundfirst.ai/learn/choose-aeo-agency/): Questions to ask an AEO agency about evidence, scope, technical execution, reporting, founder involvement, and realistic outcomes.
-- [ChatGPT advertising costs](https://befoundfirst.ai/learn/chatgpt-advertising-cost/): Understand media spend, management, landing-page work, and measurement when planning a ChatGPT advertising test.
-- [ChatGPT ads vs. Google Ads](https://befoundfirst.ai/learn/chatgpt-ads-vs-google-ads/): Compare the roles of ChatGPT advertising and Google Search ads by buyer context, destination, measurement, and test design.
-- [AEO for B2B and SaaS](https://befoundfirst.ai/learn/ai-marketing-for-b2b-saas/): AEO for B2B software: use-case pages, integration details, fair comparisons, implementation answers, and qualified demo measurement.
-- [AEO for ecommerce brands](https://befoundfirst.ai/learn/ai-marketing-for-ecommerce/): AI marketing for ecommerce: clear product attributes, buying guides, useful comparisons, customer evidence, and purchase measurement.
-- [AEO for professional services](https://befoundfirst.ai/learn/aeo-for-professional-services/): Answer engine optimization for professional services: expertise, service fit, scope, attributable proof, and qualified consultation paths.
-- [AEO for local businesses](https://befoundfirst.ai/learn/aeo-for-local-businesses/): Local AEO connects accurate service areas, business profiles, useful service content, reviews, and clear booking or inquiry paths.
-- [AEO for multi-location brands](https://befoundfirst.ai/learn/aeo-for-multi-location-brands/): Multi-location AEO connects consistent brand information with accurate location pages, local evidence, centralized governance, and location-level outcomes.
+- [Answer engine optimization services](https://befoundfirst.ai/learn/answer-engine-optimization/): What an answer engine optimization (AEO) service does, what Google and OpenAI say a site needs, how results are measured and what it costs.
+- [Getting recommended by ChatGPT](https://befoundfirst.ai/learn/get-recommended-by-chatgpt/): What gives ChatGPT a reason to name a business: crawler access, pages that answer real questions, consistent facts and public evidence. Plus how to check.
+- [Google AI Overviews and AI Mode](https://befoundfirst.ai/learn/google-ai-overviews/): What Google says a page needs to appear in AI Overviews and AI Mode: indexed, snippet-eligible, no special markup. And how Search Console counts it.
+- [AEO content strategy](https://befoundfirst.ai/learn/aeo-content-strategy/): How to plan content for AI answers: find buyers' real questions by buying stage, give each one a single page, back it with evidence and keep it current.
+- [AEO vs. SEO vs. GEO](https://befoundfirst.ai/learn/aeo-vs-seo-vs-geo/): SEO, AEO and GEO compared: what each term means, the work they share, what you measure differently, and why the label matters less than the work.
+- [ChatGPT ads vs. Google Ads](https://befoundfirst.ai/learn/chatgpt-ads-vs-google-ads/): ChatGPT ads and Google Search ads compared side by side: what triggers each ad, where it shows, how you pay, budgets, targeting and measurement.
+- [ChatGPT advertising costs](https://befoundfirst.ai/learn/chatgpt-advertising-cost/): What a ChatGPT ads budget pays for: media billed by OpenAI from $25 a day, management, the landing page, measurement and the test period.
+- [ChatGPT ads management](https://befoundfirst.ai/learn/chatgpt-ads-agency/): What managing ChatGPT ads involves, from eligibility and account setup to ad review, landing pages and reporting, and what stays with the advertiser.
+- [AI visibility audits](https://befoundfirst.ai/learn/ai-visibility-audit/): What an AI visibility audit should check and hand over: the question set, saved answers with dates and models, sources, business facts and a ranked list.
+- [Measuring AI marketing results](https://befoundfirst.ai/learn/measure-ai-marketing-roi/): How to measure AI marketing: mentions, citations, visits, inquiries and revenue as separate measures, where each one is visible and what it cannot prove.
+- [Choosing an AEO agency](https://befoundfirst.ai/learn/choose-aeo-agency/): Questions to ask an AEO agency before you sign, what a good answer sounds like, and the red flags: guarantees, secret methods and no saved evidence.
+- [AEO for local businesses](https://befoundfirst.ai/learn/aeo-for-local-businesses/): What is different about AEO for a local business: the questions customers ask, the listing facts to confirm, and what our plumbing study does and does not show.
+- [AEO for multi-location brands](https://befoundfirst.ai/learn/aeo-for-multi-location-brands/): AEO for brands with many locations: which facts the brand sets and which each location owns, what a location page needs, and how to measure by location.
+- [AEO for professional services](https://befoundfirst.ai/learn/aeo-for-professional-services/): AEO for law, accounting, medical and consulting firms: evidence a client can check, named credentials, scope fit, and the conduct rules to check first.
+- [AEO for B2B and SaaS](https://befoundfirst.ai/learn/ai-marketing-for-b2b-saas/): AEO for B2B software: the pages each buyer role needs, public pricing and docs, fair comparisons, and what a demo request can and cannot be attributed to.
+- [AEO for ecommerce brands](https://befoundfirst.ai/learn/ai-marketing-for-ecommerce/): AEO for ecommerce: the product facts shoppers ask AI about, a product page audit, how pages, feeds and ads differ on Google and ChatGPT, and what to measure.
 
 ## Resources
 - [AI Visibility Field Kit](https://befoundfirst.ai/resources/found-first-field-kit.pdf)

@@ -19,6 +19,6 @@ in `config/public-files.json`, including the research pages; add new public asse
 there explicitly. `node tools/build-public.mjs` creates `_site` and refuses to
 overwrite an existing build.
 
-Contact: nick@modernapexstrategies.com
+Contact: nick@befoundfirst.ai
 
 Font license: assets/FONT-LICENSE.txt

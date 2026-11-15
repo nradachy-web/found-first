@@ -87,3 +87,12 @@ if (copyButton) {
     catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
   });
 }
+
+// Carry a requested market into the editable inquiry. No storage or outbound request.
+if (form && location.search && typeof URLSearchParams !== 'undefined') {
+  const market = new URLSearchParams(location.search).get('market') || '';
+  if (/^(?:[A-Za-z .'-]{2,70}, (?:MI|FL|TX)|Michigan|Florida|Texas)$/.test(market)) {
+    const notes = form.elements['Notes'];
+    if (notes && !notes.value) notes.value = `Interested in AEO, GEO and AI search for ${market}.`;
+  }
+}

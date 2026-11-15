@@ -27,3 +27,9 @@ This file is a reading aid, not a requirement for AI search visibility.
 - [Research and insights](https://befoundfirst.ai/research/): Original research and selected public proof.
 - [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): Selected dated baseline findings.
 - [Being named is not enough](https://befoundfirst.ai/research/mentions-sources-recommendations/): The meaning behind a mention.
+
+## Market perspectives
+- [AI search markets](https://befoundfirst.ai/ai-search/): City, county and statewide buyer perspectives.
+- [Michigan](https://befoundfirst.ai/ai-search/michigan/): AEO, GEO and AI search in Michigan.
+- [Florida](https://befoundfirst.ai/ai-search/florida/): AEO, GEO and AI search in Florida.
+- [Texas](https://befoundfirst.ai/ai-search/texas/): AEO, GEO and AI search in Texas.

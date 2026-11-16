@@ -75,6 +75,7 @@ if (form) {
     e.preventDefault();
     if (form.reportValidity && !form.reportValidity()) return;
     const d = briefData();
+    if (typeof window !== 'undefined' && window.ffTrack) window.ffTrack('email_prepared');
     location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(briefSubject(d))}&body=${encodeURIComponent(briefBody(d))}`;
     setStatus(`Your email app should open with the message ready. If it did not, use "Copy the message instead" and send it to ${EMAIL}.`);
   });
@@ -83,8 +84,8 @@ if (copyButton) {
   copyButton.addEventListener('click', async () => {
     const d = briefData();
     const text = `To: ${EMAIL}\nSubject: ${briefSubject(d)}\n\n${briefBody(d)}`;
-    try { await navigator.clipboard.writeText(text); setStatus(`Copied. Paste it into any email to ${EMAIL}.`); }
-    catch (e) { setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
+    try { await navigator.clipboard.writeText(text); if (typeof window !== 'undefined' && window.ffTrack && form.checkValidity()) window.ffTrack('message_copied'); setStatus(`Copied. Paste it into any email to ${EMAIL}.`); }
+    catch (e) { if (typeof window !== 'undefined' && window.ffTrack) window.ffTrack('copy_failed'); setStatus(`Copy is not available here. Email ${EMAIL} with your website and what you sell.`); }
   });
 }
 

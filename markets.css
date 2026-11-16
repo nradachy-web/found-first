@@ -60,3 +60,7 @@
 @media(max-width:760px){.market-jump{margin-left:0;display:table;margin-top:8px}}
 
 .market-filters[hidden]{display:none}
+
+.engineering-band h3{font-size:21px;line-height:1.25;letter-spacing:-.03em;margin-bottom:14px}.engineering-band a+h3{margin-top:28px}
+
+.market-field.market-sales-card{display:block}.market-call-person{display:flex;gap:16px;align-items:center;border-bottom:1px solid #444;padding-bottom:22px}.market-call-person img{width:65px;height:78px;object-fit:cover;object-position:50% 28%;filter:grayscale(1)}.market-call-person strong{display:block;font-size:21px;letter-spacing:-.03em;font-weight:600}.market-call-person span{font-size:11px;color:#aaa;display:block;margin-top:6px}.market-sales-card h2{font-size:30px;line-height:1.16;letter-spacing:-.04em;margin:24px 0 17px}.market-sales-card>p{font-size:15px;line-height:1.7;color:#ccc}.market-sales-card .button{width:100%;font-size:14px;padding:14px 18px;margin-top:25px}.market-sales-card>small{display:block;color:#aaa;font-size:11px;margin-top:16px}

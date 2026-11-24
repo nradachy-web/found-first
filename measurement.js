@@ -50,8 +50,6 @@
     if (action === 'email_prepared') { emit('contact_email_prepared'); intent('prepared_email'); }
     if (action === 'message_copied') { emit('contact_message_copied'); intent('copied_message'); }
     if (action === 'copy_failed') emit('contact_copy_failed');
-    if (['booking_calendar_open','booking_time_selected','booking_fallback_click'].includes(action)) emit(action, { booking_provider: 'calendly', lead_status: 'intent_only' });
-    if (action === 'booking_confirmed') { emit('booking_confirmed', { booking_provider: 'calendly', lead_status: 'confirmed_booking' }); emit('generate_lead', { lead_type: 'strategy_call', booking_provider: 'calendly', lead_status: 'confirmed_booking' }); }
   };
   function init() {
     const form = document.getElementById('brief-form');
@@ -63,6 +61,10 @@
     document.addEventListener('click', event => {
       const a = event.target.closest?.('a'); if (!a || !allowed) return;
       const target = a.getAttribute('href') || '';
+      if (path === '/book/' && a.id === 'booking-direct') {
+        emit('booking_fallback_click', { booking_provider: 'google_calendar', lead_status: 'intent_only' });
+        return;
+      }
       if (/^mailto:nick@befoundfirst\.ai(?:\?|$)/i.test(target)) { emit('contact_email_click'); intent('email_link'); return; }
       if (/^tel:/i.test(target)) { emit('contact_phone_click'); intent('phone_link'); return; }
       try { const u = new URL(a.href); if (u.origin === location.origin && (u.hash === '#contact' || u.pathname === '/book/')) emit(u.pathname === '/book/' ? 'booking_cta_click' : 'contact_cta_click', { cta_position: a.closest('header') ? 'header' : a.closest('footer') ? 'footer' : 'body' }); } catch (_) {}

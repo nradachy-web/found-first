@@ -15,3 +15,6 @@ body .ff-footer .footer-bottom p{font:inherit;max-width:38em}body .ff-footer .fo
 @media(max-width:600px){.header.ff-header{padding-left:22px;padding-right:22px}.header.ff-header .brand{font-size:14px;gap:8px}.header.ff-header .brand img{width:25px;height:25px}.header.ff-header nav{font-size:11.5px}.header.ff-header .header-cta{font-size:12px;padding:10px 12px}body .ff-footer{padding-top:42px}body .ff-footer .footer-wordmark{margin-bottom:28px}body .ff-footer .footer-grid{grid-template-columns:1fr 1fr;gap:25px 24px;padding-top:25px}body .ff-footer .footer-bottom{grid-template-columns:1fr;gap:16px}body .ff-footer .footer-bottom>a{text-align:left}}
 
 .button:not(.button-white):focus-visible{outline-color:#000}.button-white:focus-visible{outline-color:#fff}
+
+.specialty-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 26px;max-width:1440px;margin:0 auto;padding:22px var(--site-pad);border-block:1px solid var(--rule);font-size:15px;font-weight:600}
+.specialty-links a{display:inline-flex;gap:6px;align-items:center;min-height:44px;text-underline-offset:4px}.specialty-links a:hover{text-decoration:underline}

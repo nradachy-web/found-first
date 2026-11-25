@@ -10,7 +10,8 @@
   const path = new URL(canonical).pathname;
   const legal = /^\/(privacy|sms-terms)\//.test(path);
   const state = path.match(/^\/ai-search\/(michigan|florida|texas)\//)?.[1] || 'none';
-  const pageType = legal ? 'legal' : path.startsWith('/book/') ? 'booking' : path.startsWith('/industries/') ? 'industry' : path.startsWith('/services/') ? 'service' : path.startsWith('/ai-search/') ? 'market' : path.startsWith('/learn/') ? 'guide' : path.startsWith('/research/') ? 'research' : 'home';
+  const specialty = /^\/(aeo|geo|chatgpt-ads)\//.test(path);
+  const pageType = legal ? 'legal' : specialty ? 'specialty' : path.startsWith('/book/') ? 'booking' : path.startsWith('/industries/') ? 'industry' : path.startsWith('/services/') ? 'service' : path.startsWith('/ai-search/') ? 'market' : path.startsWith('/learn/') ? 'guide' : path.startsWith('/research/') ? 'research' : 'home';
   const browserOptOut = navigator.globalPrivacyControl === true || navigator.doNotTrack === '1' || window.doNotTrack === '1';
   const storage = (store, key, value) => { try { if (value === undefined) return store.getItem(key); store.setItem(key, value); } catch (_) {} return null; };
   const allowed = !browserOptOut && storage(localStorage, PRIOR_CHOICE) !== 'denied';
@@ -35,7 +36,7 @@
   function emit(name, extra = {}) {
     if (!allowed || browserOptOut) return;
     const entry = storage(sessionStorage, 'ff_entry_path');
-    const safeEntry = /^\/(?:ai-search|learn|research|industries|services|book)\/[a-z0-9/-]*$/.test(entry || '') || entry === '/' ? entry : path;
+    const safeEntry = /^\/(?:ai-search|learn|research|industries|services|book|aeo|geo|chatgpt-ads)\/[a-z0-9/-]*$/.test(entry || '') || entry === '/' ? entry : path;
     gtag('event', name, { send_to: DESTINATION, page_location: canonical, page_path: path, page_type: pageType, market_state: state, entry_page: safeEntry, user_data: {}, ...extra });
   }
   function intent(method) {

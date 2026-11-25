@@ -5,15 +5,15 @@
 Contact: nick@befoundfirst.ai
 
 ## Perspectives
-- [Answer engine optimization services](https://befoundfirst.ai/learn/answer-engine-optimization/): Found First offers AEO and GEO services that connect your website, content and business strengths to AI discovery. Book a call with Nick.
+- [Answer engine optimization services](https://befoundfirst.ai/learn/answer-engine-optimization/): Found First is an AEO and GEO agency. We improve website content so buyers can understand your services, compare the evidence and contact the right team.
 - [Getting recommended by ChatGPT](https://befoundfirst.ai/learn/get-recommended-by-chatgpt/): Found First helps businesses improve organic ChatGPT visibility through clearer websites, accurate positioning and evidence buyers can use.
 - [Google AI Overviews and AI Mode](https://befoundfirst.ai/learn/google-ai-overviews/): Understand Google AI Overviews and AI Mode, their relationship to SEO, and where Found First can improve organic business visibility.
 - [AEO content strategy](https://befoundfirst.ai/learn/aeo-content-strategy/): Found First develops clear business content for organic AI discovery, with distinct buyer value, credible evidence and a useful next step.
 - [AEO vs. SEO vs. GEO](https://befoundfirst.ai/learn/aeo-vs-seo-vs-geo/): Understand the overlap between SEO, AEO and GEO, and decide which visibility problem needs attention before buying another service.
 - [ChatGPT ads vs. Google Ads](https://befoundfirst.ai/learn/chatgpt-ads-vs-google-ads/): Compare ChatGPT Ads with Google Search advertising around buyer intent, targeting expectations, destinations and useful business outcomes.
 - [ChatGPT advertising costs](https://befoundfirst.ai/learn/chatgpt-advertising-cost/): Understand ChatGPT advertising cost categories, media spend, management fees and website readiness before discussing a Found First engagement.
-- [ChatGPT ads management](https://befoundfirst.ai/learn/chatgpt-ads-agency/): Found First manages ChatGPT advertising, from creative and campaign decisions to measurement. Discuss your offer on a 30-minute call with Nick.
-- [AI visibility audits](https://befoundfirst.ai/learn/ai-visibility-audit/): An AI visibility audit examines whether your business is named, understood and relevant to buyers. Discuss your assessment with Found First.
+- [ChatGPT ads management](https://befoundfirst.ai/learn/chatgpt-ads-agency/): Advertise on ChatGPT with Found First. We manage sponsored campaigns, creative, landing pages and measurement around the action you want buyers to take.
+- [AI visibility audits](https://befoundfirst.ai/learn/ai-visibility-audit/): An AEO and GEO audit examines how AI answers describe your business, which sources they cite, and where buyers encounter an incomplete picture.
 - [Measuring AI marketing results](https://befoundfirst.ai/learn/measure-ai-marketing-roi/): Found First separates AI mentions, citations, paid conversions and customer outcomes so marketing investment can be judged on meaningful evidence.
 - [Choosing an AEO agency](https://befoundfirst.ai/learn/choose-aeo-agency/): Compare AEO agencies by service clarity, relevant proof, website judgment and accountable people. Discuss Found First's approach on a call with Nick.
 - [AEO for local businesses](https://befoundfirst.ai/learn/aeo-for-local-businesses/): Found First helps local businesses improve organic AI visibility through clearer service information, website improvements and useful content.
@@ -35,6 +35,9 @@ This file is a reading aid, not a requirement for AI search visibility.
 - [Texas](https://befoundfirst.ai/ai-search/texas/): AEO, GEO and AI search in Texas.
 
 ## National buyer guides
+- [AEO guides](https://befoundfirst.ai/aeo/): Answer engine optimization.
+- [GEO guides](https://befoundfirst.ai/geo/): Generative engine optimization.
+- [ChatGPT ads guides](https://befoundfirst.ai/chatgpt-ads/): Paid advertising decisions.
 - [Services](https://befoundfirst.ai/services/): Organic AI visibility and managed ChatGPT advertising.
 - [Industries](https://befoundfirst.ai/industries/): Business-specific buying decisions.
 - [Buyer guides](https://befoundfirst.ai/learn/): Platform, measurement and channel decisions.

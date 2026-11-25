@@ -21,7 +21,11 @@
   function fit() {
     const { width, height } = stage.getBoundingClientRect();
     if (width <= 0 || height <= 0) return;
-    const scale = Math.min(1, width / minWidth, height / calendarHeight);
+    const widthScale = Math.min(1, width / minWidth);
+    const chromeHeight = screen.getBoundingClientRect().height - height;
+    // Once the calendar is width-limited, let the supporting copy follow it.
+    screen.style.setProperty('--booking-height-limit', Math.ceil(chromeHeight + calendarHeight * widthScale) + 'px');
+    const scale = Math.min(widthScale, height / calendarHeight);
     stage.style.setProperty('--frame-scale', scale);
     stage.style.setProperty('--frame-width', (width / scale) + 'px');
     stage.style.setProperty('--frame-height', (height / scale) + 'px');

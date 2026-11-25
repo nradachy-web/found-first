@@ -50,7 +50,7 @@
 .booking-screen.is-fitted {
   height: 100vh;
   height: 100svh;
-  max-height: 1080px;
+  max-height: var(--booking-height-limit, 1080px);
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
 }

@@ -25,6 +25,7 @@ This file is a reading aid, not a requirement for AI search visibility.
 
 ## Original research
 - [Research and insights](https://befoundfirst.ai/research/): Original research and selected public proof.
+- [Airport hotel shuttle hours study](https://befoundfirst.ai/research/airport-hotel-shuttle-hours/): First-party evidence from 12 hotels across three airports.
 - [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): Selected dated baseline findings.
 - [Being named is not enough](https://befoundfirst.ai/research/mentions-sources-recommendations/): The meaning behind a mention.
 

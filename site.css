@@ -23,3 +23,66 @@ body .ff-footer .footer-source-label{margin-top:22px}
 .study-citation p{margin:0;font-size:1rem;line-height:1.65;color:#333}
 .study-citation a{text-decoration:underline;text-underline-offset:.16em}
 .specialty-hub .study-citation{margin-inline:auto;width:calc(100% - 48px)}
+
+/* Launch design layer (November 25, 2026): the homepage language applied site-wide. */
+:root{--ds-ink:#0b0b0b;--ds-line:rgba(0,0,0,.085);--ds-soft:#f5f5f4;--ds-ease:cubic-bezier(.2,.75,.15,1)}
+html{scroll-padding-top:84px}
+.header.ff-header{position:sticky;top:0;z-index:60;max-width:none;height:68px;margin:0;padding:0 max(var(--site-pad),calc((100% - var(--site-max)) / 2 + var(--site-pad)));background:rgba(255,255,255,.84);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--ds-line);transition:border-color .3s,background .3s}
+.header.ff-header .brand{font-size:15px;letter-spacing:-.02em;gap:10px}
+.header.ff-header .brand img{width:28px;height:28px;border-radius:7px}
+.header.ff-header nav{gap:30px;font-size:14px;color:#3a3a3a}
+.header.ff-header nav a{transition:color .2s}
+.header.ff-header nav a:hover{color:#000}
+.header.ff-header nav a:after{display:none}
+.header.ff-header .header-cta{display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--ds-ink);color:#fff;font-size:14px;font-weight:600;transition:background .2s,transform .2s}
+.header.ff-header .header-cta:hover{background:#2a2a2a;transform:translateY(-1px)}
+.header.ff-header .header-cta:focus-visible{outline:2px solid #000;outline-offset:3px}
+.guide-aside>div{top:96px}
+
+/* Buttons */
+.button{border:0;border-radius:999px;min-height:52px;padding:0 26px;gap:10px;font-weight:600;letter-spacing:-.01em;background:var(--ds-ink);color:#fff;box-shadow:0 10px 26px -14px rgba(0,0,0,.45);transition:background .25s,color .25s,transform .25s var(--ds-ease),box-shadow .25s}
+.button:hover{background:#262626;color:#fff;transform:translateY(-2px)}
+.button-white{background:#fff;color:var(--ds-ink);box-shadow:none}
+.button-white:hover{background:#ececec;color:var(--ds-ink)}
+.button:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+
+/* Cards and panels */
+.national-call-card,.market-field.market-sales-card{border-radius:28px;background:radial-gradient(80% 60% at 100% 0%,#2a2a2a 0%,rgba(11,11,11,0) 62%),var(--ds-ink);box-shadow:0 34px 70px -42px rgba(0,0,0,.65)}
+.national-call-card img,.market-field img{border-radius:12px}
+.national-service-panel,.national-index-cross,.article-callout,.audit-preview,.opportunity{border-radius:28px;background:var(--ds-soft);border:0}
+.specialty-example{border-left:0;border-radius:20px;background:var(--ds-soft);padding:26px clamp(18px,3vw,34px)}
+.prompt-list li{border-left:0;border-radius:14px;background:var(--ds-soft)}
+.engineering-band,.evidence,.answer-field,.fieldkit-download{border-radius:32px;background:radial-gradient(70% 70% at 100% 0%,#2a2a2a 0%,rgba(11,11,11,0) 62%),var(--ds-ink);overflow:hidden}
+.guide-next,.national-close,.next-step,.market-cta{width:calc(100% - 2 * var(--site-pad));max-width:1320px;margin:clamp(48px,7vw,96px) auto;border-radius:40px;background:radial-gradient(60% 75% at 92% 8%,#2b2b2b 0%,rgba(11,11,11,0) 70%),var(--ds-ink);overflow:hidden}
+.state-doors a{border-radius:22px;transition:transform .35s var(--ds-ease),background .3s}
+.state-doors a:hover{transform:translateY(-3px);background:#1b1b1b}
+
+/* Search, filters and links */
+.national-filter input,.market-filters input,.market-filters select,.industry-switch select{border:1px solid var(--ds-line);border-radius:16px;background:var(--ds-soft);min-height:52px;padding:14px 18px;transition:background .2s,border-color .2s,box-shadow .2s}
+.national-filter input:focus,.market-filters input:focus,.market-filters select:focus{background:#fff;border-color:#bdbdbd;box-shadow:0 0 0 4px rgba(0,0,0,.06)}
+.market-filters button{border:0;border-radius:999px;min-height:52px;padding:0 24px;font-weight:600}
+.specialty-links{border-block:0;gap:10px;padding-top:26px;padding-bottom:26px}
+.specialty-links a{min-height:44px;padding:0 18px;border-radius:999px;background:var(--ds-soft);font-size:14.5px;transition:background .25s}
+.specialty-links a:hover{background:#e9e9e8;text-decoration:none}
+.faq summary{align-items:center}
+.faq summary>span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#f1f1f0;font:400 20px/1 var(--sans);transition:transform .35s var(--ds-ease),background .3s,color .3s}
+.faq details[open] summary>span{background:var(--ds-ink);color:#fff}
+.workbench-tabs button[aria-selected=true]{border-radius:12px}
+
+@media(max-width:850px){
+ .header.ff-header{position:relative;height:auto;padding:14px var(--site-pad) 12px;gap:12px 16px;-webkit-backdrop-filter:none;backdrop-filter:none;background:#fff}
+ .header.ff-header nav{gap:6px 18px;justify-content:flex-start;flex-wrap:wrap;font-size:13.5px}
+ .header.ff-header .header-cta{height:38px;padding:0 15px;font-size:13px}
+ .guide-aside>div{top:30px}
+}
+@media(max-width:600px){
+ .guide-next,.national-close,.next-step,.market-cta{width:calc(100% - 20px);border-radius:28px}
+ .national-call-card,.market-field.market-sales-card,.engineering-band,.evidence,.answer-field{border-radius:24px}
+}
+.booking .header.ff-header{position:relative}
+.specialty-topics{gap:8px!important}
+.specialty-topics a{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:var(--ds-soft);text-decoration:none!important;transition:background .25s}
+.specialty-topics a:hover{background:#e9e9e8}
+.study-window{border-radius:28px}
+.booking .header.ff-header .header-cta{display:none}
+@media(max-width:850px){.booking .header.ff-header nav{font-size:12px;flex-wrap:nowrap}}

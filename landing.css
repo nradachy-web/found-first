@@ -11,15 +11,6 @@
 /* Header: same markup as every page, refined here */
 .ff-home .header.ff-header{position:sticky;top:0;z-index:60;max-width:none;height:68px;margin:0;padding:0 max(var(--lp-pad),calc((100% - var(--lp-max)) / 2));background:rgba(255,255,255,0);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
 .ff-home .header.ff-header.is-scrolled{border-bottom-color:var(--lp-line);background:rgba(255,255,255,.82);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px)}
-.ff-home .header.ff-header .brand{font-size:15px;letter-spacing:-.02em;gap:10px}
-.ff-home .header.ff-header .brand img{width:28px;height:28px;border-radius:7px}
-.ff-home .header.ff-header nav{gap:30px;font-size:14px;color:#3a3a3a}
-.ff-home .header.ff-header nav a{transition:color .2s}
-.ff-home .header.ff-header nav a:hover{color:#000}
-.ff-home .header.ff-header nav a:after{display:none}
-.ff-home .header.ff-header .header-cta{display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--lp-ink);color:#fff;font-size:14px;font-weight:600;transition:background .2s,transform .2s}
-.ff-home .header.ff-header .header-cta:hover{background:#2a2a2a;transform:translateY(-1px)}
-.ff-home .header.ff-header .header-cta:focus-visible{outline:2px solid #000;outline-offset:3px}
 
 /* Buttons and links */
 .lp-actions{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:34px}
@@ -316,8 +307,6 @@
 }
 @media (max-width:850px){
  .ff-home .header.ff-header{position:relative;height:auto;padding:14px var(--lp-pad) 12px;gap:12px 16px}
- .ff-home .header.ff-header nav{gap:6px 18px;justify-content:flex-start;flex-wrap:wrap;font-size:13.5px}
- .ff-home .header.ff-header .header-cta{height:38px;padding:0 15px;font-size:13px}
 }
 @media (max-width:600px){
  .lp-announce{font-size:13px}
@@ -372,3 +361,20 @@
  .lp-marquee-row{overflow-x:auto}
  .lp-btn,.lp-fit-card,.lp-study,.lp-book,.lp-mini{transition:none}
 }
+
+/* Services page */
+.lp-pill{display:inline-flex;align-items:center;padding:7px 15px;border-radius:999px;background:#f4f4f3;border:1px solid var(--lp-line);font-size:13.5px;color:#3a3a3a}
+.lp-hero-compact{padding-bottom:0}
+.lp-hero-compact .lp-h1{font-size:clamp(44px,7.4vw,98px);margin-top:26px}
+.lp-services-tight{padding-top:clamp(56px,7vw,96px)}
+.lp-decide{padding-top:clamp(88px,11vw,150px)}
+.lp-decide-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:56px}
+.lp-decide-card{position:relative;display:flex;flex-direction:column;min-height:320px;padding:clamp(28px,3.5vw,44px);border-radius:var(--lp-r-xl);background:var(--lp-soft);transition:transform .45s var(--lp-ease),box-shadow .45s,background .35s,opacity .9s var(--lp-ease)}
+.lp-decide-card:hover{transform:translateY(-5px);box-shadow:0 30px 60px -36px rgba(0,0,0,.35)}
+.lp-decide-card h3{font-size:clamp(28px,3vw,40px);font-weight:600;letter-spacing:-.045em;line-height:1.06;margin-top:22px}
+.lp-decide-card p{font-size:16.5px;line-height:1.6;color:#5b5b5b;margin-top:14px;max-width:32em}
+.lp-decide-card .lp-link{margin-top:auto;padding-top:30px}
+.lp-decide-card.is-dark{background:radial-gradient(70% 80% at 100% 0%,#2c2c2c 0%,rgba(11,11,11,0) 65%),var(--lp-ink);color:#fff}
+.lp-decide-card.is-dark .lp-fit-label{color:#9a9a9a}
+.lp-decide-card.is-dark p{color:#b5b5b5}
+@media (max-width:900px){.lp-decide-grid{grid-template-columns:1fr}.lp-decide-card{min-height:0}}

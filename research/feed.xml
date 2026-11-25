@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Found First Research</title>
+    <link>https://befoundfirst.ai/research/</link>
+    <description>Original studies on the questions people ask businesses, with findings and source data.</description>
+    <atom:link href="https://befoundfirst.ai/research/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How often do West Michigan thunderstorm wind reports mention trees?</title>
+      <link>https://befoundfirst.ai/research/west-michigan-storm-tree-reports/</link>
+      <description>In Kent, Ionia and Montcalm counties, 48 of 64 NOAA thunderstorm wind event reports mentioned a tree or trees during 2021 through 2025.</description>
+      <guid>https://befoundfirst.ai/research/west-michigan-storm-tree-reports/</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Does a HELOC always come second? Michigan’s mortgage records give an answer.</title>
+      <link>https://befoundfirst.ai/research/michigan-heloc-lien-position/</link>
+      <description>Of 46,741 qualifying Michigan home equity lines originated in 2025, 12,539 were recorded in first lien position. See the counts by loan purpose.</description>
+      <guid>https://befoundfirst.ai/research/michigan-heloc-lien-position/</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Can you catch the airport shuttle at 12:30 a.m.?</title>
+      <link>https://befoundfirst.ai/research/airport-hotel-shuttle-hours/</link>
+      <description>Found First reviewed 12 hotels across three airports. Eleven advertised a shuttle. Five published hours that answered a late-arriving guest’s question.</description>
+      <guid>https://befoundfirst.ai/research/airport-hotel-shuttle-hours/</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Same business. Different answer.</title>
+      <link>https://befoundfirst.ai/research/rooter-man-austin/</link>
+      <description>Selected findings from our Rooter-Man Austin research. A sharp contrast in AI visibility, with the detailed work kept private.</description>
+      <guid>https://befoundfirst.ai/research/rooter-man-austin/</guid>
+      <pubDate>Wed, 21 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

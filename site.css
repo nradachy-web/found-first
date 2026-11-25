@@ -18,3 +18,8 @@ body .ff-footer .footer-bottom p{font:inherit;max-width:38em}body .ff-footer .fo
 
 .specialty-links{display:flex;align-items:center;flex-wrap:wrap;gap:8px 26px;max-width:1440px;margin:0 auto;padding:22px var(--site-pad);border-block:1px solid var(--rule);font-size:15px;font-weight:600}
 .specialty-links a{display:inline-flex;gap:6px;align-items:center;min-height:44px;text-underline-offset:4px}.specialty-links a:hover{text-decoration:underline}
+body .ff-footer .footer-source-label{margin-top:22px}
+.study-citation{margin:28px 0;padding:12px 0 12px 18px;border-inline-start:2px solid #555;max-width:74ch}
+.study-citation p{margin:0;font-size:1rem;line-height:1.65;color:#333}
+.study-citation a{text-decoration:underline;text-underline-offset:.16em}
+.specialty-hub .study-citation{margin-inline:auto;width:calc(100% - 48px)}

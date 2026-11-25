@@ -1,29 +1,91 @@
-/* The booking page keeps the conversation and calendar in one quiet split layout. */
-.booking{--book-width:1440px;--book-gutter:max(24px,calc((100vw - var(--book-width))/2));}
-.booking .header{margin-inline:var(--book-gutter)}
-.book-main{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);margin:40px var(--book-gutter) 80px;align-items:start}
-.book-intro{padding:46px clamp(28px,4vw,58px) 50px;background:#000;color:#fff;min-width:0}
-.book-eyebrow{font-size:14px;color:#c6c6c6;margin-bottom:26px}
-.book-intro h1{font-size:clamp(46px,4.5vw,68px);line-height:1.03;letter-spacing:-.065em;font-weight:650;max-width:9em;text-wrap:balance}
-.book-lede{font-size:18px;line-height:1.65;color:#ddd;margin-top:26px;max-width:32em}
-.book-host{display:flex;align-items:center;gap:22px;margin:34px 0 26px}
-.book-host img{display:block;flex:none;width:82px;height:100px;object-fit:cover;object-position:center top;filter:grayscale(1)}
-.book-host strong{font-size:18px;font-weight:650}.book-host p{font-size:13px;line-height:1.65;color:#ccc;margin-top:6px}
-.book-facts{font-size:14px;line-height:1.5;border-top:1px solid #444;border-bottom:1px solid #444;padding:17px 0}
-.book-agenda{margin-top:30px}.book-agenda h2{font-size:21px;line-height:1.3;letter-spacing:-.03em}
-.book-agenda ul{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:20px}
-.book-agenda li{font-size:15px;line-height:1.6}.book-agenda strong{display:block;font-weight:650;margin-bottom:4px}.book-agenda span{color:#c8c8c8;display:block;max-width:31em}
-.book-bring{font-size:13px;line-height:1.7;color:#c8c8c8;margin-top:28px;max-width:35em}
-.book-calendar{padding:32px 0 0 clamp(28px,4vw,64px);min-width:0}
-.book-calendar-head h2{font-size:clamp(30px,3vw,42px);letter-spacing:-.045em;line-height:1.12}
-.book-calendar-head p{font-size:15px;line-height:1.7;color:#555;max-width:37em;margin:16px 0 26px}
-.book-schedule{display:block;width:100%;height:600px;border:0;background:#fff}
-.book-fallback{font-size:14px;line-height:1.65;margin-top:14px}.book-fallback span{display:block;margin-top:12px;color:#555}
-.book-fallback a,.book-notice a{text-decoration:underline;text-underline-offset:4px}.book-fallback a{display:inline-block;padding:8px 0;color:#000}
-.book-notice{font-size:12px;line-height:1.8;color:#666;max-width:48em;margin-top:22px}
-.booking [hidden]{display:none!important}
-.booking footer{padding-left:var(--book-gutter);padding-right:var(--book-gutter)}
-@media(min-width:1600px){.book-main{margin-top:60px}.book-intro{padding-top:58px;padding-bottom:58px}}
-@media(max-width:1050px){.book-main{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}.book-intro{padding:34px 28px}.book-calendar{padding-left:28px}.book-intro h1{font-size:48px}.book-lede{font-size:16px}.book-host{gap:14px}.book-host img{width:64px;height:80px}.book-host p{font-size:12px}}
-@media(max-width:800px){.book-main{grid-template-columns:1fr;margin-top:24px;gap:28px}.book-intro{padding:28px}.book-intro h1{font-size:42px;max-width:11em}.book-calendar{padding:0}.book-agenda,.book-bring,.book-eyebrow{display:none}.book-lede{margin-top:18px;font-size:15px;line-height:1.6}.book-host{margin:20px 0}.book-facts{padding:12px 0}.book-calendar-head p{margin-bottom:22px}.book-main{margin-bottom:56px}}
-@media(max-width:400px){.booking{--book-gutter:18px}.book-intro{padding:24px}.book-intro h1{font-size:38px}.book-host img{width:48px;height:58px}.book-host{gap:12px}.book-host strong{font-size:16px}}
+.booking-screen,
+.book-about {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+}
+.booking .header.ff-header {
+  width: 100%;
+  min-height: 0;
+  height: auto;
+  padding-block: 10px;
+}
+.booking .header-cta { display: none; }
+.book-main {
+  min-width: 0;
+  padding: 0 clamp(8px, 3vw, 44px) 8px;
+}
+.book-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 0;
+}
+.book-heading h1 {
+  font-size: clamp(20px, 2.4vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -.05em;
+}
+.book-heading a,
+.book-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35em;
+  min-height: 40px;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.book-heading a { flex-shrink: 0; }
+.book-stage { position: relative; }
+.book-schedule {
+  display: block;
+  width: 100%;
+  height: 1500px;
+  border: 0;
+}
+@media (min-width: 610px) {
+  .book-schedule { height: 940px; }
+}
+.booking-screen.is-fitted {
+  height: 100vh;
+  height: 100svh;
+  max-height: 1080px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.is-fitted .book-main {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.is-fitted .book-schedule {
+  position: absolute;
+  inset: 0 auto auto 0;
+  transform-origin: top left;
+  width: var(--frame-width);
+  height: var(--frame-height);
+  transform: scale(var(--frame-scale));
+}
+.book-about {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px var(--site-pad);
+  border-top: 1px solid var(--rule);
+}
+.book-about h2 { font-size: 20px; letter-spacing: -.04em; }
+.book-about p { max-width: 60ch; margin-top: 6px; color: #555; }
+.book-links { display: flex; gap: 20px; white-space: nowrap; }
+@media (max-width: 850px) {
+  .booking .header.ff-header { gap: 10px; }
+  .booking .header.ff-header nav { width: auto; margin-left: auto; }
+}
+@media (max-width: 600px) {
+  .booking .header.ff-header { padding: 10px 12px; }
+  .booking .header.ff-header nav { gap: 10px; }
+  .book-heading { padding: 3px 4px; }
+  .book-heading a { font-size: 13px; }
+  .book-about { display: block; padding: 24px 16px; }
+  .book-links { margin-top: 8px; }
+}

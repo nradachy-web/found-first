@@ -25,6 +25,8 @@ This file is a reading aid, not a requirement for AI search visibility.
 
 ## Original research
 - [Research and insights](https://befoundfirst.ai/research/): Original research and selected public proof.
+- [Does a HELOC always come second? Michigan’s mortgage records give an answer.](https://befoundfirst.ai/research/michigan-heloc-lien-position/): Of 46,741 qualifying Michigan home equity lines originated in 2025, 12,539 were recorded in first lien position. See the counts by loan purpose.
+- [How often do West Michigan thunderstorm wind reports mention trees?](https://befoundfirst.ai/research/west-michigan-storm-tree-reports/): In Kent, Ionia and Montcalm counties, 48 of 64 NOAA thunderstorm wind event reports mentioned a tree or trees during 2021 through 2025.
 - [Airport hotel shuttle hours study](https://befoundfirst.ai/research/airport-hotel-shuttle-hours/): First-party evidence from 12 hotels across three airports.
 - [Rooter-Man Austin study](https://befoundfirst.ai/research/rooter-man-austin/): Selected dated baseline findings.
 - [Being named is not enough](https://befoundfirst.ai/research/mentions-sources-recommendations/): The meaning behind a mention.
